@@ -24,10 +24,9 @@ const Button = ({
   children: ReactNode
 }) => {
   let outlineStyle = outline ? "border border-black" : ""
-  let textColorStyle = `text-${textColor !== undefined ? textColor : "white"}`
-  let bgColorStyle = `bg-${bgColor !== undefined ? bgColor : "highlight"}`
+  let textColorStyle: string = textColor !== undefined ? `text-${textColor}` : "text-white"
+  let bgColorStyle: string = bgColor !== undefined ? `bg-${bgColor}` : "text-action"
 
-  // href = ""
   if (href)
     return (
       <Link
