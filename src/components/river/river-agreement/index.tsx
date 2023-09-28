@@ -4,7 +4,7 @@ const RiverAgreement = ({ agreement }: { agreement: string }) => {
   return (
     <div className="flex flex-col justify-between">
       <div className="w-full text-center font-bold">Agreement</div>
-      <div className="bg-gray">{agreement}</div>
+      <div className="m-4 bg-gray p-2">{agreement}</div>
     </div>
   )
 }

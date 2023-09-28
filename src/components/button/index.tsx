@@ -42,7 +42,7 @@ const Button = ({
     return (
       <button
         className={
-          styles.button + ` ${outlineStyle} ${textColorStyle} ${bgColorStyle} ${customClass} `
+          styles.button + ` ${outlineStyle} ${textColorStyle} ${bgColorStyle} ${customClass}`
         }
         onClick={onClick}
         disabled={disabled}
