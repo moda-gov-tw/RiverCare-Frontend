@@ -1,8 +1,9 @@
 const Dropdown = ({}) => {
   return (
-    <footer className="flex w-full items-center">
-      <div className="mx-auto">dropdown</div>
-    </footer>
+    <div className="mx-auto my-2 flex w-full justify-between border border-gray px-2 py-1">
+      <div>dropdown</div>
+      <div>^</div>
+    </div>
   )
 }
 export default Dropdown
