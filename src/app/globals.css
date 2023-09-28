@@ -20,14 +20,3 @@ body {
   background: var(--white);
   text-align: center;
 }
-
-.button {
-  font-weight: bold;
-  padding: 0.6rem 2rem;
-  border-radius: 20px;
-}
-
-.button:disabled {
-  background-color: #656566;
-  color: #868686;
-}
