@@ -1,0 +1,16 @@
+{
+  "menu": [
+    {
+      "route": "create-river",
+      "title": "Create River"
+    },
+    {
+      "route": "river-list",
+      "title": "River List"
+    },
+    {
+      "route": "faq",
+      "title": "FAQ"
+    }
+  ]
+}

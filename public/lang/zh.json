@@ -1,0 +1,16 @@
+{
+  "menu": [
+    {
+      "route": "create-river",
+      "title": "創建河流"
+    },
+    {
+      "route": "river-list",
+      "title": "河流列表"
+    },
+    {
+      "route": "faq",
+      "title": "FAQ"
+    }
+  ]
+}
