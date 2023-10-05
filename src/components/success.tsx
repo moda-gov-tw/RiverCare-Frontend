@@ -1,5 +1,5 @@
 import Image from "next/image"
-import Button from "../button"
+import Button from "./button"
 import CheckIcon from "@/../public/images/check.png"
 
 const Success = ({
