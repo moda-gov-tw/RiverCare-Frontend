@@ -21,9 +21,7 @@ const EventCard = ({ id }: { id: number }) => {
         edition={edition}
       />
       <div className="mt-4">
-        <Button bgColor="action" textColor="white">
-          Approve Event
-        </Button>
+        <Button>Approve Event</Button>
       </div>
     </div>
   )

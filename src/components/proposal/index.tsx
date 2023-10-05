@@ -1,4 +1,4 @@
-import Button from "../button"
+import Button, { ButtonStyle } from "../button"
 
 const Proposal = ({}) => {
   return (
@@ -11,8 +11,8 @@ const Proposal = ({}) => {
         <div> ^ </div>
       </div>
       <div className="bg-gray p-2">
-        <Button bgColor="danger">Reject</Button>
-        <Button bgColor="primary">Sign</Button>
+        <Button style={ButtonStyle.danger}>Reject</Button>
+        <Button style={ButtonStyle.primary}>Sign</Button>
       </div>
     </div>
   )

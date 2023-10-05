@@ -1,6 +1,6 @@
 "use client"
 
-import Button from "@/components/button"
+import Button, { ButtonStyle } from "@/components/button"
 import EventInfo from "@/components/event/event-info"
 import RiverAgreement from "@/components/river/river-agreement"
 
@@ -29,10 +29,10 @@ export default function Event({ params }: { params: { id: number } }) {
       />
       <RiverAgreement agreement={agreement} />
       <div className="flex flex-col">
-        <Button outline={false} textColor="black" bgColor="highlight" onClick={handleAgree}>
+        <Button style={ButtonStyle.highlight} onClick={handleAgree}>
           I agree for above statement
         </Button>
-        <Button textColor="white" bgColor="action" onClick={handleAgree} disabled={false}>
+        <Button onClick={handleAgree} disabled={false}>
           Join event!
         </Button>
       </div>
