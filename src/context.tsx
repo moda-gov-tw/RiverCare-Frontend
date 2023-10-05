@@ -47,7 +47,9 @@ export const ContextProvider = (props: any) => {
         .catch((e) => console.error(e))
     }
     setTezos(TEZOS)
-    setWallet(WALLET)
+    setWallet(wallet)
+    setAddress(await wallet.getPKH())
+    setAcc(await wallet.client.getActiveAccount())
   }
 
   const disconnect = async () => {
