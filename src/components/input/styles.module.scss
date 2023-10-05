@@ -1,6 +1,26 @@
 .input {
+  width: auto;
   background-color: #dddddd;
   color: var(--black);
   font-weight: bold;
   padding: 0.6rem 1rem;
+  margin-left: auto;
+}
+
+.input::placeholder {
+  color: #bdbdbd;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 10rem;
+  background-color: #dddddd;
+  color: var(--black);
+  font-weight: bold;
+  padding: 0.6rem 1rem;
+  margin: 0.5rem auto;
+}
+
+.textarea::placeholder {
+  color: #bdbdbd;
 }
