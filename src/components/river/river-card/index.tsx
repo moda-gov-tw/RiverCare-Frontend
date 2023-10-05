@@ -18,9 +18,7 @@ const RiverCard = ({ id }: { id: number }) => {
         expiredTime={expiredTime}
       />
       <div className="mt-4">
-        <Button bgColor="action" textColor="white" href={`/river/${id}`}>
-          View
-        </Button>
+        <Button href={`/river/${id}`}>View</Button>
       </div>
     </div>
   )
