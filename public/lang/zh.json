@@ -12,5 +12,17 @@
       "route": "faq",
       "title": "FAQ"
     }
-  ]
+  ],
+  "createRiver": {
+    "name": {
+      "label": "河流名稱",
+      "placeholder": "請輸入河流名稱"
+    },
+    "agreement": {
+      "label": "河流公約",
+      "placeholder": "請輸入河流公約，新的關懷者必須同意此公約才能加入此河流"
+    },
+    "create": "建立",
+    "success": "成功建立河流!"
+  }
 }

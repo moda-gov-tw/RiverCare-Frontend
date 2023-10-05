@@ -12,5 +12,17 @@
       "route": "faq",
       "title": "FAQ"
     }
-  ]
+  ],
+  "createRiver": {
+    "name": {
+      "label": "River's name",
+      "placeholder": "Please input the name of river"
+    },
+    "agreement": {
+      "label": "River's agreement",
+      "placeholder": "Please enter the agreement. New stewardships must agree to this to join this river."
+    },
+    "create": "Create!",
+    "success": "Successfully created!"
+  }
 }

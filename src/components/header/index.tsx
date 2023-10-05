@@ -9,7 +9,7 @@ import LogoSrc from "@/../public/images/logo.png"
 import Image from "next/image"
 import { Burger } from "./burger"
 import { LanguageController } from "./language-controller"
-import { Language, getLanguage } from "@/utils/language"
+import { Language } from "@/utils/language"
 
 import { usePathname } from "next/navigation"
 import { WalletController } from "./wallet-controller"
@@ -38,7 +38,6 @@ const Header = ({ test = "", wallet = false, menu = true }) => {
   const currPath = usePathname().substring(1)
   const [isNavOpen, setIsNavOpen] = useState(false)
   const context = useContext(Context)
-  const address = context.acc?.address
 
   return (
     <header className="sticky left-0 top-0 z-50 flex h-[60px] w-full justify-between border-b bg-white p-3">
