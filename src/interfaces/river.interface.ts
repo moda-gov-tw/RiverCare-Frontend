@@ -2,8 +2,8 @@ import { Event } from "./event.interface"
 import { Proposal } from "./proposal.interface"
 
 export enum RiverStatus {
-  dead,
-  alive
+  dead = "Dead",
+  alive = "Alive"
 }
 export declare interface River {
   id: number

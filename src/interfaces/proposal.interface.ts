@@ -1,7 +1,7 @@
 export enum ProposalStatus {
-  dead,
-  proposing,
-  approved
+  dead = "Dead",
+  proposing = "Proposing",
+  approved = "Approved"
 }
 
 export enum ProposalType {

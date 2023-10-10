@@ -1,24 +1,26 @@
+import { River } from "@/interfaces/river.interface"
 import Button from "../../button"
 import RiverInfo from "../river-info"
+import Image from "next/image"
 
-const RiverCard = ({ id }: { id: number }) => {
-  let createdTime = ""
-  let gen = 0
-  let status = 0
-  let ownersCount = 10
-  let expiredTime = "3 days"
-
+const RiverCard = ({ river }: { river: River }) => {
   return (
     <div className="mx-auto my-2 border p-4">
-      <RiverInfo
-        createdTime={createdTime}
-        gen={gen}
-        status={status}
-        ownersCount={ownersCount}
-        expiredTime={expiredTime}
+      <Image
+        src={`/${river.currentTokenId}`}
+        alt={`${river.currentTokenId}`}
+        width={100}
+        height={100}
       />
-      <div className="mt-4">
-        <Button href={`/river/${id}`}>View</Button>
+      <div className="">{river.name}</div>
+      <RiverInfo
+        createdTime={river.createdTime}
+        gen={river.gen}
+        status={river.status}
+        // ownersCount={river.stewardsCount}
+      />
+      <div className="my-2">
+        <Button href={`/river/${river.id}`}>View</Button>
       </div>
     </div>
   )

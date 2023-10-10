@@ -1,3 +1,4 @@
+import { RiverStatus } from "@/interfaces/river.interface"
 import Button from "../../button"
 
 const RiverInfo = ({
@@ -9,21 +10,27 @@ const RiverInfo = ({
 }: {
   createdTime: string
   gen: number
-  status: number
-  ownersCount: number
-  expiredTime: string
+  status: RiverStatus
+  ownersCount?: number
+  expiredTime?: string
 }) => {
   return (
     <div className="flex flex-row justify-between">
       <div className="mx-auto p-4 text-left">
         <div>Created Time: {createdTime}</div>
-        <div>Generation: {gen}</div>
-        <div>Status: {status}</div>
+        <div>
+          Generation: <span className="font-bold">{gen}</span>
+        </div>
+        <div>
+          Status: <span className="font-bold">{status}</span>
+        </div>
       </div>
-      <div className="mx-auto p-4">
-        <div>{ownersCount}</div>
-        <div>{expiredTime}</div>
-      </div>
+      {ownersCount !== undefined && expiredTime !== undefined && (
+        <div className="mx-auto p-4">
+          <div>{ownersCount}</div>
+          <div>{expiredTime}</div>
+        </div>
+      )}
     </div>
   )
 }
