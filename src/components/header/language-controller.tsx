@@ -2,15 +2,7 @@
 import { getLanguage, setLanguage, LANGUAGE } from "@/utils/language"
 import { useEffect, useState } from "react"
 import styles from "./styles.module.scss"
-
-const FlipArrow = ({ opened = false }) => {
-  return (
-    <div className={`${styles.arrow} ${opened ? styles.active : ""}`}>
-      <span className="bg-black" />
-      <span className="bg-black" />
-    </div>
-  )
-}
+import { FlipArrow } from "../flip-arrow"
 
 export const LanguageController = ({ mobile }: { mobile: boolean }) => {
   const [isLangOpen, setIsLangOpen] = useState(false)

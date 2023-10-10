@@ -1,6 +1,3 @@
-import Dropdown from "@/components/dropdown"
-import RiverCard from "@/components/river/river-card"
-
 export default function FAQ() {
   return (
     <main className="w-full">

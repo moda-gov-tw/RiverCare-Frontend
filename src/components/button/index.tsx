@@ -16,9 +16,6 @@ const Button = ({
   onClick,
   disabled = false,
   customClass = "",
-  // outline = true,
-  // textColor = "white",
-  // bgColor = "action",
   style = ButtonStyle.action,
   children
 }: {
@@ -26,16 +23,9 @@ const Button = ({
   onClick?: any
   disabled?: boolean
   customClass?: string
-  // outline?: boolean
-  // textColor?: string
-  // bgColor?: string
   style?: string
   children: ReactNode
 }) => {
-  // let outlineStyle = outline ? "border border-black" : ""
-  // let textColorStyle: string = textColor !== undefined ? `text-${textColor}` : "text-white"
-  // let bgColorStyle: string = bgColor !== undefined ? `bg-${bgColor}` : "text-action"
-
   if (href)
     return (
       <Link className={`${styles.button} ${style} ${customClass}`} href={href}>

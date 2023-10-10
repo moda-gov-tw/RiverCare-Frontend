@@ -1,4 +1,4 @@
-import Dropdown from "@/components/dropdown"
+import Sorting from "@/components/sorting"
 
 export default function CreateRiverLayout({ children }: { children: React.ReactNode }) {
   return (
