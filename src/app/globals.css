@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Monda:wght@700&display=swap");
 
 @layer base {
   :root {
@@ -19,4 +20,9 @@ body {
   color: var(--black);
   background: var(--white);
   text-align: center;
+}
+
+.MainText {
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: black;
 }

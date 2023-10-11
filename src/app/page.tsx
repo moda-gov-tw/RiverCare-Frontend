@@ -1,6 +1,7 @@
 "use client"
 
 import Button, { ButtonStyle } from "@/components/button"
+import Footer from "@/components/footer"
 import { Context } from "@/context"
 import { useContext, useEffect, useState } from "react"
 
@@ -14,10 +15,19 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-col text-center">
-      <div className="text-title">Rivercare</div>
-      <div className="">RiverCareRiverCareRiverCareRiverCareRiverCareRiverCareRiverCareRiver</div>
-      <div className="text-2xl text-white">
+    <main className="flex flex-col items-center justify-center font-monda">
+      <div className="mt-20">
+        <div className="flex items-center justify-center text-[20vmin] font-bold text-white drop-shadow-[0px_0px_1px_rgba(0,0,0,0.5)]">
+          Rivercare
+          <div className="absolute text-[18vmin] font-bold text-primary">Rivercare</div>
+        </div>
+      </div>
+      <div>
+        <p className="break-all">
+          RiverCareRiverCareRiverCareRiverCareRiverCareRiverCareRiverCareRiver
+        </p>
+      </div>
+      <div className="mt-32 flex flex-col gap-8 text-2xl text-white xl:flex-row xl:text-3xl">
         {context.acc?.address !== undefined ? (
           <>
             <Button href="/create-river">Create River</Button>
@@ -28,6 +38,9 @@ export default function Home() {
         ) : (
           <Button onClick={connectWallet}>Connect</Button>
         )}
+      </div>
+      <div className="fixed bottom-0">
+        <Footer />
       </div>
     </main>
   )
