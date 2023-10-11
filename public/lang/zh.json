@@ -13,6 +13,20 @@
       "title": "FAQ"
     }
   ],
+  "faq": [
+    {
+      "Q": "qqq1",
+      "A": "aaa1"
+    },
+    {
+      "Q": "qqq2",
+      "A": "aaa2"
+    },
+    {
+      "Q": "qqq3",
+      "A": "aaa1"
+    }
+  ],
   "createRiver": {
     "name": {
       "label": "河流名稱",

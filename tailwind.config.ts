@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        mainBg: "url('/images/bg.png')"
+      },
       colors: {
         primary: "var(--primary-color)",
         action: "var(--action-color)",
@@ -18,6 +21,9 @@ const config: Config = {
         gray: "var(--gray)",
         black: "var(--black)"
       }
+    },
+    fontFamily: {
+      monda: ["Monda", "sans-serif"]
     }
   },
   plugins: []
