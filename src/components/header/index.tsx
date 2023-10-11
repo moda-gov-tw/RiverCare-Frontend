@@ -25,7 +25,7 @@ const Menu = ({ currPath, mobile }: { currPath: string; mobile: boolean }) => {
           href={`/${item.route}`}
           className={`
               ${currPath === item.route ? "underline underline-offset-8" : ""}
-              text-black duration-300 hover:text-primary`}
+              MainText text-xl font-black text-white duration-300 hover:text-primary`}
         >
           {item.title}
         </Link>
@@ -40,7 +40,7 @@ const Header = ({ test = "", wallet = false, menu = true }) => {
   const context = useContext(Context)
 
   return (
-    <header className="sticky left-0 top-0 z-50 flex h-[60px] w-full justify-between border-b bg-white p-3">
+    <header className="sticky right-0 top-0 z-50 flex h-[60px] w-full justify-between border-b bg-white p-3 font-monda">
       {/* LOGO */}
       <Link href="/">
         <Image src={LogoSrc} alt="RiverCare" className="h-full w-auto" />
