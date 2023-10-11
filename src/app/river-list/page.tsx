@@ -29,7 +29,7 @@ export default async function RiverList() {
 
   return (
     <main className="">
-      <div className="text-2xl text-title">River List</div>
+      <div className="MainText text-3xl font-bold text-primary">River List</div>
       <div className="text-lg">RivercareRivercareRivercare</div>
       <Dropdown type="sorting" />
       {rivers && rivers.map((river, i) => <RiverCard key={i} river={river} />)}
