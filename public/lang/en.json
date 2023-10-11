@@ -38,5 +38,13 @@
     },
     "create": "Create!",
     "success": "Successfully created!"
-  }
+  },
+  "sortMethod": ["Created time", "River name"],
+  "riverNav": [
+    "Details",
+    "Events list",
+    "Create event",
+    "River wallet",
+    "Propose agreement modification"
+  ]
 }

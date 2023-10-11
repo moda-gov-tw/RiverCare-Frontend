@@ -1,4 +1,4 @@
-import Sorting from "@/components/sorting"
+import Dropdown from "@/components/dropdown"
 import RiverCard from "@/components/river/river-card"
 import { River, RiverStatus } from "@/interfaces/river.interface"
 
@@ -31,7 +31,7 @@ export default async function RiverList() {
     <main className="">
       <div className="text-2xl text-title">River List</div>
       <div className="text-lg">RivercareRivercareRivercare</div>
-      <Sorting />
+      <Dropdown type="sorting" />
       {rivers && rivers.map((river, i) => <RiverCard key={i} river={river} />)}
     </main>
   )
