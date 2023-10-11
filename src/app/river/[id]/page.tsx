@@ -4,11 +4,12 @@ import Button, { ButtonStyle } from "@/components/button"
 import RiverAgreement from "@/components/river/river-agreement"
 import RiverInfo from "@/components/river/river-info"
 import Schedule from "@/components/schedule"
+import { RiverStatus } from "@/interfaces/river.interface"
 
 export default function River({ params }: { params: { id: number } }) {
   let createdTime = ""
   let gen = 0
-  let status = 0
+  let status = RiverStatus.alive
   let ownersCount = 10
   let expiredTime = "3 days"
   let agreement = "I agree..."

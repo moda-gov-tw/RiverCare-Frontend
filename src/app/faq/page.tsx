@@ -1,6 +1,6 @@
 "use client"
 
-import Dropdown from "@/components/dropdown"
+import Sorting from "@/components/sorting"
 import Footer from "@/components/footer"
 import RiverCard from "@/components/river/river-card"
 import { Language } from "@/utils/language"
@@ -14,7 +14,7 @@ export default function FAQ() {
       {lang.faq.map(({ Q, A }, i) => (
         <ul key={i}>
           <li>
-            <details className="ring-secondary font-monda group my-4 w-full rounded-lg font-normal ring-1">
+            <details className="ring-secondary group my-4 w-full rounded-lg font-monda font-normal ring-1">
               <summary className="MainText flex cursor-pointer list-none justify-between px-4 py-6 text-2xl font-extrabold text-white">
                 <span>
                   Q{i + 1} - {Q}
