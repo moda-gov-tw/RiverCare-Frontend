@@ -18,9 +18,9 @@ export default function River({ params }: { params: { id: number } }) {
     name: "磺溪",
     agreement: "agreement",
     prompt: ["", "", "", "", ""],
-    gen: 0,
+    gen: 2,
     createdTime: "2023-09-30 22:25",
-    expiredTime: "2023-10-30 22:25",
+    expiredTime: "2023-10-1 22:25",
     status: RiverStatus.alive,
     stewards: ["tz1123"],
     stewardsCount: 1,
@@ -47,7 +47,7 @@ export default function River({ params }: { params: { id: number } }) {
   }
 
   return (
-    <main className="border border-gray p-4">
+    <main className="border p-4">
       {joined ? (
         <div>
           <Success
@@ -59,7 +59,7 @@ export default function River({ params }: { params: { id: number } }) {
         </div>
       ) : (
         <>
-          <Schedule gen={river.gen} status={river.status} />
+          <Schedule gen={river.gen} expiredTime={river.expiredTime} />
           <RiverInfo
             createdTime={river.createdTime}
             gen={river.gen}

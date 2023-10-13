@@ -30,7 +30,7 @@ const RiverInfo = ({
         </div>
       </div>
       {ownersCount !== undefined && expiredTime !== undefined && (
-        <div className="mx-0 p-4 pt-0 text-left">
+        <div className="mx-0 flex justify-around p-4 pt-0 text-left">
           <div className="my-2 flex items-center text-xl font-bold text-action">
             <Image src={Stewardship} alt="" className="mr-4" width={28} />
             {ownersCount} people
@@ -38,7 +38,7 @@ const RiverInfo = ({
           <div className="relative my-2 flex items-center  text-xl font-bold text-danger">
             <Image src={refresh} alt="" className="mr-4" width={28} />
             in {dayLeft} days
-            <div className="absolute left-[42px] top-[28px] text-xs">({expiredTime})</div>
+            <div className="absolute left-[42px] top-[28px] text-xs">{expiredTime}</div>
           </div>
         </div>
       )}
