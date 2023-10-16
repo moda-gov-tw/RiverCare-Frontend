@@ -39,7 +39,10 @@
     "create": "Create!",
     "success": "Successfully created!"
   },
-  "sortMethod": [{ "option": "Created time" }, { "option": "River name" }],
+  "sortMethod": [
+    { "route": "created-time", "option": "Created time" },
+    { "route": "name", "option": "River name" }
+  ],
   "riverNav": [
     { "route": "", "option": "Details" },
     { "route": "events", "option": "Events list" },

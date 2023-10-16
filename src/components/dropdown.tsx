@@ -4,12 +4,23 @@ import { useState } from "react"
 import { FlipArrow } from "./flip-arrow"
 import { Language } from "@/utils/language"
 
-const Dropdown = ({ type, onChange }: { type: string; onChange: any }) => {
-  const [showMenu, setShowMenu] = useState(false)
-  const [ind, setInd] = useState<number>(0)
-
+const Dropdown = ({
+  type,
+  onChange,
+  currRoute
+}: {
+  type: string
+  onChange: any
+  currRoute?: string
+}) => {
   const lang = Language()
-  let options = type === "sorting" ? lang.sortMethod : lang.riverNav
+  let options = type !== "sorting" ? lang.riverNav : lang.sortMethod
+
+  let defaultInd = options.findIndex((item) => item.route === currRoute)
+  if (defaultInd === -1) defaultInd = 0
+
+  const [showMenu, setShowMenu] = useState(false)
+  const [ind, setInd] = useState<number>(defaultInd)
 
   return (
     <div

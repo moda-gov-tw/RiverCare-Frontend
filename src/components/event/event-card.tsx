@@ -1,26 +1,14 @@
 import Button from "../button"
 import EventInfo from "./event-info"
+import { Event } from "@/interfaces/event.interface"
 
-const EventCard = ({ id }: { id: number }) => {
-  let title = "River"
-  let description =
-    "sdefgsdfklgjsdklfghjksldcvslergfjklsdfjcvlsjhdkfgkldhswjfgvklhbjnzm,xscdvlakshdjklf"
-  let createdTime = ""
-  let creator = "sdf"
-  let gen = 0
-  let edition = 0
-
+const EventCard = ({ event, stewardsCount }: { event: Event; stewardsCount: number }) => {
   return (
-    <div className="mx-auto my-2 border p-4">
-      <EventInfo
-        id={id}
-        title={title}
-        description={description}
-        createdTime={createdTime}
-        creator={creator}
-        edition={edition}
-      />
-      <div className="mt-4">
+    <div className="relative mx-auto my-2 border p-4">
+      <div className="absolute left-3 top-2 text-2xl text-[#BCBCBC]">#{event.tokenId}</div>
+      <div className="mt-4 text-2xl font-bold">{event.name}</div>
+      <EventInfo event={event} stewardsCount={stewardsCount} />
+      <div className="my-4">
         <Button>Approve Event</Button>
       </div>
     </div>

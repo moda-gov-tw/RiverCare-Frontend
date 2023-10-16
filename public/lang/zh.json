@@ -39,7 +39,10 @@
     "create": "建立",
     "success": "成功建立河流!"
   },
-  "sortMethod": [{ "option": "創建時間" }, { "option": "河流名稱" }],
+  "sortMethod": [
+    { "route": "created-time", "option": "創建時間" },
+    { "route": "name", "option": "河流名稱" }
+  ],
   "riverNav": [
     { "route": "", "option": "資訊" },
     { "route": "events", "option": "事件列表" },

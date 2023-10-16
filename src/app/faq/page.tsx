@@ -1,6 +1,5 @@
 "use client"
 
-import Sorting from "@/components/sorting"
 import Footer from "@/components/footer"
 import RiverCard from "@/components/river/river-card"
 import { Language } from "@/utils/language"
