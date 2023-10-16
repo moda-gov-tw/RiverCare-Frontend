@@ -1,4 +1,5 @@
 import { RiverStatus } from "@/interfaces/river.interface"
+import React from "react"
 
 const Dot = ({ text, disabled }: { text?: string; disabled?: boolean }) => {
   return (
@@ -90,16 +91,17 @@ const Schedule = ({ gen, expiredTime }: { gen: number; expiredTime: string }) =>
   return (
     <div className="my-10 flex justify-center">
       {lineTopText.map((lineTopText, i) => (
-        <>
-          <Dot text={dotText[i]} disabled={dotDisabled[i]} />
+        <React.Fragment key={i}>
+          <Dot key={`Dot ${i}`} text={dotText[i]} disabled={dotDisabled[i]} />
           <Line
+            key={`Line ${i}`}
             bottomText={lineBottomText[i]}
             topText={lineTopText}
             disabled={lineDisabled[i]}
             dashed={i === 1}
             currGen={gen}
           />
-        </>
+        </React.Fragment>
       ))}
       <Dot text={dotText[3]} disabled={dotDisabled[3]} />
     </div>

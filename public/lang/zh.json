@@ -39,6 +39,13 @@
     "create": "建立",
     "success": "成功建立河流!"
   },
-  "sortMethod": ["創建時間", "河流名稱"],
-  "riverNav": ["資訊", "事件列表", "建立事件", "河流錢包", "提出公約修改"]
+  "sortMethod": [{ "option": "創建時間" }, { "option": "河流名稱" }],
+  "riverNav": [
+    { "route": "", "option": "資訊" },
+    { "route": "events", "option": "事件列表" },
+    { "route": "create-event", "option": "建立事件" },
+    { "route": "multisig", "option": "河流錢包" },
+    { "route": "update-agreement", "option": "修改公約" },
+    { "route": "update-dataset", "option": "修改河流資料" }
+  ]
 }

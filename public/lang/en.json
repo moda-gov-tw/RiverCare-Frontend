@@ -39,12 +39,13 @@
     "create": "Create!",
     "success": "Successfully created!"
   },
-  "sortMethod": ["Created time", "River name"],
+  "sortMethod": [{ "option": "Created time" }, { "option": "River name" }],
   "riverNav": [
-    "Details",
-    "Events list",
-    "Create event",
-    "River wallet",
-    "Propose agreement modification"
+    { "route": "", "option": "Details" },
+    { "route": "events", "option": "Events list" },
+    { "route": "create-event", "option": "Create event" },
+    { "route": "multisig", "option": "River wallet" },
+    { "route": "update-agreement", "option": "Update agreement" },
+    { "route": "update-dataset", "option": "Update dataset" }
   ]
 }

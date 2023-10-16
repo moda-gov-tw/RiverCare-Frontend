@@ -11,6 +11,8 @@ import Check from "@/../public/images/check.png"
 import StewardshipTokenImg from "@/../public/images/stewardship-token.png"
 import { Context } from "@/context"
 import Success from "@/components/success"
+import Dropdown from "@/components/dropdown"
+import { useRouter } from "next/navigation"
 
 export default function River({ params }: { params: { id: number } }) {
   let mockdata: River = {
@@ -31,6 +33,7 @@ export default function River({ params }: { params: { id: number } }) {
     proposals: []
   }
 
+  const router = useRouter()
   const [river, setRiver] = useState(mockdata)
   const [agreed, setAgreed] = useState(false)
   const [needActivate, setNeedActivate] = useState(false)
@@ -46,61 +49,68 @@ export default function River({ params }: { params: { id: number } }) {
     return false
   }
 
+  const navigate = (item: { route: string }) => {
+    router.push(`/river/${params.id}/${item.route}`)
+  }
+
   return (
-    <main className="border p-4">
-      {joined ? (
-        <div>
-          <Success
-            imgSrc="/images/stewardship-token.png"
-            message="Successfully received stewardship token!"
-          />
-          {/* <Image src={StewardshipTokenImg} alt="" /> */}
-          <div></div>
-        </div>
-      ) : (
-        <>
-          <Schedule gen={river.gen} expiredTime={river.expiredTime} />
-          <RiverInfo
-            createdTime={river.createdTime}
-            gen={river.gen}
-            status={river.status}
-            ownersCount={river.stewardsCount}
-            expiredTime={river.expiredTime}
-          />
-          <RiverAgreement agreement={river.agreement} />
-          <div className="flex flex-col">
-            {address && river.gen === 0 && !isSteward(address) && (
-              <>
-                <div className="my-2">
-                  <Button
-                    style={ButtonStyle.highlight}
-                    onClick={(e: any) => {
-                      setAgreed(!agreed)
-                    }}
-                  >
-                    <div className="flex">
-                      {agreed && <Image src={Check} alt="" width={24} />}
-                      <span className="ml-4">I agree for above</span>
-                    </div>
-                  </Button>
-                </div>
+    <>
+      <Dropdown type="rivernav" onChange={navigate} />
+      <main className="border p-4">
+        {joined ? (
+          <div>
+            <Success
+              imgSrc="/images/stewardship-token.png"
+              message="Successfully received stewardship token!"
+            />
+            {/* <Image src={StewardshipTokenImg} alt="" /> */}
+            <div></div>
+          </div>
+        ) : (
+          <>
+            <Schedule gen={river.gen} expiredTime={river.expiredTime} />
+            <RiverInfo
+              createdTime={river.createdTime}
+              gen={river.gen}
+              status={river.status}
+              ownersCount={river.stewardsCount}
+              expiredTime={river.expiredTime}
+            />
+            <RiverAgreement agreement={river.agreement} />
+            <div className="flex flex-col">
+              {address && river.gen === 0 && !isSteward(address) && (
+                <>
+                  <div className="my-2">
+                    <Button
+                      style={ButtonStyle.highlight}
+                      onClick={(e: any) => {
+                        setAgreed(!agreed)
+                      }}
+                    >
+                      <div className="flex">
+                        {agreed && <Image src={Check} alt="" width={24} />}
+                        <span className="ml-4">I agree for above</span>
+                      </div>
+                    </Button>
+                  </div>
+                  <div className="my-2">
+                    <Button onClick={handleAgree} disabled={!agreed}>
+                      Join!
+                    </Button>
+                  </div>
+                </>
+              )}
+              {address && needActivate && (
                 <div className="my-2">
                   <Button onClick={handleAgree} disabled={!agreed}>
-                    Join!
+                    Activate!
                   </Button>
                 </div>
-              </>
-            )}
-            {address && needActivate && (
-              <div className="my-2">
-                <Button onClick={handleAgree} disabled={!agreed}>
-                  Activate!
-                </Button>
-              </div>
-            )}
-          </div>
-        </>
-      )}
-    </main>
+              )}
+            </div>
+          </>
+        )}
+      </main>
+    </>
   )
 }
