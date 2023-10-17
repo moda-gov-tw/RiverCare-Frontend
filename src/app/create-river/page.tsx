@@ -19,16 +19,26 @@ export default function CreateRiver({ params }: { params: { id: number } }) {
   }
 
   return (
-    <main className="rounded border p-6 xl:p-10">
+    <main className="border p-6 xl:p-10">
       {!isSuccess ? (
         <>
           {/* name */}
-          <div className="flex items-center">
+          <div className="flex flex-col items-start">
             <div className="mr-4">{lang.createRiver.name.label} : </div>
             <Input
               value={name}
               placeholder={lang.createRiver.name.placeholder}
               onChange={setName}
+            />
+          </div>
+          {/* description */}
+          <div className="mt-4 flex flex-col items-start ">
+            <div>{lang.createRiver.agreement.label} : </div>
+            <Input
+              value={agreement}
+              type="text-area"
+              placeholder={lang.createRiver.agreement.placeholder}
+              onChange={setAgreement}
             />
           </div>
           {/* agreement */}
@@ -41,6 +51,8 @@ export default function CreateRiver({ params }: { params: { id: number } }) {
               onChange={setAgreement}
             />
           </div>
+          {/* dataset JSON */}
+
           <div className="m-6">
             <Button onClick={createRiver}>{lang.createRiver.create}</Button>
           </div>

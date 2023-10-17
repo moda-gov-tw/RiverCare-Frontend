@@ -1,10 +1,10 @@
 .input {
-  width: auto;
+  width: 100%;
   background-color: #dddddd;
   color: var(--black);
   font-weight: bold;
   padding: 0.6rem 1rem;
-  margin-left: auto;
+  margin: 0.5rem auto;
 }
 
 .input::placeholder {

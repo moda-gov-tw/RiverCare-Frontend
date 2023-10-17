@@ -7,8 +7,12 @@ import { ProposalStatus, ProposalType } from "@/interfaces/proposal.interface"
 import { Language } from "@/utils/language"
 import { useRouter } from "next/navigation"
 import { Context } from "@/context"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { River, RiverStatus } from "@/interfaces/river.interface"
+import Modal from "react-modal"
+import UpdateAgreement from "../update-agreement/page"
+import UpdateDataset from "../update-dataset/page"
+import ProposeTransfer from "../propose-transfer/page"
 
 export default function Multisig({ params }: { params: { id: number } }) {
   const router = useRouter()
@@ -61,6 +65,13 @@ export default function Multisig({ params }: { params: { id: number } }) {
   const river = getRiver()
   const proposals = getProposals()
 
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [proposalType, setProposalType] = useState<ProposalType>()
+  function toggleModal(type?: ProposalType) {
+    setIsModalOpen(!isModalOpen)
+    if (type !== undefined) setProposalType(type)
+  }
+
   const createProposal = () => {}
 
   return (
@@ -88,8 +99,61 @@ export default function Multisig({ params }: { params: { id: number } }) {
             ))}
           </div>
         </div>
-        <div className="m-6 text-center">
-          <Button onClick={createProposal}>Create proposal</Button>
+        <div className="flex flex-col gap-4 p-2 xl:flex-row">
+          <div className="text-center">
+            <Button
+              onClick={(e: any) => {
+                toggleModal(ProposalType.transferTezos)
+              }}
+              customClass="w-full"
+            >
+              Transfer proposal
+            </Button>
+          </div>
+          <div className="text-center">
+            <Button
+              onClick={(e: any) => {
+                toggleModal(ProposalType.updateAgreement)
+              }}
+              customClass="w-full"
+            >
+              Agreement update proposal
+            </Button>
+          </div>
+          <div className="text-center">
+            <Button
+              onClick={(e: any) => {
+                toggleModal(ProposalType.updateDataset)
+              }}
+              customClass="w-full"
+            >
+              Dataset update proposal
+            </Button>
+          </div>
+          <Modal
+            isOpen={isModalOpen}
+            className={
+              "absolute right-1/2 top-1/2 w-full max-w-xl -translate-y-1/2 translate-x-1/2 rounded-xl border bg-white"
+            }
+            overlayClassName={""}
+            ariaHideApp={false}
+          >
+            <button
+              onClick={(e: any) => toggleModal()}
+              className="w-full pr-6 pt-4 text-right text-black"
+            >
+              x
+            </button>
+            {proposalType === ProposalType.transferTezos && (
+              <ProposeTransfer params={{ id: params.id }} />
+            )}
+            {proposalType === ProposalType.updateAgreement && (
+              <UpdateAgreement params={{ id: params.id }} />
+            )}
+            {proposalType === ProposalType.updateDataset && (
+              <UpdateDataset params={{ id: params.id }} />
+            )}
+          </Modal>
         </div>
       </main>
     </>
