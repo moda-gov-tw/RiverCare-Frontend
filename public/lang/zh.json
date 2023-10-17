@@ -50,5 +50,9 @@
     { "route": "multisig", "option": "河流錢包" },
     { "route": "update-agreement", "option": "修改公約" },
     { "route": "update-dataset", "option": "修改河流資料" }
-  ]
+  ],
+  "proposal": {
+    "status": ["dead", "提議中", "通過"],
+    "transactionType": ["傳送 tezos", "更新公約", "更新河流資料"]
+  }
 }

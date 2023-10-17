@@ -3,7 +3,7 @@
 import Button, { ButtonStyle } from "@/components/button"
 import Footer from "@/components/footer"
 import { Context } from "@/context"
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 
 export default function Home() {
   const context = useContext(Context)

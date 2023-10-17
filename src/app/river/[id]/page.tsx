@@ -19,7 +19,7 @@ export default function River({ params }: { params: { id: number } }) {
     id: 0,
     name: "磺溪",
     agreement: "agreement",
-    prompt: ["", "", "", "", ""],
+    dataset: "ipfs",
     gen: 2,
     createdTime: "2023-09-30 22:25",
     expiredTime: "2023-10-1 22:25",
