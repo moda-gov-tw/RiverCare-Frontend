@@ -9,7 +9,7 @@ export declare interface River {
   id: number
   name: string
   agreement: string
-  prompt: string[]
+  dataset: string
   gen: number
   createdTime: string
   expiredTime: string

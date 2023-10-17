@@ -38,5 +38,21 @@
     },
     "create": "Create!",
     "success": "Successfully created!"
+  },
+  "sortMethod": [
+    { "route": "created-time", "option": "Created time" },
+    { "route": "name", "option": "River name" }
+  ],
+  "riverNav": [
+    { "route": "", "option": "Details" },
+    { "route": "events", "option": "Events list" },
+    { "route": "create-event", "option": "Create event" },
+    { "route": "multisig", "option": "River wallet" },
+    { "route": "update-agreement", "option": "Update agreement" },
+    { "route": "update-dataset", "option": "Update dataset" }
+  ],
+  "proposal": {
+    "status": ["dead", "proposing", "approved"],
+    "transactionType": ["Transfer tezos", "Update agreement", "Update dataset"]
   }
 }

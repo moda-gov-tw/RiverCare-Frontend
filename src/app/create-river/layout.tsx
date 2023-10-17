@@ -1,5 +1,3 @@
-import Sorting from "@/components/sorting"
-
 export default function CreateRiverLayout({ children }: { children: React.ReactNode }) {
   return (
     <section className="w-full">
