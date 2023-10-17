@@ -47,9 +47,7 @@
     { "route": "", "option": "資訊" },
     { "route": "events", "option": "事件列表" },
     { "route": "create-event", "option": "建立事件" },
-    { "route": "multisig", "option": "河流錢包" },
-    { "route": "update-agreement", "option": "修改公約" },
-    { "route": "update-dataset", "option": "修改河流資料" }
+    { "route": "multisig", "option": "河流錢包" }
   ],
   "proposal": {
     "status": ["dead", "提議中", "通過"],

@@ -28,6 +28,7 @@ export default function CreateEvent({ params }: { params: { id: number } }) {
 
   const createEvent = () => {
     // name, description, editions
+    // parseInt(editions)
   }
 
   return (

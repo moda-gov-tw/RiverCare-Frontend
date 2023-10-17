@@ -9,12 +9,7 @@ import { Context } from "@/context"
 import UploadFile from "@/components/upload-file"
 import { updateToIpfs } from "@/utils/ipfs"
 export default function UpdateDataset({ params }: { params: { id: number } }) {
-  const router = useRouter()
   const context = useContext(Context)
-
-  const navigate = (item: { route: string }) => {
-    router.push(`/river/${params.id}/${item.route}`)
-  }
 
   const [dataset, setDataset] = useState<string>()
 
@@ -28,19 +23,16 @@ export default function UpdateDataset({ params }: { params: { id: number } }) {
   }
 
   return (
-    <>
-      <Dropdown type="rivernav" onChange={navigate} currRoute={"update-dataset"} />
-      <main className="border p-6 text-left">
-        <div>
-          <div>Event&apos;s dataset:</div>
-          <UploadFile onChange={setDataset} />
-        </div>
-        <div className="my-4 w-full text-center">
-          <Button onClick={updateDataset} disabled={!validated()}>
-            Create!
-          </Button>
-        </div>
-      </main>
-    </>
+    <main className="p-6 text-left">
+      <div>
+        <div>Event&apos;s dataset:</div>
+        <UploadFile onChange={setDataset} />
+      </div>
+      <div className="my-4 w-full text-center">
+        <Button onClick={updateDataset} disabled={!validated()}>
+          Create!
+        </Button>
+      </div>
+    </main>
   )
 }
