@@ -18,10 +18,12 @@
     "@taquito/beacon-wallet": "^17.3.1",
     "@taquito/taquito": "^17.3.1",
     "fs": "^0.0.1-security",
+    "html-to-image": "^1.11.11",
     "next": "13.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-modal": "^3.16.1",
+    "react-qr-code": "^2.0.12",
     "sass": "^1.68.0"
   },
   "devDependencies": {

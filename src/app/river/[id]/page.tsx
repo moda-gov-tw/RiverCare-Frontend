@@ -55,7 +55,7 @@ export default function River({ params }: { params: { id: number } }) {
 
   return (
     <>
-      <Dropdown type="rivernav" onChange={navigate} />
+      <Dropdown type="riverNav" onChange={navigate} />
       <main className="border p-4">
         {joined ? (
           <div>

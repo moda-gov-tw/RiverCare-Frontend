@@ -25,7 +25,7 @@ const Menu = ({ currPath, mobile }: { currPath: string; mobile: boolean }) => {
           href={`/${item.route}`}
           className={`
               ${currPath === item.route ? "underline underline-offset-8" : ""}
-              MainText text-xl font-black text-white duration-300 hover:text-primary`}
+              MainText text-xl font-black text-white duration-300 hover:text-title`}
         >
           {item.title}
         </Link>
@@ -34,7 +34,7 @@ const Menu = ({ currPath, mobile }: { currPath: string; mobile: boolean }) => {
   )
 }
 
-const Header = ({ test = "", wallet = false, menu = true }) => {
+const Header = () => {
   const currPath = usePathname().substring(1)
   const [isNavOpen, setIsNavOpen] = useState(false)
   const context = useContext(Context)

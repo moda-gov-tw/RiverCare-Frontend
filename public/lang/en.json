@@ -9,8 +9,8 @@
       "title": "River List"
     },
     {
-      "route": "faq",
-      "title": "FAQ"
+      "route": "my-page",
+      "title": "My Page"
     }
   ],
   "faq": [
@@ -42,6 +42,10 @@
   "sortMethod": [
     { "route": "created-time", "option": "Created time" },
     { "route": "name", "option": "River name" }
+  ],
+  "tokenType": [
+    { "route": "stewardship", "option": "Stewardship tokens" },
+    { "route": "event", "option": "Event tokens" }
   ],
   "riverNav": [
     { "route": "", "option": "Details" },

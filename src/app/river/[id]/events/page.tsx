@@ -43,7 +43,7 @@ export default function Events({ params }: { params: { id: number } }) {
 
   return (
     <>
-      <Dropdown type="rivernav" onChange={navigate} currRoute={"events"} />
+      <Dropdown type="riverNav" onChange={navigate} currRoute={"events"} />
       <main className="">
         <div>
           {events?.map((event, i) => (

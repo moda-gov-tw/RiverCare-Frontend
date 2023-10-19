@@ -9,8 +9,8 @@
       "title": "河流列表"
     },
     {
-      "route": "faq",
-      "title": "FAQ"
+      "route": "my-page",
+      "title": "個人頁面"
     }
   ],
   "faq": [
@@ -42,6 +42,10 @@
   "sortMethod": [
     { "route": "created-time", "option": "創建時間" },
     { "route": "name", "option": "河流名稱" }
+  ],
+  "tokenType": [
+    { "route": "stewardship", "option": "河流關懷代幣" },
+    { "route": "event", "option": "事件代幣" }
   ],
   "riverNav": [
     { "route": "", "option": "資訊" },

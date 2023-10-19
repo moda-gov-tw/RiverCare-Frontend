@@ -14,7 +14,8 @@ const Dropdown = ({
   currRoute?: string
 }) => {
   const lang = Language()
-  let options = type !== "sorting" ? lang.riverNav : lang.sortMethod
+  let options =
+    type === "sorting" ? lang.sortMethod : type === "tokenType" ? lang.tokenType : lang.riverNav
 
   let defaultInd = options.findIndex((item) => item.route === currRoute)
   if (defaultInd === -1) defaultInd = 0
@@ -27,11 +28,15 @@ const Dropdown = ({
       className="mx-auto my-4 flex w-full flex-col font-bold"
       onClick={(e) => setShowMenu(!showMenu)}
     >
-      <div className="flex w-full items-center justify-between border px-2 py-1">
+      <div className="mx-auto flex w-3/4 max-w-[300px] items-center justify-between border px-2 py-1">
         <div>{options[ind].option}</div>
         <FlipArrow opened={showMenu} />
       </div>
-      <div className={`${!showMenu && "hidden"} flex w-full flex-col bg-gray px-2 py-2 transition`}>
+      <div
+        className={`${
+          !showMenu && "hidden"
+        } mx-auto flex w-3/4 max-w-[300px] flex-col bg-gray px-2 py-2 transition`}
+      >
         {options.map((item, i) => (
           <button
             key={i}
