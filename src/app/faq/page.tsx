@@ -8,12 +8,12 @@ export default function FAQ() {
   const lang = Language()
   return (
     <main className="w-2/5">
-      <div className="MainText font-monda text-5xl font-bold text-title">River List</div>
+      <div className="MainText text-5xl font-bold text-title">River List</div>
       {/* {Array.from(Array(5).keys()).map((temp, i) => */}
       {lang.faq.map(({ Q, A }, i) => (
         <ul key={i}>
           <li>
-            <details className="ring-secondary group my-4 w-full rounded-lg font-monda font-normal ring-1">
+            <details className="ring-secondary group my-4 w-full rounded-lg font-normal ring-1">
               <summary className="MainText flex cursor-pointer list-none justify-between px-4 py-6 text-2xl font-extrabold text-white">
                 <span>
                   Q{i + 1} - {Q}

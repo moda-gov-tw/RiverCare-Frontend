@@ -40,7 +40,7 @@ const Header = () => {
   const context = useContext(Context)
 
   return (
-    <header className="sticky right-0 top-0 z-50 flex h-[60px] w-full justify-between border-b bg-white p-3 font-monda">
+    <header className="sticky right-0 top-0 z-50 flex h-[60px] w-full justify-between border-b bg-white p-3">
       {/* LOGO */}
       <Link href="/">
         <Image src={LogoSrc} alt="RiverCare" className="h-full w-auto" />
