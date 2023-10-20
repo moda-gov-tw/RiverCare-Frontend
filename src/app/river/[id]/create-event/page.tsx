@@ -34,7 +34,7 @@ export default function CreateEvent({ params }: { params: { id: number } }) {
   return (
     <>
       <Dropdown type="riverNav" onChange={navigate} currRoute={"create-event"} />
-      <main className="border p-6 text-left">
+      <main className="border p-6 text-left font-monda">
         <div className="mb-4">
           <div className="mb-2">Event&apos;s name:</div>
           <Input value={name} placeholder={"enter name"} onChange={setName} />

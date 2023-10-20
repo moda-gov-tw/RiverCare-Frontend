@@ -25,7 +25,7 @@ const Dropdown = ({
 
   return (
     <div
-      className="mx-auto my-4 flex w-full flex-col font-bold"
+      className="mx-auto my-4 flex w-full flex-col font-monda font-bold"
       onClick={(e) => setShowMenu(!showMenu)}
     >
       <div className="mx-auto flex w-3/4 max-w-[300px] items-center justify-between border px-2 py-1">

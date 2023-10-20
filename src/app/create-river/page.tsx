@@ -19,7 +19,7 @@ export default function CreateRiver({ params }: { params: { id: number } }) {
   }
 
   return (
-    <main className="border p-6 xl:p-10">
+    <main className="border p-6 font-monda xl:p-10">
       {!isSuccess ? (
         <>
           {/* name */}
