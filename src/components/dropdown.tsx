@@ -15,7 +15,7 @@ const Dropdown = ({
 }) => {
   const lang = Language()
   let options =
-    type === "sorting" ? lang.sortMethod : type === "tokenType" ? lang.tokenType : lang.riverNav
+    type === "sorting" ? lang.sortMethod : type === "myPage" ? lang.myPage : lang.riverNav
 
   let defaultInd = options.findIndex((item) => item.route === currRoute)
   if (defaultInd === -1) defaultInd = 0

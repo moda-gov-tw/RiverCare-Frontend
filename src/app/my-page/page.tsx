@@ -7,6 +7,7 @@ import StewardshipToken from "@/components/token/stewardship-token"
 import { Context } from "@/context"
 import { Event } from "@/interfaces/event.interface"
 import { River, RiverStatus } from "@/interfaces/river.interface"
+import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 
 export default function Mypage({ params }: { params: { wallet: string } }) {
@@ -28,56 +29,31 @@ export default function Mypage({ params }: { params: { wallet: string } }) {
       walletAddr: "KT1111",
       proposals: []
     }
-    let mockEvent: Event = {
-      uid: "1",
-      name: "River cleanup",
-      tokenId: 0,
-      tokenContract: "KT1111",
-      description: "this is the description of the river cleanup, this event is for......",
-      editions: 100,
-      amount: 100,
-      host: "tz1111",
-      createdTime: "2023-09-30 22:25",
-      participants: ["tz1111", "tz1111", "tz1111", "tz1111", "tz1111"],
-      participantsCount: 5,
-      approvals: ["tz1111", "tz1111", "tz1111"],
-      approvalCount: 3
-    }
 
-    return {
-      stewarships: Array.from(Array(2).keys()).map((temp, i) => mockRiver),
-      events: Array.from(Array(3).keys()).map((temp, i) => mockEvent)
-    }
+    return Array.from(Array(2).keys()).map((temp, i) => mockRiver)
   }
 
-  const [type, setType] = useState("stewardship")
+  const router = useRouter()
   const [stewardships, setStewardships] = useState<River[]>([])
-  const [events, setEvents] = useState<Event[]>([])
 
   const { address } = useContext(Context)
 
   useEffect(() => {
     let tokens = getTokens()
-    setStewardships(tokens.stewarships)
-    setEvents(tokens.events)
-  }, [type])
+    setStewardships(tokens)
+  }, [])
+
+  const navigate = (item: { route: string }) => {
+    router.push(`/my-page/${item.route}`)
+  }
 
   if (!address?.startsWith("tz")) return <ConnectHint />
   return (
     <>
-      <Dropdown
-        type="tokenType"
-        onChange={(item: { route: string }) => {
-          setType(item.route)
-        }}
-      />
+      <Dropdown type="myPage" onChange={navigate} />
       <main className="m-4 w-auto border text-left">
-        {type === "stewardship" &&
-          stewardships.length > 0 &&
+        {stewardships.length > 0 &&
           stewardships.map((river: River, i) => <StewardshipToken key={i} river={river} />)}
-        {type === "event" &&
-          events.length > 0 &&
-          events.map((event: Event, i) => <EventToken key={i} event={event} />)}
       </main>
     </>
   )

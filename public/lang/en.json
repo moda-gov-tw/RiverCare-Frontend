@@ -43,10 +43,12 @@
     { "route": "created-time", "option": "Created time" },
     { "route": "name", "option": "River name" }
   ],
-  "tokenType": [
-    { "route": "stewardship", "option": "Stewardship tokens" },
-    { "route": "event", "option": "Event tokens" }
+  "myPage": [
+    { "route": "", "option": "Stewardship tokens" },
+    { "route": "event-tokens", "option": "Event tokens" },
+    { "route": "hosted-events", "option": "Hosted events" }
   ],
+
   "riverNav": [
     { "route": "", "option": "Details" },
     { "route": "events", "option": "Events list" },

@@ -14,7 +14,15 @@ import { Language } from "@/utils/language"
 import { usePathname } from "next/navigation"
 import { WalletController } from "./wallet-controller"
 
-const Menu = ({ currPath, mobile }: { currPath: string; mobile: boolean }) => {
+const Menu = ({
+  currPath,
+  mobile,
+  onClick
+}: {
+  currPath: string
+  mobile: boolean
+  onClick?: any
+}) => {
   const lang = Language()
 
   return (
@@ -23,9 +31,10 @@ const Menu = ({ currPath, mobile }: { currPath: string; mobile: boolean }) => {
       <li key={i} className={mobile ? "w-full border-b py-4" : ""}>
         <Link
           href={`/${item.route}`}
+          onClick={onClick}
           className={`
               ${currPath === item.route ? "underline underline-offset-8" : ""}
-              MainText text-xl font-black text-white duration-300 hover:text-title`}
+              MainText font-black text-white duration-300 hover:text-title`}
         >
           {item.title}
         </Link>
@@ -40,7 +49,7 @@ const Header = () => {
   const context = useContext(Context)
 
   return (
-    <header className="sticky right-0 top-0 z-50 flex h-[60px] w-full justify-between border-b bg-white p-3">
+    <header className="sticky right-0 top-0 z-50 flex h-[60px] w-full justify-between border-b bg-white p-3 text-2xl">
       {/* LOGO */}
       <Link href="/">
         <Image src={LogoSrc} alt="RiverCare" className="h-full w-auto" />
@@ -51,13 +60,19 @@ const Header = () => {
           <Burger isNavOpen={isNavOpen} setIsNavOpen={async () => setIsNavOpen(!isNavOpen)} />
           {/* toggle menu based on isNavOpen state */}
           <div className={isNavOpen ? styles.showNav : styles.hideNav}>
-            <ul className="flex flex-col items-center justify-between pb-2">
-              <Menu currPath={currPath} mobile={true} />
-              <li className="bg-gray-400 w-screen p-4 text-black">
+            <ul className=" flex flex-col items-center justify-between pb-2 font-black ">
+              <Menu
+                currPath={currPath}
+                mobile={true}
+                onClick={(e: any) => {
+                  setIsNavOpen(!isNavOpen)
+                }}
+              />
+              <li className="bg-gray-400 w-screen p-4">
                 <LanguageController mobile={true} />
               </li>
 
-              {<WalletController />}
+              <li className="bg-gray-400 w-screen p-4">{<WalletController />}</li>
             </ul>
           </div>
         </section>
