@@ -9,7 +9,11 @@ import { AccountInfo, Network, RequestSignPayloadInput, SigningType } from "@air
 import { ContextState } from "@/interfaces/context.interface"
 
 const TEZOS = new TezosToolkit(NODE_URL)
-const WALLET = new BeaconWallet({ name: "akaswap-event" })
+const WALLET = new BeaconWallet({
+  name: "akaswap-event",
+  network: { type: NETWORK_TYPE, rpcUrl: NODE_URL },
+  featuredWallets: ["temple", "kukai", "metamask", "plenty"]
+})
 TEZOS.setWalletProvider(WALLET)
 
 export const Context = createContext<ContextState>(null!)
@@ -29,10 +33,6 @@ export const ContextProvider = (props: any) => {
   }
 
   const syncTaquito = async () => {
-    const network: Network = {
-      type: NETWORK_TYPE,
-      rpcUrl: NODE_URL
-    }
     // We check the storage and only do a permission request if we don't have an active account yet
     // This piece of code should be called on startup to "load" the current address from the user
     // If the activeAccount is present, no "permission request" is required again, unless the user "disconnects" first.
@@ -40,7 +40,7 @@ export const ContextProvider = (props: any) => {
     if (activeAccount === undefined) {
       await wallet.clearActiveAccount()
       await wallet
-        .requestPermissions({ network })
+        .requestPermissions()
         .then((response) => {
           console.log(response)
         })
@@ -65,6 +65,7 @@ export const ContextProvider = (props: any) => {
 
     const input = message
 
+    // const payloadBytes = char2Bytes(input)
     const bytes = char2Bytes(input)
     const payloadBytes = "0501" + bytes.length.toString(16).padStart(8, "0") + bytes
 
@@ -85,22 +86,105 @@ export const ContextProvider = (props: any) => {
     }
   }
 
+  const stringToHex = (str: string) => Buffer.from(str, "utf-8").toString("hex")
+
+  ////////////
+  // Events //
+  ////////////
+
+  const createEvent = async (
+    contract: string,
+    edition: number,
+    name: string,
+    description: string
+  ) => {
+    let editionData: number | null = null
+    if (edition > 0) editionData = edition
+    const nameData = stringToHex(name)
+    const descriptionData = stringToHex(description)
+
+    return await TEZOS.wallet
+      .at(contract)
+      .then(async (c) =>
+        c.methodsObject
+          .create_event({
+            edition: editionData,
+            name: nameData,
+            description: descriptionData
+          })
+          .send()
+          .then(async (op) => {
+            console.log("Hash : " + op.opHash)
+            return await op.confirmation().then((result) => {
+              return result !== undefined && result.completed
+            })
+          })
+      )
+      .catch((e) => {
+        console.log(e)
+        return false
+      })
+  }
+
+  const claimEvent = async (
+    contract: string,
+    eventId: number,
+    publicKey: string,
+    signature: string
+  ) => {
+    return await TEZOS.wallet
+      .at(contract)
+      .then(async (c) =>
+        c.methodsObject
+          .claim_event({
+            public_key: publicKey,
+            signature: signature,
+            event_id: eventId
+          })
+          .send()
+          .then(async (op) => {
+            console.log("Hash : " + op.opHash)
+            return await op.confirmation().then((result) => {
+              return result !== undefined && result.completed
+            })
+          })
+      )
+      .catch((e) => {
+        console.log(e)
+        return false
+      })
+  }
+
+  const approveEvent = async (contract: string, eventId: number) => {
+    return await TEZOS.wallet
+      .at(contract)
+      .then(async (c) =>
+        c.methods
+          .approve_event(eventId)
+          .send()
+          .then(async (op) => {
+            console.log("Hash : " + op.opHash)
+            return await op.confirmation().then((result) => {
+              return result !== undefined && result.completed
+            })
+          })
+      )
+      .catch((e) => {
+        console.log(e)
+        return false
+      })
+  }
+
   ///////////////
   // Proposals //
   ///////////////
 
-  /**
-   *
-   * @param contract River multisig contract address
-   * @param targetAddress Target tezos address to send
-   * @param transferAmount Tezos amount to send (the unit is mutez)
-   */
   const createTransferTezosProposal = async (
     contract: string,
     targetAddress: string,
     transferAmount: number
   ) => {
-    await TEZOS.wallet
+    return await TEZOS.wallet
       .at(contract)
       .then(async (c) =>
         c.methodsObject
@@ -111,71 +195,65 @@ export const ContextProvider = (props: any) => {
           .send()
           .then(async (op) => {
             console.log("Hash : " + op.opHash)
-            await op.confirmation().then((result) => {
+            return await op.confirmation().then((result) => {
               return result !== undefined && result.completed
             })
           })
       )
-      .catch((e) => e)
+      .catch((e) => {
+        console.log(e)
+        return false
+      })
   }
 
-  /**
-   *
-   * @param contract River multisig contract address
-   * @param agreementUri New agreement Uri (ipfs/https)
-   */
   const createUpdateAgreementProposal = async (contract: string, agreementUri: string) => {
-    await TEZOS.wallet
+    return await TEZOS.wallet
       .at(contract)
       .then(async (c) =>
         c.methodsObject
           .create_proposal({
-            content: { update_agreement_uri: agreementUri },
+            content: { update_agreement_uri: stringToHex(agreementUri) },
             reserve: new MichelsonMap()
           })
           .send()
           .then(async (op) => {
             console.log("Hash : " + op.opHash)
-            await op.confirmation().then((result) => {
+            return await op.confirmation().then((result) => {
               return result !== undefined && result.completed
             })
           })
       )
-      .catch((e) => e)
+      .catch((e) => {
+        console.log(e)
+        return false
+      })
   }
 
-  /**
-   *
-   * @param contract River multisig contract address
-   * @param datasetUri New dataset Uri (ipfs/https)
-   */
   const createUpdateDatasetProposal = async (contract: string, datasetUri: string) => {
-    await TEZOS.wallet
+    return await TEZOS.wallet
       .at(contract)
       .then(async (c) =>
         c.methodsObject
           .create_proposal({
-            content: { update_dataset_uri: datasetUri },
+            content: { update_dataset_uri: stringToHex(datasetUri) },
             reserve: new MichelsonMap()
           })
           .send()
           .then(async (op) => {
             console.log("Hash : " + op.opHash)
-            await op.confirmation().then((result) => {
+            return await op.confirmation().then((result) => {
               return result !== undefined && result.completed
             })
           })
       )
-      .catch((e) => e)
+      .catch((e) => {
+        console.log(e)
+        return false
+      })
   }
 
-  /**
-   *
-   * @param contract River multisig contract address
-   * @param proposalId Proposal ID to sign
-   */
   const signProposal = async (contract: string, proposalId: number) => {
-    await TEZOS.wallet
+    return await TEZOS.wallet
       .at(contract)
       .then(async (c) =>
         c.methods
@@ -183,21 +261,19 @@ export const ContextProvider = (props: any) => {
           .send()
           .then(async (op) => {
             console.log("Hash : " + op.opHash)
-            await op.confirmation().then((result) => {
+            return await op.confirmation().then((result) => {
               return result !== undefined && result.completed
             })
           })
       )
-      .catch((e) => e)
+      .catch((e) => {
+        console.log(e)
+        return false
+      })
   }
 
-  /**
-   *
-   * @param contract River multisig contract address
-   * @param proposalId Proposal ID to resolve
-   */
   const resolveProposal = async (contract: string, proposalId: number) => {
-    await TEZOS.wallet
+    return await TEZOS.wallet
       .at(contract)
       .then(async (c) =>
         c.methods
@@ -205,12 +281,15 @@ export const ContextProvider = (props: any) => {
           .send()
           .then(async (op) => {
             console.log("Hash : " + op.opHash)
-            await op.confirmation().then((result) => {
+            return await op.confirmation().then((result) => {
               return result !== undefined && result.completed
             })
           })
       )
-      .catch((e) => e)
+      .catch((e) => {
+        console.log(e)
+        return false
+      })
   }
 
   return (
@@ -225,7 +304,15 @@ export const ContextProvider = (props: any) => {
         setAccount,
         syncTaquito,
         disconnect,
-        sign
+        sign,
+        createEvent,
+        claimEvent,
+        approveEvent,
+        createTransferTezosProposal,
+        createUpdateAgreementProposal,
+        createUpdateDatasetProposal,
+        signProposal,
+        resolveProposal
       }}
     >
       {props.children}
