@@ -18,11 +18,11 @@ export default function CreateRiver({ params }: { params: { id: number } }) {
   const [isSuccess, setIsSuccess] = useState(false)
 
   const createRiver = () => {
-    setIsSuccess(true)
+    // setIsSuccess(true)
   }
 
   return (
-    <main className="border p-6 font-monda xl:p-10">
+    <main className="border bg-white p-6 font-monda xl:p-10">
       {!isSuccess ? (
         <>
           {/* name */}

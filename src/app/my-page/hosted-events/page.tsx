@@ -47,7 +47,7 @@ export default function HostedEvents({ params }: { params: { wallet: string } })
   return (
     <>
       <Dropdown type="myPage" onChange={navigate} currRoute={"hosted-events"} />
-      <main className="m-4 w-auto border text-left font-monda">
+      <main className="m-4 w-auto border bg-white text-left font-monda">
         {events.length > 0 &&
           events.map((event: Event, i) => <EventToken key={i} event={event} isHost={true} />)}
       </main>
