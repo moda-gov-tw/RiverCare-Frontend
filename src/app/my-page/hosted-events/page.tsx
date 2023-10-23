@@ -46,7 +46,7 @@ export default function HostedEvents({ params }: { params: { wallet: string } })
   if (!address?.startsWith("tz")) return <ConnectHint />
   return (
     <>
-      <Dropdown type="myPage" onChange={navigate} currRoute={"event-tokens"} />
+      <Dropdown type="myPage" onChange={navigate} currRoute={"hosted-events"} />
       <main className="m-4 w-auto border text-left font-monda">
         {events.length > 0 &&
           events.map((event: Event, i) => <EventToken key={i} event={event} isHost={true} />)}
