@@ -23,7 +23,7 @@ const config: Config = {
       }
     },
     fontFamily: {
-      monda: ["Monda", "sans-serif"]
+      monda: ["var(--font-monda)"]
     }
   },
   plugins: []

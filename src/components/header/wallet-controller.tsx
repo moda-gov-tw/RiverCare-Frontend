@@ -28,7 +28,7 @@ export const WalletController = ({}) => {
 
   return (
     <button
-      className="min-w-[150px] rounded-3xl border border-black px-4 py-2 text-center font-bold text-primary"
+      className="min-w-[150px] rounded-3xl border border-black px-4 py-2 text-center font-monda text-xl text-primary"
       onClick={handleSyncUnsync}
       onMouseEnter={() => setShowUnsync(true)}
       onMouseLeave={() => setShowUnsync(false)}

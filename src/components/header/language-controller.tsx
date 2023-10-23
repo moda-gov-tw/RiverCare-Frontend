@@ -22,11 +22,11 @@ export const LanguageController = ({ mobile }: { mobile: boolean }) => {
 
   return (
     <div
-      className="relative flex flex-col hover:cursor-pointer"
+      className="MainText relative mx-auto flex flex-col items-center text-white hover:cursor-pointer"
       onClick={() => setIsLangOpen(!isLangOpen)}
     >
       {/* Button */}
-      <div className="MainText flex w-24 justify-center text-xl font-extrabold text-white">
+      <div className="flex w-24 justify-center">
         <button>{currLang}</button>
         <div className="ml-4 flex items-center">
           <FlipArrow opened={isLangOpen} />
@@ -39,7 +39,7 @@ export const LanguageController = ({ mobile }: { mobile: boolean }) => {
             <button
               key={i}
               onClick={() => switchLanguage(key)}
-              className="MainText px-4 py-1 text-xl font-bold text-gray hover:text-black"
+              className="px-4 py-1 hover:text-black"
             >
               {value}
             </button>

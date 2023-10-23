@@ -7,8 +7,8 @@ import Progress from "../progress"
 
 const EventInfo = ({ event, stewardsCount }: { event: Event; stewardsCount: number }) => {
   return (
-    <div className="flex flex-col justify-between">
-      <div className="mx-auto p-4 pb-0 text-left">
+    <div className="flex flex-col justify-between font-monda">
+      <div className="mx-auto px-4 text-left">
         <div className="mb-4 mt-2 text-lg text-[#595959]">{event.description}</div>
         <div className="my-2 font-semibold">Created time: {event.createdTime}</div>
         <div className="my-2 font-semibold">Created by: {event.host}</div>
@@ -20,7 +20,7 @@ const EventInfo = ({ event, stewardsCount }: { event: Event; stewardsCount: numb
           Participants: <span className="font-bold">&nbsp;{event.participantsCount}</span>
         </div>
         {event.participants.length > 0 && (
-          <div className="my-2 max-h-[120px] overflow-y-scroll border p-4 text-xs">
+          <div className="my-2 max-h-[120px] overflow-y-scroll border p-4 text-xs ">
             {event.participants.map((address, i) => (
               <div key={i}>{address}</div>
             ))}

@@ -76,7 +76,7 @@ export default function Multisig({ params }: { params: { id: number } }) {
 
   return (
     <>
-      <Dropdown type="rivernav" onChange={navigate} currRoute={"multisig"} />
+      <Dropdown type="riverNav" onChange={navigate} currRoute={"multisig"} />
       <main className="border p-3 text-left">
         <div className="border px-4 py-2">
           <div className="text-xs font-bold">Wallet address: {river.walletAddr}</div>

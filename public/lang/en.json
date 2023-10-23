@@ -9,8 +9,8 @@
       "title": "River List"
     },
     {
-      "route": "faq",
-      "title": "FAQ"
+      "route": "my-page",
+      "title": "My Page"
     }
   ],
   "faq": [
@@ -43,6 +43,12 @@
     { "route": "created-time", "option": "Created time" },
     { "route": "name", "option": "River name" }
   ],
+  "myPage": [
+    { "route": "", "option": "Stewardship tokens" },
+    { "route": "event-tokens", "option": "Event tokens" },
+    { "route": "hosted-events", "option": "Hosted events" }
+  ],
+
   "riverNav": [
     { "route": "", "option": "Details" },
     { "route": "events", "option": "Events list" },

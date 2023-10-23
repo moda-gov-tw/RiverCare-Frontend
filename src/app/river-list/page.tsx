@@ -35,8 +35,7 @@ export default function RiverList() {
 
   return (
     <main className="">
-      <div className="MainText text-3xl font-bold text-primary">River List</div>
-      <div className="text-lg">RivercareRivercareRivercare</div>
+      <div className="MainText mb-6 mt-4 font-monda text-5xl font-bold text-title">River List</div>
       <Dropdown type="sorting" onChange={setSortMethod} />
       {rivers && rivers.map((river, i) => <RiverCard key={i} river={river} />)}
     </main>

@@ -28,14 +28,14 @@ const Button = ({
 }) => {
   if (href)
     return (
-      <Link className={`${styles.button} ${style} ${customClass}`} href={href}>
+      <Link className={`${styles.button} ${style} ${customClass} font-monda`} href={href}>
         {children}
       </Link>
     )
   else
     return (
       <button
-        className={`${styles.button} ${style} ${customClass}`}
+        className={`${styles.button} ${style} ${customClass} font-monda`}
         onClick={onClick}
         disabled={disabled}
       >

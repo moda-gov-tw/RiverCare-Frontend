@@ -19,7 +19,7 @@ export default function Home() {
       <div className="mt-20">
         <div className="flex items-center justify-center text-[20vmin] font-bold text-white drop-shadow-[0px_0px_1px_rgba(0,0,0,0.5)]">
           Rivercare
-          <div className="absolute text-[18vmin] font-bold text-primary">Rivercare</div>
+          <div className="absolute text-[18vmin] font-bold text-title">Rivercare</div>
         </div>
       </div>
       <div>

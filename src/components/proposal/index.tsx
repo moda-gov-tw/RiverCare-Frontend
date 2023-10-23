@@ -28,7 +28,7 @@ const Proposal = ({ proposal }: { proposal: Proposal }) => {
   const resolveProposal = () => {}
 
   return (
-    <div className="m-0 mb-2 border text-left">
+    <div className="m-0 mb-2 border text-left font-monda">
       <button
         className="flex w-full items-center justify-between border-b p-1 text-sm font-bold"
         onClick={(e) => setShowDetail(!showDetail)}

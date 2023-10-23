@@ -19,7 +19,7 @@ export default function CreateRiver({ params }: { params: { id: number } }) {
   }
 
   return (
-    <main className="border p-6 xl:p-10">
+    <main className="border p-6 font-monda xl:p-10">
       {!isSuccess ? (
         <>
           {/* name */}
@@ -33,11 +33,11 @@ export default function CreateRiver({ params }: { params: { id: number } }) {
           </div>
           {/* description */}
           <div className="mt-4 flex flex-col items-start ">
-            <div>{lang.createRiver.agreement.label} : </div>
+            <div>description : </div>
             <Input
               value={agreement}
               type="text-area"
-              placeholder={lang.createRiver.agreement.placeholder}
+              placeholder={"please enter the description of the river"}
               onChange={setAgreement}
             />
           </div>
