@@ -7,6 +7,7 @@ import { TezosToolkit, MichelsonMap } from "@taquito/taquito"
 import { char2Bytes } from "@taquito/utils"
 import { AccountInfo, Network, RequestSignPayloadInput, SigningType } from "@airgap/beacon-types"
 import { ContextState } from "@/interfaces/context.interface"
+import { riverFactory } from "./constants"
 
 const TEZOS = new TezosToolkit(NODE_URL)
 const WALLET = new BeaconWallet({
@@ -88,6 +89,40 @@ export const ContextProvider = (props: any) => {
 
   const stringToHex = (str: string) => Buffer.from(str, "utf-8").toString("hex")
 
+  //////////////
+  // Creation //
+  //////////////
+  const createRiver = async (
+    name: string,
+    description: string,
+    agreementUri: string,
+    datasetUri: string,
+    metadataUri: string
+  ) => {
+    return await TEZOS.wallet
+      .at(riverFactory)
+      .then(async (c) =>
+        c.methodsObject
+          .create_multisig({
+            name: stringToHex(name),
+            description: stringToHex(description),
+            agreement_uri: stringToHex(agreementUri),
+            dataset_uri: stringToHex(datasetUri),
+            contract_metadata: stringToHex(metadataUri)
+          })
+          .send()
+          .then(async (op) => {
+            console.log("Hash : " + op.opHash)
+            return await op.confirmation().then((result) => {
+              return result !== undefined && result.completed
+            })
+          })
+      )
+      .catch((e) => {
+        console.log(e)
+        return false
+      })
+  }
   /////////////////
   // Activations //
   /////////////////
@@ -372,6 +407,7 @@ export const ContextProvider = (props: any) => {
         syncTaquito,
         disconnect,
         sign,
+        createRiver,
         claimStewardship,
         activateRiver,
         reactivateRiver,
