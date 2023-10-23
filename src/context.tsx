@@ -88,6 +88,73 @@ export const ContextProvider = (props: any) => {
 
   const stringToHex = (str: string) => Buffer.from(str, "utf-8").toString("hex")
 
+  /////////////////
+  // Activations //
+  /////////////////
+
+  const claimStewardship = async (contract: string, publicKey: string, signature: string) => {
+    return await TEZOS.wallet
+      .at(contract)
+      .then(async (c) =>
+        c.methodsObject
+          .claim_gen0_stewardship({
+            public_key: publicKey,
+            signature: signature
+          })
+          .send()
+          .then(async (op) => {
+            console.log("Hash : " + op.opHash)
+            return await op.confirmation().then((result) => {
+              return result !== undefined && result.completed
+            })
+          })
+      )
+      .catch((e) => {
+        console.log(e)
+        return false
+      })
+  }
+
+  const activateRiver = async (contract: string) => {
+    return await TEZOS.wallet
+      .at(contract)
+      .then(async (c) =>
+        c.methods
+          .activate()
+          .send()
+          .then(async (op) => {
+            console.log("Hash : " + op.opHash)
+            return await op.confirmation().then((result) => {
+              return result !== undefined && result.completed
+            })
+          })
+      )
+      .catch((e) => {
+        console.log(e)
+        return false
+      })
+  }
+
+  const reactivateRiver = async (contract: string) => {
+    return await TEZOS.wallet
+      .at(contract)
+      .then(async (c) =>
+        c.methods
+          .reactivate()
+          .send()
+          .then(async (op) => {
+            console.log("Hash : " + op.opHash)
+            return await op.confirmation().then((result) => {
+              return result !== undefined && result.completed
+            })
+          })
+      )
+      .catch((e) => {
+        console.log(e)
+        return false
+      })
+  }
+
   ////////////
   // Events //
   ////////////
@@ -305,6 +372,9 @@ export const ContextProvider = (props: any) => {
         syncTaquito,
         disconnect,
         sign,
+        claimStewardship,
+        activateRiver,
+        reactivateRiver,
         createEvent,
         claimEvent,
         approveEvent,
