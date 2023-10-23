@@ -18,14 +18,14 @@ const UploadFile = ({ onChange }: { onChange?: any }) => {
   }
 
   return (
-    <div className="relative my-[60px] text-center">
-      <div className="absolute left-1/2 top-1/2 flex h-[50px] w-[250px] -translate-x-1/2 -translate-y-1/2 items-center justify-center">
-        <div className="rounded border border-dashed px-10 py-6">
-          {filename !== undefined ? filename : "Choose a json file..."}
+    <div className="relative my-[20px] flex w-[220px] bg-white text-center hover:cursor-pointer">
+      <div className="absolute left-1/2  top-1/2 flex h-[50px] w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-white hover:cursor-pointer">
+        <div className="w-full rounded border border-dashed bg-white px-5 py-6 hover:cursor-pointer">
+          {filename !== undefined ? filename : "Upload a json file"}
         </div>
       </div>
       <input
-        className="h-[50px] w-[250px] opacity-0"
+        className="h-[50px] w-full bg-white font-monda opacity-0 hover:cursor-pointer"
         type="file"
         onChange={(e) => {
           readFile(e)

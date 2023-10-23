@@ -27,10 +27,11 @@ const monda = localFont({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`h-screen bg-mainBg bg-cover bg-no-repeat ${monda.variable}`}>
+      <body className={`${monda.variable}`}>
         <ContextProvider>
           <Header />
           <div className="flex flex-col items-center justify-between p-4 ">{children}</div>
+          <div className="fixed left-0 top-0 -z-10 h-screen w-screen bg-mainBg bg-cover bg-no-repeat"></div>
         </ContextProvider>
       </body>
     </html>

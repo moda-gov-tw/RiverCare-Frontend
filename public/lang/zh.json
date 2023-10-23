@@ -32,9 +32,17 @@
       "label": "河流名稱",
       "placeholder": "請輸入河流名稱"
     },
+    "description": {
+      "label": "河流敘述",
+      "placeholder": "請輸入一段河流的敘述"
+    },
     "agreement": {
       "label": "河流公約",
       "placeholder": "請輸入河流公約，新的關懷者必須同意此公約才能加入此河流"
+    },
+    "dataset": {
+      "label": "河流資料",
+      "placeholder": "請上傳河流的細節描述 JSON 檔案"
     },
     "create": "建立",
     "success": "成功建立河流!"

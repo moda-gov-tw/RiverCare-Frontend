@@ -5,7 +5,7 @@ import Image from "next/image"
 
 const RiverCard = ({ river }: { river: River }) => {
   return (
-    <div className="mx-auto my-2 border p-4 font-monda">
+    <div className="mx-auto my-2 border bg-white p-4 font-monda">
       <Image
         src={`/${river.currentTokenId}`}
         alt={`${river.currentTokenId}`}

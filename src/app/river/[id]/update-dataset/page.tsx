@@ -24,9 +24,11 @@ export default function UpdateDataset({ params }: { params: { id: number } }) {
 
   return (
     <main className="p-6 text-left">
-      <div>
+      <div className="w-full">
         <div>Event&apos;s dataset:</div>
-        <UploadFile onChange={setDataset} />
+        <div className="flex justify-center py-8">
+          <UploadFile onChange={setDataset} />
+        </div>
       </div>
       <div className="my-4 w-full text-center">
         <Button onClick={updateDataset} disabled={!validated()}>
