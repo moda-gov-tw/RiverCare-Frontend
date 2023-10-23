@@ -3,7 +3,7 @@
 import React, { createContext, useState } from "react"
 import { BeaconWallet } from "@taquito/beacon-wallet"
 import { NETWORK_TYPE, NODE_URL } from "@/environments/environment"
-import { TezosToolkit } from "@taquito/taquito"
+import { TezosToolkit, MichelsonMap } from "@taquito/taquito"
 import { char2Bytes } from "@taquito/utils"
 import { AccountInfo, Network, RequestSignPayloadInput, SigningType } from "@airgap/beacon-types"
 import { ContextState } from "@/interfaces/context.interface"
@@ -83,6 +83,134 @@ export const ContextProvider = (props: any) => {
       signature,
       publicKey: tz!.publicKey
     }
+  }
+
+  ///////////////
+  // Proposals //
+  ///////////////
+
+  /**
+   *
+   * @param contract River multisig contract address
+   * @param targetAddress Target tezos address to send
+   * @param transferAmount Tezos amount to send (the unit is mutez)
+   */
+  const createTransferTezosProposal = async (
+    contract: string,
+    targetAddress: string,
+    transferAmount: number
+  ) => {
+    await TEZOS.wallet
+      .at(contract)
+      .then(async (c) =>
+        c.methodsObject
+          .create_proposal({
+            content: { transfer_tez: { amount: transferAmount, to_: targetAddress } },
+            reserve: new MichelsonMap()
+          })
+          .send()
+          .then(async (op) => {
+            console.log("Hash : " + op.opHash)
+            await op.confirmation().then((result) => {
+              return result !== undefined && result.completed
+            })
+          })
+      )
+      .catch((e) => e)
+  }
+
+  /**
+   *
+   * @param contract River multisig contract address
+   * @param agreementUri New agreement Uri (ipfs/https)
+   */
+  const createUpdateAgreementProposal = async (contract: string, agreementUri: string) => {
+    await TEZOS.wallet
+      .at(contract)
+      .then(async (c) =>
+        c.methodsObject
+          .create_proposal({
+            content: { update_agreement_uri: agreementUri },
+            reserve: new MichelsonMap()
+          })
+          .send()
+          .then(async (op) => {
+            console.log("Hash : " + op.opHash)
+            await op.confirmation().then((result) => {
+              return result !== undefined && result.completed
+            })
+          })
+      )
+      .catch((e) => e)
+  }
+
+  /**
+   *
+   * @param contract River multisig contract address
+   * @param datasetUri New dataset Uri (ipfs/https)
+   */
+  const createUpdateDatasetProposal = async (contract: string, datasetUri: string) => {
+    await TEZOS.wallet
+      .at(contract)
+      .then(async (c) =>
+        c.methodsObject
+          .create_proposal({
+            content: { update_dataset_uri: datasetUri },
+            reserve: new MichelsonMap()
+          })
+          .send()
+          .then(async (op) => {
+            console.log("Hash : " + op.opHash)
+            await op.confirmation().then((result) => {
+              return result !== undefined && result.completed
+            })
+          })
+      )
+      .catch((e) => e)
+  }
+
+  /**
+   *
+   * @param contract River multisig contract address
+   * @param proposalId Proposal ID to sign
+   */
+  const signProposal = async (contract: string, proposalId: number) => {
+    await TEZOS.wallet
+      .at(contract)
+      .then(async (c) =>
+        c.methods
+          .sign_proposal(proposalId)
+          .send()
+          .then(async (op) => {
+            console.log("Hash : " + op.opHash)
+            await op.confirmation().then((result) => {
+              return result !== undefined && result.completed
+            })
+          })
+      )
+      .catch((e) => e)
+  }
+
+  /**
+   *
+   * @param contract River multisig contract address
+   * @param proposalId Proposal ID to resolve
+   */
+  const resolveProposal = async (contract: string, proposalId: number) => {
+    await TEZOS.wallet
+      .at(contract)
+      .then(async (c) =>
+        c.methods
+          .resolve_proposal(proposalId)
+          .send()
+          .then(async (op) => {
+            console.log("Hash : " + op.opHash)
+            await op.confirmation().then((result) => {
+              return result !== undefined && result.completed
+            })
+          })
+      )
+      .catch((e) => e)
   }
 
   return (
