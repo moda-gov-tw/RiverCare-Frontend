@@ -3,6 +3,7 @@
 import Button from "@/components/button"
 import Input from "@/components/input"
 import Success from "@/components/success"
+import UploadFile from "@/components/upload-file"
 import { Language } from "@/utils/language"
 import { useState } from "react"
 
@@ -10,16 +11,18 @@ export default function CreateRiver({ params }: { params: { id: number } }) {
   const lang = Language()
 
   const [name, setName] = useState<string>("")
-  const [agreement, setAgreement] = useState("")
+  const [description, setDescription] = useState<string>("")
+  const [agreement, setAgreement] = useState<string>("")
+  const [dataset, setDataset] = useState<string>("")
   const [riverId, setRiverId] = useState("")
   const [isSuccess, setIsSuccess] = useState(false)
 
   const createRiver = () => {
-    setIsSuccess(true)
+    // setIsSuccess(true)
   }
 
   return (
-    <main className="border p-6 font-monda xl:p-10">
+    <main className="border bg-white p-6 font-monda xl:p-10">
       {!isSuccess ? (
         <>
           {/* name */}
@@ -33,11 +36,11 @@ export default function CreateRiver({ params }: { params: { id: number } }) {
           </div>
           {/* description */}
           <div className="mt-4 flex flex-col items-start ">
-            <div>description : </div>
+            <div>{lang.createRiver.description.label} : </div>
             <Input
               value={agreement}
               type="text-area"
-              placeholder={"please enter the description of the river"}
+              placeholder={lang.createRiver.description.placeholder}
               onChange={setAgreement}
             />
           </div>
@@ -52,6 +55,12 @@ export default function CreateRiver({ params }: { params: { id: number } }) {
             />
           </div>
           {/* dataset JSON */}
+          <div className="mt-4 flex flex-col items-start ">
+            <div>{lang.createRiver.dataset.label} : </div>
+            <div className="py-4">
+              <UploadFile onChange={setDataset} />
+            </div>
+          </div>
 
           <div className="m-6">
             <Button onClick={createRiver}>{lang.createRiver.create}</Button>

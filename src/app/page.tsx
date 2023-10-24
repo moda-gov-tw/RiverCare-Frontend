@@ -19,12 +19,12 @@ export default function Home() {
       <div className="mt-20">
         <div className="flex items-center justify-center text-[20vmin] font-bold text-white drop-shadow-[0px_0px_1px_rgba(0,0,0,0.5)]">
           Rivercare
-          <div className="absolute text-[18vmin] font-bold text-title">Rivercare</div>
+          <div className="absolute text-[18vmin] font-bold text-title">RiverCare</div>
         </div>
       </div>
       <div>
         <p className="break-all">
-          RiverCareRiverCareRiverCareRiverCareRiverCareRiverCareRiverCareRiver
+          RiverCare, the decentralized identity based on the stewardship&apos;s care actions
         </p>
       </div>
       <div className="mt-32 flex flex-col gap-8 text-2xl text-white xl:flex-row xl:text-3xl">

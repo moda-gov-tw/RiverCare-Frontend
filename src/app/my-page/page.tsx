@@ -51,7 +51,7 @@ export default function Mypage({ params }: { params: { wallet: string } }) {
   return (
     <>
       <Dropdown type="myPage" onChange={navigate} />
-      <main className="m-4 w-auto border text-left font-monda">
+      <main className="m-4 w-auto border bg-white text-left font-monda">
         {stewardships.length > 0 &&
           stewardships.map((river: River, i) => <StewardshipToken key={i} river={river} />)}
       </main>

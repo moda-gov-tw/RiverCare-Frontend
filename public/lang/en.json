@@ -30,11 +30,19 @@
   "createRiver": {
     "name": {
       "label": "River's name",
-      "placeholder": "Please input the name of river"
+      "placeholder": "Please enter the name of river"
+    },
+    "description": {
+      "label": "River's description",
+      "placeholder": "Please enter the description of river"
     },
     "agreement": {
       "label": "River's agreement",
       "placeholder": "Please enter the agreement. New stewardships must agree to this to join this river."
+    },
+    "dataset": {
+      "label": "River's dataset",
+      "placeholder": "Please upload the detail data of river(JSON file)"
     },
     "create": "Create!",
     "success": "Successfully created!"

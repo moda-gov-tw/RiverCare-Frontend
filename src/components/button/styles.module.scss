@@ -3,8 +3,9 @@
   font-weight: bold;
   padding: 0.8rem 3rem;
   border-radius: 50px;
-  border-color: #969696;
+  border-color: #656566;
   box-shadow: 5px 5px 0px #969696;
+  color: var(--gray);
 }
 
 .button:disabled {
@@ -13,10 +14,10 @@
 }
 
 .button:hover {
-  color: #505050;
+  color: var(--white);
 }
 
 .button:active {
   box-shadow: #969696 2px 2px 0 0;
-  transform: translate(2px, 2px);
+  transform: translate(5px, 5px);
 }
