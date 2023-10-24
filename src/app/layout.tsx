@@ -1,7 +1,7 @@
 import Header from "@/components/header"
 import "./globals.css"
 import type { Metadata } from "next"
-import localFont from "@next/font/local"
+import localFont from "next/font/local"
 import Footer from "@/components/footer"
 import { ContextProvider } from "@/context"
 
