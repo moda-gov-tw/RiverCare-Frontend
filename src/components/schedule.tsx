@@ -73,9 +73,7 @@ const Line = ({
   )
 }
 
-const Schedule = ({ gen, expiredTime }: { gen: number; expiredTime: string }) => {
-  const deadline = new Date(expiredTime)
-
+const Schedule = ({ gen, needActivate }: { gen: number; needActivate: boolean }) => {
   let dotText = ["Activated", `Gen ${gen} deadline`, "Activate", `Gen ${gen + 1} deadline`]
   let dotDisabled = [false, true, true, true]
   let lineBottomText = ["3M", "", "3M"]
@@ -89,7 +87,7 @@ const Schedule = ({ gen, expiredTime }: { gen: number; expiredTime: string }) =>
     lineDisabled = [false, true, true]
   }
 
-  if (deadline < new Date()) {
+  if (needActivate) {
     lineDisabled = [false, false, true]
     dotDisabled[1] = false
   }

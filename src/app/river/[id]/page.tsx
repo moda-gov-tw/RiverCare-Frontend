@@ -14,6 +14,7 @@ import Success from "@/components/success"
 import Dropdown from "@/components/dropdown"
 import { useRouter } from "next/navigation"
 import { Language } from "@/utils/language"
+import Loading from "./loading"
 
 export default function River({ params }: { params: { id: number } }) {
   let mockdata: River = {
@@ -21,10 +22,10 @@ export default function River({ params }: { params: { id: number } }) {
     name: "磺溪",
     agreement: "ipfs://QmbxnccENRW6awW1bUmZYGc4v81hEdHZnDz88vRD6Hyawc",
     dataset: "ipfs",
-    gen: 0,
+    gen: 1,
     createdTime: "2023-09-30 22:25",
-    expiredTime: "2023-10-30 22:25",
-    status: RiverStatus.alive,
+    expiredTime: "2023-10-10 22:25",
+    status: RiverStatus.dead,
     stewards: ["tz1123"],
     stewardsCount: 1,
     currentTokenId: 0,
@@ -44,9 +45,9 @@ export default function River({ params }: { params: { id: number } }) {
   const [showOverlay, setShowOverlay] = useState<boolean>(false)
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
-  let needActivate = false
+  let needActivate = new Date(river.expiredTime) < new Date()
 
-  const { address, claimStewardship, sign } = useContext(Context)
+  const { address, claimStewardship, sign, activateRiver, reactivateRiver } = useContext(Context)
 
   const signAgree = () => {
     setShowOverlay(true)
@@ -93,7 +94,37 @@ export default function River({ params }: { params: { id: number } }) {
   }
 
   const activate = () => {
-    setJoined(true)
+    setShowOverlay(true)
+
+    if (!address) {
+      alert(lang.alert)
+      setShowOverlay(false)
+      return
+    }
+    if (river.gen === 0) {
+      activateRiver(river.walletAddr)
+        .then((res) => {
+          setShowOverlay(false)
+          if (res) {
+            setIsSuccess(true)
+          }
+        })
+        .catch(() => {
+          alert(lang.alert)
+          setShowOverlay(false)
+        })
+    } else
+      reactivateRiver(river.walletAddr)
+        .then((res) => {
+          setShowOverlay(false)
+          if (res) {
+            setIsSuccess(true)
+          }
+        })
+        .catch(() => {
+          alert(lang.alert)
+          setShowOverlay(false)
+        })
   }
 
   const isSteward = (address: string) => {
@@ -110,16 +141,22 @@ export default function River({ params }: { params: { id: number } }) {
     <>
       <Dropdown type="riverNav" onChange={navigate} />
       <main className="border p-4 font-monda">
-        {joined ? (
-          <div>
-            <Success
-              imgSrc="/images/stewardship-token.png"
-              message="Successfully received stewardship token!"
-            />
-          </div>
+        {isSuccess ? (
+          joined ? (
+            <div>
+              <Success
+                imgSrc="/images/stewardship-token.png"
+                message="Successfully received stewardship token!"
+              />
+            </div>
+          ) : (
+            <div>
+              <Success message="Successfully activated!" />
+            </div>
+          )
         ) : (
           <>
-            <Schedule gen={river.gen} expiredTime={river.expiredTime} />
+            <Schedule gen={river.gen} needActivate={needActivate} />
             <RiverInfo
               createdTime={river.createdTime}
               gen={river.gen}
@@ -163,6 +200,12 @@ export default function River({ params }: { params: { id: number } }) {
               )}
             </div>
           </>
+        )}
+        {/* Overlay */}
+        {showOverlay && (
+          <div className="fixed left-0 top-0 z-50 h-screen w-screen bg-black opacity-50">
+            <Loading />
+          </div>
         )}
       </main>
     </>
