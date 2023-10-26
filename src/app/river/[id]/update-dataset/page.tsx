@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation"
 import { useState, useContext } from "react"
 import { Context } from "@/context"
 import UploadFile from "@/components/upload-file"
-import { updateToIpfs } from "@/utils/ipfs"
+import { uploadToIpfs } from "@/utils/ipfs"
 export default function UpdateDataset({ params }: { params: { id: number } }) {
   const context = useContext(Context)
 
@@ -19,7 +19,7 @@ export default function UpdateDataset({ params }: { params: { id: number } }) {
   }
 
   const updateDataset = async () => {
-    let ipfsHash = await updateToIpfs(dataset)
+    let ipfsHash = await uploadToIpfs(dataset)
   }
 
   return (

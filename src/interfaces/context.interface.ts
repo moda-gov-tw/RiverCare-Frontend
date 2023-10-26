@@ -19,7 +19,7 @@ export interface ContextState {
    * @param agreementUri River's agreement URI (https/ipfs)
    * @param datasetUri River's dataset URI (https/ipfs)
    * @param metadataUri River's metadata URI (ipfs)
-   * @returns
+   * @returns TRUE means success, FALSE means something wrong, see console log
    */
   createRiver: (
     name: string,

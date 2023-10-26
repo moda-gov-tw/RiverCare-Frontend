@@ -47,16 +47,16 @@ export default function Multisig({ params }: { params: { id: number } }) {
       name: "磺溪",
       agreement: "agreement",
       dataset: "ipfs",
-      gen: 2,
+      gen: 0,
       createdTime: "2023-09-30 22:25",
-      expiredTime: "2023-10-1 22:25",
-      status: RiverStatus.alive,
+      expiredTime: "2023-10-30 22:25",
+      status: RiverStatus.dead,
       stewards: ["tz1123", "tz1123", "tz1123", "tz1123", "tz1123"],
       stewardsCount: 5,
       currentTokenId: 0,
       currentTokenContract: "KT11111",
       events: [],
-      walletAddr: "KT1111",
+      walletAddr: "KT1BUwQFrMvUK2r7fLqaponPEE9eSPozXe2r",
       proposals: []
     }
     return mockdata

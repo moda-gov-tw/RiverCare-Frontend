@@ -6,7 +6,7 @@ import Input from "@/components/input"
 import { useRouter } from "next/navigation"
 import { useState, useContext } from "react"
 import { Context } from "@/context"
-import { updateToIpfs } from "@/utils/ipfs"
+import { uploadToIpfs } from "@/utils/ipfs"
 
 export default function UpdateAgreement({ params }: { params: { id: number } }) {
   const context = useContext(Context)
@@ -19,7 +19,7 @@ export default function UpdateAgreement({ params }: { params: { id: number } }) 
   }
 
   const updateAgreement = async () => {
-    let ipfsHash = await updateToIpfs(agreement)
+    let ipfsHash = await uploadToIpfs(agreement)
     console.log(ipfsHash)
   }
 

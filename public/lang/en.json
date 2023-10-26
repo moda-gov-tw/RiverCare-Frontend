@@ -66,5 +66,6 @@
   "proposal": {
     "status": ["dead", "proposing", "approved"],
     "transactionType": ["Transfer tezos", "Update agreement", "Update dataset"]
-  }
+  },
+  "alert": "Sorry, please try it again"
 }
