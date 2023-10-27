@@ -11,28 +11,29 @@ import { useContext, useState } from "react"
 import Image from "next/image"
 import Success from "@/components/success"
 import { Language } from "@/utils/language"
+import Loading from "./loading"
 
 export default function Event({ params }: { params: { id: number } }) {
   let mockRiver: River = {
     id: 0,
     name: "磺溪",
-    agreement: "agreement",
+    agreement: "ipfs://QmbxnccENRW6awW1bUmZYGc4v81hEdHZnDz88vRD6Hyawc",
     dataset: "ipfs",
     gen: 2,
     createdTime: "2023-09-30 22:25",
     expiredTime: "2023-10-1 22:25",
     status: RiverStatus.alive,
-    stewards: ["tz1123"],
+    stewards: ["tz1YEqTs8H1ffjMzasTWk1LKifsKZ1TdhF4o"],
     stewardsCount: 1,
     currentTokenId: 0,
     currentTokenContract: "KT11111",
     events: [],
-    walletAddr: "KT1111",
+    walletAddr: "KT1NeZApGbSQicX3672TQAeL21Cg6fQ3Q9fe",
     proposals: []
   }
 
   let mockEvent: Event = {
-    uid: "1",
+    uid: "0",
     name: "River cleanup",
     tokenId: 0,
     tokenContract: "KT1111",
@@ -50,46 +51,108 @@ export default function Event({ params }: { params: { id: number } }) {
   const lang = Language()
 
   const [agreed, setAgreed] = useState(false)
+  const [approved, setApproved] = useState(false)
+  const [publicKey, setPublicKey] = useState("")
+  const [signature, setSignature] = useState("")
   const [isSuccess, setIsSuccess] = useState(false)
-  const { address } = useContext(Context)
+  const [joined, setJoined] = useState(false)
+  const [showOverlay, setShowOverlay] = useState<boolean>(false)
+  const { address, sign, claimEvent, approveEvent } = useContext(Context)
 
   let event = mockEvent
+  let eventId = parseInt(event.uid) // substring
   let river = mockRiver
 
-  const handleAgree = () => {
-    setIsSuccess(true)
+  const signAgree = () => {
+    setShowOverlay(true)
+    if (!address) {
+      alert(lang.alert)
+      setShowOverlay(false)
+      return
+    }
+    sign(river.agreement)
+      .then((res) => {
+        setShowOverlay(false)
+        if (res) {
+          setPublicKey(res.publicKey)
+          setSignature(res.signature)
+          setAgreed(!agreed)
+        }
+      })
+      .catch(() => {
+        alert(lang.alert)
+        setShowOverlay(false)
+      })
   }
 
-  const handleApprove = () => {}
+  const join = () => {
+    setShowOverlay(true)
+
+    if (!address || !publicKey || !signature || isNaN(eventId)) {
+      alert(lang.alert)
+      setShowOverlay(false)
+      return
+    }
+    claimEvent(river.walletAddr, eventId, publicKey, signature)
+      .then((res) => {
+        setShowOverlay(false)
+        if (res) {
+          setJoined(true)
+          setIsSuccess(true)
+        }
+      })
+      .catch(() => {
+        alert(lang.alert)
+        setShowOverlay(false)
+      })
+  }
+
+  const approve = () => {
+    setShowOverlay(true)
+
+    if (!address || isNaN(eventId)) {
+      alert(lang.alert)
+      setShowOverlay(false)
+      return
+    }
+    approveEvent(river.walletAddr, eventId)
+      .then((res) => {
+        setShowOverlay(false)
+        if (res) {
+          setApproved(true)
+        }
+      })
+      .catch(() => {
+        alert(lang.alert)
+        setShowOverlay(false)
+      })
+  }
 
   return (
     <main className="border bg-white p-4">
       {!isSuccess ? (
         <>
           <EventInfo event={event} stewardsCount={10} />
-          <div className="border-b-2 pb-8">
-            <Button style={ButtonStyle.primary} onClick={handleApprove}>
-              Approve
-            </Button>
-          </div>
+          {address && river.stewards.indexOf(address) >= 0 && !approved && (
+            <div className="border-b-2 pb-8">
+              <Button style={ButtonStyle.primary} onClick={approve}>
+                Approve
+              </Button>
+            </div>
+          )}
           {address && event.participants.indexOf(address) < 0 && (
             <>
               <RiverAgreement agreement={river.agreement} />
               <div className="my-2">
-                <Button
-                  style={ButtonStyle.highlight}
-                  onClick={(e: any) => {
-                    setAgreed(!agreed)
-                  }}
-                >
+                <Button style={ButtonStyle.highlight} onClick={signAgree}>
                   <div className="flex">
                     {agreed && <Image src={Check} alt="" width={24} />}
-                    <span className="ml-4">I agree for above</span>
+                    <span className="ml-4 text-black">I agree for above</span>
                   </div>
                 </Button>
               </div>
               <div className="my-2">
-                <Button onClick={handleAgree} disabled={!agreed}>
+                <Button onClick={join} disabled={!agreed}>
                   Join event!
                 </Button>
               </div>
@@ -100,10 +163,16 @@ export default function Event({ params }: { params: { id: number } }) {
         <div className="py-8">
           <Success
             imgSrc="/images/event-token.png"
-            message={lang.createRiver.success}
+            message={"Successfully get event token"}
             buttonLink={`/my-page`}
             buttonText={"View my token"}
           />
+        </div>
+      )}
+      {/* Overlay */}
+      {showOverlay && (
+        <div className="fixed left-0 top-0 z-50 h-screen w-screen bg-black opacity-50">
+          <Loading />
         </div>
       )}
     </main>

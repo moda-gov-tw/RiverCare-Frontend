@@ -176,12 +176,7 @@ export default function River({ params }: { params: { id: number } }) {
                     river.gen === 0 && (
                       <>
                         <div className="my-2">
-                          <Button
-                            style={ButtonStyle.highlight}
-                            onClick={(e: any) => {
-                              signAgree()
-                            }}
-                          >
+                          <Button style={ButtonStyle.highlight} onClick={signAgree}>
                             <div className="flex">
                               {agreed && <Image src={Check} alt="" width={24} />}
                               <span className="ml-4 text-black">I agree for above</span>
