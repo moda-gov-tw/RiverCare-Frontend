@@ -20,7 +20,7 @@ export default function RiverList() {
       currentTokenId: 0,
       currentTokenContract: "KT11111",
       events: [],
-      walletAddr: "KT1BUwQFrMvUK2r7fLqaponPEE9eSPozXe2r",
+      walletAddr: "KT1NeZApGbSQicX3672TQAeL21Cg6fQ3Q9fe",
       proposals: []
     }
 
