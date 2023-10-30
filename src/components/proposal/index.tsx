@@ -6,26 +6,75 @@ import { Language } from "@/utils/language"
 import { FlipArrow } from "../flip-arrow"
 import { useState } from "react"
 import Progress from "../progress"
-import { approveRatioTotal } from "@/constants"
+import { approveLowerbound, approveRatioTotal } from "@/constants"
 import Link from "next/link"
 import { Context } from "@/context"
 import { useContext } from "react"
+import { showWallet } from "@/utils/string"
+import { River } from "@/interfaces/river.interface"
 
-const Proposal = ({ proposal }: { proposal: Proposal }) => {
+const Proposal = ({
+  proposal,
+  river,
+  onSend,
+  onFinish
+}: {
+  proposal: Proposal
+  river: River
+  onSend?: any
+  onFinish?: any
+}) => {
   const lang = Language()
-  const context = useContext(Context)
+  const { address, signProposal, resolveProposal } = useContext(Context)
+  const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
+  let id = parseInt(proposal.uid)
   let title = lang.proposal.transactionType[proposal.transactionType]
   let status = lang.proposal.status[proposal.status]
 
-  let riverTotal = 10 // temp
-  let approvedRatio = proposal.approvalCount / riverTotal
+  let approvedRatio = proposal.approvalCount / river.stewardsCount
 
   const [showDetail, setShowDetail] = useState(false)
 
-  const signProposal = () => {}
+  const isApproved = () => {
+    return approvedRatio >= 1 / approveRatioTotal && proposal.approvalCount >= approveLowerbound
+  }
 
-  const resolveProposal = () => {}
+  const sign = () => {
+    onSend()
+    if (!address || !river.walletAddr) {
+      alert(lang.alert)
+      onFinish()
+      return
+    }
+    signProposal(river.walletAddr, id)
+      .then((res) => {
+        onFinish()
+        if (res) setIsSuccess(true)
+      })
+      .catch(() => {
+        alert(lang.alert)
+        onFinish()
+      })
+  }
+
+  const resolve = () => {
+    onSend()
+    if (!address || !river.walletAddr) {
+      alert(lang.alert)
+      onFinish()
+      return
+    }
+    resolveProposal(river.walletAddr, id)
+      .then((res) => {
+        onFinish()
+        if (res) setIsSuccess(true)
+      })
+      .catch(() => {
+        alert(lang.alert)
+        onFinish()
+      })
+  }
 
   return (
     <div className="m-0 mb-2 border text-left font-monda">
@@ -44,12 +93,12 @@ const Proposal = ({ proposal }: { proposal: Proposal }) => {
           <FlipArrow opened={showDetail} />
         </div>
       </button>
-      <div className="flex flex-col bg-[#DDDDDD] p-2">
+      <div className=" flex flex-col bg-[#DDDDDD] p-2">
         {showDetail && (
           <div>
             <div className="mt-2">
               <div className="font-bold">Content</div>
-              <div className="flex w-full justify-between text-xs">
+              <div className="mx-0 flex justify-between gap-2 text-xs">
                 <div>
                   <div className="text-[#969696]">Function</div>
                   <div className="">{title}</div>
@@ -71,7 +120,7 @@ const Proposal = ({ proposal }: { proposal: Proposal }) => {
                 {proposal.transactionType === ProposalType.transferTezos && (
                   <div>
                     <div className="text-[#969696]">Address</div>
-                    <div className="">{proposal.targetAddr}</div>
+                    <div className="">{showWallet({ wallet: proposal.targetAddr })}</div>
                   </div>
                 )}
               </div>
@@ -86,12 +135,12 @@ const Proposal = ({ proposal }: { proposal: Proposal }) => {
         )}
         {proposal.status === ProposalStatus.proposing && (
           <div className="flex w-full gap-1 p-2">
-            {approvedRatio >= 1 / approveRatioTotal ? (
-              <Button style={ButtonStyle.primary} onClick={resolveProposal}>
+            {isApproved() ? (
+              <Button style={ButtonStyle.primary} onClick={resolve}>
                 Resolve
               </Button>
             ) : (
-              <Button style={ButtonStyle.primary} onClick={signProposal}>
+              <Button style={ButtonStyle.primary} onClick={sign}>
                 Sign
               </Button>
             )}

@@ -6,10 +6,33 @@ import Input from "@/components/input"
 import { useRouter } from "next/navigation"
 import { useState, useContext } from "react"
 import { Context } from "@/context"
+import Loading from "../loading"
+import { Language } from "@/utils/language"
+import { River, RiverStatus } from "@/interfaces/river.interface"
+import Success from "@/components/success"
 
 export default function CreateEvent({ params }: { params: { id: number } }) {
+  let river: River = {
+    id: 0,
+    name: "磺溪",
+    agreement: "ipfs://QmbxnccENRW6awW1bUmZYGc4v81hEdHZnDz88vRD6Hyawc",
+    dataset: "ipfs",
+    gen: 2,
+    createdTime: "2023-09-30 22:25",
+    expiredTime: "2023-10-30 22:25",
+    status: RiverStatus.alive,
+    stewards: ["tz1123"],
+    stewardsCount: 1,
+    currentTokenId: 0,
+    currentTokenContract: "KT11111",
+    events: [],
+    walletAddr: "KT1NeZApGbSQicX3672TQAeL21Cg6fQ3Q9fe",
+    proposals: []
+  }
+
+  const lang = Language()
   const router = useRouter()
-  const context = useContext(Context)
+  const { address, createEvent } = useContext(Context)
 
   const navigate = (item: { route: string }) => {
     router.push(`/river/${params.id}/${item.route}`)
@@ -18,45 +41,87 @@ export default function CreateEvent({ params }: { params: { id: number } }) {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [editions, setEditions] = useState("")
+  const [showOverlay, setShowOverlay] = useState<boolean>(false)
+  const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
   const validated = () => {
     let e = parseInt(editions)
     if (name === "" || description === "") return false
-    if (isNaN(e) || e <= 0) return false
+    if (editions !== "" && (isNaN(e) || e <= 0)) return false
     return true
   }
 
-  const createEvent = () => {
-    // name, description, editions
-    // parseInt(editions)
+  const create = () => {
+    setShowOverlay(true)
+
+    if (!validated() || !address || !river.walletAddr) {
+      alert(lang.alert)
+      setShowOverlay(false)
+      return
+    }
+
+    let e = editions === "" ? -1 : parseInt(editions)
+
+    createEvent(river.walletAddr, e, name, description)
+      .then((res) => {
+        setShowOverlay(false)
+        if (res) setIsSuccess(true)
+      })
+      .catch(() => {
+        alert(lang.alert)
+        setShowOverlay(false)
+      })
   }
 
   return (
     <>
       <Dropdown type="riverNav" onChange={navigate} currRoute={"create-event"} />
       <main className="border p-6 text-left font-monda">
-        <div className="mb-4">
-          <div className="mb-2">Event&apos;s name:</div>
-          <Input value={name} placeholder={"enter name"} onChange={setName} />
-        </div>
-        <div>
-          <div>Event&apos;s description:</div>
-          <Input
-            value={description}
-            type="text-area"
-            placeholder={"enter description"}
-            onChange={setDescription}
+        {!isSuccess ? (
+          <>
+            <div className="mb-4">
+              <div className="mb-2">Event&apos;s name:</div>
+              <Input value={name} placeholder={"enter name"} onChange={setName} />
+            </div>
+            <div>
+              <div>Event&apos;s description:</div>
+              <Input
+                value={description}
+                type="text-area"
+                placeholder={"enter description"}
+                onChange={setDescription}
+              />
+            </div>
+            <div>
+              <div>Event&apos;s editions</div>
+              <Input
+                value={editions}
+                placeholder={
+                  "enter the edition, if left blank, it represents an unlimited edition."
+                }
+                onChange={setEditions}
+              />
+            </div>
+            <div className="my-4 w-full text-center">
+              <Button onClick={create} disabled={!validated()}>
+                Create!
+              </Button>
+            </div>
+          </>
+        ) : (
+          <Success
+            imgSrc="/images/event-token.png"
+            message={"Event successfully created!"}
+            buttonLink={`/my-page/event-tokens`}
+            buttonText={"Go"}
           />
-        </div>
-        <div>
-          <div>Event&apos;s editions</div>
-          <Input value={editions} placeholder={"enter name"} onChange={setEditions} />
-        </div>
-        <div className="my-4 w-full text-center">
-          <Button onClick={createEvent} disabled={!validated()}>
-            Create!
-          </Button>
-        </div>
+        )}
+        {/* Overlay */}
+        {showOverlay && (
+          <div className="fixed left-0 top-0 z-50 h-screen w-screen bg-black opacity-50">
+            <Loading />
+          </div>
+        )}
       </main>
     </>
   )

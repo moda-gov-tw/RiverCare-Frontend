@@ -19,7 +19,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-# COPY ./lib/patch/LocalStorage.js ./node_modules/@airgap/beacon-core/dist/cjs/storage/LocalStorage.js
+COPY ./src/libs/patch/LocalStorage.js ./node_modules/@airgap/beacon-core/dist/cjs/storage/LocalStorage.js
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry

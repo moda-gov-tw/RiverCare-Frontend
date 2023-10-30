@@ -65,5 +65,6 @@
   "proposal": {
     "status": ["dead", "提議中", "通過"],
     "transactionType": ["傳送 tezos", "更新公約", "更新河流資料"]
-  }
+  },
+  "alert": "抱歉，請連結錢包並重新操作一次。"
 }

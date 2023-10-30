@@ -51,7 +51,7 @@ const Header = () => {
   return (
     <header className="sticky right-0 top-0 z-50 flex h-[60px] w-full justify-between border-b bg-white p-3 text-2xl">
       {/* LOGO */}
-      <Link href="/">
+      <Link href="/" onClick={(e: any) => setIsNavOpen(false)}>
         <Image src={LogoSrc} alt="RiverCare" className="h-full w-auto" />
       </Link>
       {/* Navigation bar */}

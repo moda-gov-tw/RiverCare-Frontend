@@ -33,10 +33,11 @@ const Line = ({
   return (
     <div className="relative flex w-1/4 text-xs">
       <div
-        className={`relative w-full -translate-y-1/2 border-b border-primary ${
-          dashed && "border-dashed"
-        } ${disabled && "border-[#D9D9D9]"}`}
+        className={`relative w-full -translate-y-1/2 border-b ${dashed && "border-dashed"} ${
+          disabled ? " border-[#D9D9D9]" : "border-primary"
+        }`}
       >
+        {/* arrow */}
         <div
           className={`absolute bottom-0 right-0 w-2 -translate-y-full rotate-45 border ${
             disabled ? " border-[#D9D9D9]" : "border-primary"
@@ -54,8 +55,10 @@ const Line = ({
             ? currGen === parseInt(topText?.replace("Gen ", ""))
               ? "whitespace-nowrap rounded-lg bg-danger px-2 py-1 text-white"
               : "whitespace-nowrap rounded-lg border border-danger bg-white px-2 py-1 text-danger"
-            : " text-primary"
-        } ${disabled && "border-[#D9D9D9] text-[#D9D9D9]"}`}
+            : disabled
+            ? " border-[#D9D9D9] text-[#D9D9D9]"
+            : "text-primary"
+        }`}
       >
         {topText}
       </div>
@@ -70,23 +73,23 @@ const Line = ({
   )
 }
 
-const Schedule = ({ gen, expiredTime }: { gen: number; expiredTime: string }) => {
-  const deadline = new Date(expiredTime)
-
+const Schedule = ({ gen, needActivate }: { gen: number; needActivate: boolean }) => {
   let dotText = ["Activated", `Gen ${gen} deadline`, "Activate", `Gen ${gen + 1} deadline`]
-  let dotDisabled = [false, false, true, true]
+  let dotDisabled = [false, true, true, true]
   let lineBottomText = ["3M", "", "3M"]
   let lineTopText = [`Gen ${gen}`, "Until activated", `Gen ${gen + 1}`]
-  let lineDisabled = [false, false, true]
+  let lineDisabled = [false, true, true]
 
   if (gen === 0) {
     dotText[0] = "Created"
     lineBottomText[0] = "1M"
+    dotDisabled[1] = true
+    lineDisabled = [false, true, true]
   }
 
-  if (deadline > new Date()) {
-    lineDisabled = [false, true, true]
-    dotDisabled[1] = true
+  if (needActivate) {
+    lineDisabled = [false, false, true]
+    dotDisabled[1] = false
   }
   return (
     <div className="my-10 flex justify-center">

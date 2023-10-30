@@ -13,36 +13,118 @@ import { Context } from "@/context"
 import Success from "@/components/success"
 import Dropdown from "@/components/dropdown"
 import { useRouter } from "next/navigation"
+import { Language } from "@/utils/language"
+import Loading from "./loading"
 
 export default function River({ params }: { params: { id: number } }) {
   let mockdata: River = {
     id: 0,
     name: "磺溪",
-    agreement: "agreement",
+    agreement: "ipfs://QmbxnccENRW6awW1bUmZYGc4v81hEdHZnDz88vRD6Hyawc",
     dataset: "ipfs",
-    gen: 2,
+    gen: 1,
     createdTime: "2023-09-30 22:25",
-    expiredTime: "2023-10-1 22:25",
-    status: RiverStatus.alive,
+    expiredTime: "2023-10-10 22:25",
+    status: RiverStatus.dead,
     stewards: ["tz1123"],
     stewardsCount: 1,
     currentTokenId: 0,
     currentTokenContract: "KT11111",
     events: [],
-    walletAddr: "KT1111",
+    walletAddr: "KT1NeZApGbSQicX3672TQAeL21Cg6fQ3Q9fe",
     proposals: []
   }
 
+  const lang = Language()
   const router = useRouter()
   const [river, setRiver] = useState(mockdata)
   const [agreed, setAgreed] = useState(false)
-  const [needActivate, setNeedActivate] = useState(false)
+  const [publicKey, setPublicKey] = useState("")
+  const [signature, setSignature] = useState("")
   const [joined, setJoined] = useState(false)
+  const [showOverlay, setShowOverlay] = useState<boolean>(false)
+  const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
-  const { address } = useContext(Context)
+  let needActivate = new Date(river.expiredTime) < new Date()
 
-  const handleAgree = () => {
-    setJoined(true)
+  const { address, claimStewardship, sign, activateRiver, reactivateRiver } = useContext(Context)
+
+  const signAgree = () => {
+    setShowOverlay(true)
+    if (!address) {
+      alert(lang.alert)
+      setShowOverlay(false)
+      return
+    }
+    sign(river.agreement)
+      .then((res) => {
+        setShowOverlay(false)
+        if (res) {
+          setPublicKey(res.publicKey)
+          setSignature(res.signature)
+          setAgreed(!agreed)
+        }
+      })
+      .catch(() => {
+        alert(lang.alert)
+        setShowOverlay(false)
+      })
+  }
+
+  const join = () => {
+    setShowOverlay(true)
+
+    if (!address || !publicKey || !signature) {
+      alert(lang.alert)
+      setShowOverlay(false)
+      return
+    }
+    claimStewardship(river.walletAddr, publicKey, signature)
+      .then((res) => {
+        setShowOverlay(false)
+        if (res) {
+          setJoined(true)
+          setIsSuccess(true)
+        }
+      })
+      .catch(() => {
+        alert(lang.alert)
+        setShowOverlay(false)
+      })
+  }
+
+  const activate = () => {
+    setShowOverlay(true)
+
+    if (!address) {
+      alert(lang.alert)
+      setShowOverlay(false)
+      return
+    }
+    if (river.gen === 0) {
+      activateRiver(river.walletAddr)
+        .then((res) => {
+          setShowOverlay(false)
+          if (res) {
+            setIsSuccess(true)
+          }
+        })
+        .catch(() => {
+          alert(lang.alert)
+          setShowOverlay(false)
+        })
+    } else
+      reactivateRiver(river.walletAddr)
+        .then((res) => {
+          setShowOverlay(false)
+          if (res) {
+            setIsSuccess(true)
+          }
+        })
+        .catch(() => {
+          alert(lang.alert)
+          setShowOverlay(false)
+        })
   }
 
   const isSteward = (address: string) => {
@@ -53,22 +135,28 @@ export default function River({ params }: { params: { id: number } }) {
     router.push(`/river/${params.id}/${item.route}`)
   }
 
+  if (river.gen === 0 && new Date(river.expiredTime) < new Date()) needActivate = true
+
   return (
     <>
       <Dropdown type="riverNav" onChange={navigate} />
       <main className="border p-4 font-monda">
-        {joined ? (
-          <div>
-            <Success
-              imgSrc="/images/stewardship-token.png"
-              message="Successfully received stewardship token!"
-            />
-            {/* <Image src={StewardshipTokenImg} alt="" /> */}
-            <div></div>
-          </div>
+        {isSuccess ? (
+          joined ? (
+            <div>
+              <Success
+                imgSrc="/images/stewardship-token.png"
+                message="Successfully received stewardship token!"
+              />
+            </div>
+          ) : (
+            <div>
+              <Success message="Successfully activated!" />
+            </div>
+          )
         ) : (
           <>
-            <Schedule gen={river.gen} expiredTime={river.expiredTime} />
+            <Schedule gen={river.gen} needActivate={needActivate} />
             <RiverInfo
               createdTime={river.createdTime}
               gen={river.gen}
@@ -78,37 +166,41 @@ export default function River({ params }: { params: { id: number } }) {
             />
             <RiverAgreement agreement={river.agreement} />
             <div className="flex flex-col">
-              {address && river.gen === 0 && !isSteward(address) && (
+              {address && (
                 <>
-                  <div className="my-2">
-                    <Button
-                      style={ButtonStyle.highlight}
-                      onClick={(e: any) => {
-                        setAgreed(!agreed)
-                      }}
-                    >
-                      <div className="flex">
-                        {agreed && <Image src={Check} alt="" width={24} />}
-                        <span className="ml-4">I agree for above</span>
-                      </div>
-                    </Button>
-                  </div>
-                  <div className="my-2">
-                    <Button onClick={handleAgree} disabled={!agreed}>
-                      Join!
-                    </Button>
-                  </div>
+                  {needActivate ? (
+                    <div className="my-2">
+                      <Button onClick={activate}>Activate!</Button>
+                    </div>
+                  ) : (
+                    river.gen === 0 && (
+                      <>
+                        <div className="my-2">
+                          <Button style={ButtonStyle.highlight} onClick={signAgree}>
+                            <div className="flex">
+                              {agreed && <Image src={Check} alt="" width={24} />}
+                              <span className="ml-4 text-black">I agree for above</span>
+                            </div>
+                          </Button>
+                        </div>
+                        <div className="my-2">
+                          <Button onClick={join} disabled={!agreed}>
+                            Join!
+                          </Button>
+                        </div>
+                      </>
+                    )
+                  )}
                 </>
-              )}
-              {address && needActivate && (
-                <div className="my-2">
-                  <Button onClick={handleAgree} disabled={!agreed}>
-                    Activate!
-                  </Button>
-                </div>
               )}
             </div>
           </>
+        )}
+        {/* Overlay */}
+        {showOverlay && (
+          <div className="fixed left-0 top-0 z-50 h-screen w-screen bg-black opacity-50">
+            <Loading />
+          </div>
         )}
       </main>
     </>

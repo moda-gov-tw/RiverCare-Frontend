@@ -27,9 +27,9 @@ const Success = ({
           />
         </div>
       )}
-      <div className="mx-auto mt-4 font-bold text-action">{message}</div>
+      <div className="mx-auto my-4 font-bold text-action">{message}</div>
       {buttonLink && buttonText && (
-        <div className="mt-4">
+        <div className="my-4">
           <Button href={buttonLink}>{buttonText}</Button>
         </div>
       )}

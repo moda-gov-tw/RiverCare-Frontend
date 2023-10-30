@@ -45,7 +45,7 @@
       "placeholder": "Please upload the detail data of river(JSON file)"
     },
     "create": "Create!",
-    "success": "Successfully created!"
+    "success": "River successfully created!"
   },
   "sortMethod": [
     { "route": "created-time", "option": "Created time" },
@@ -66,5 +66,6 @@
   "proposal": {
     "status": ["dead", "proposing", "approved"],
     "transactionType": ["Transfer tezos", "Update agreement", "Update dataset"]
-  }
+  },
+  "alert": "Sorry, please connect the wallet and try it again"
 }
