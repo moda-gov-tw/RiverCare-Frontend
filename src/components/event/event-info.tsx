@@ -4,20 +4,32 @@ import { Event } from "@/interfaces/event.interface"
 import Stewardship from "@/../public/images/stewardship.svg"
 import Approval from "@/../public/images/approval.svg"
 import Progress from "../progress"
+import { Language } from "@/utils/language"
 
 const EventInfo = ({ event, stewardsCount }: { event: Event; stewardsCount: number }) => {
+  const lang = Language()
   return (
     <div className="flex flex-col justify-between font-monda">
       <div className="mx-auto px-4 text-left">
         <div className="mb-4 mt-2 text-lg text-[#595959]">{event.description}</div>
-        <div className="my-2 font-semibold">Created time: {event.createdTime}</div>
-        <div className="my-2 font-semibold">Created by: {event.host}</div>
-        <div className="my-2 font-semibold">Editions: {event.editions}</div>
+        <div className="my-2 font-semibold">
+          {lang.eventInfo.createTime}
+          {event.createdTime}
+        </div>
+        <div className="my-2 font-semibold">
+          {lang.eventInfo.creator}
+          {event.host}
+        </div>
+        <div className="my-2 font-semibold">
+          {lang.eventInfo.edition}
+          {event.editions}
+        </div>
       </div>
       <div className="p-4 pt-0 text-left">
         <div className="my-4 flex items-center text-lg text-action">
           <Image src={Stewardship} alt="" className="mr-4" width={28} />
-          Participants: <span className="font-bold">&nbsp;{event.participantsCount}</span>
+          {lang.eventInfo.participants}{" "}
+          <span className="font-bold">&nbsp;{event.participantsCount}</span>
         </div>
         {event.participants.length > 0 && (
           <div className="my-2 max-h-[120px] overflow-y-scroll border p-4 text-xs ">
@@ -28,7 +40,7 @@ const EventInfo = ({ event, stewardsCount }: { event: Event; stewardsCount: numb
         )}
         <div className="my-4 flex items-center text-lg text-primary">
           <Image src={Approval} alt="" className="mr-4" width={28} />
-          Approval rate:{" "}
+          {lang.eventInfo.approveRate}{" "}
           <span className="font-bold">&nbsp;{(event.approvalCount / stewardsCount) * 100}%</span>
         </div>
         <Progress value={event.approvalCount} total={stewardsCount} />

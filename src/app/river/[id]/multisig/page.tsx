@@ -16,7 +16,7 @@ import Loading from "../loading"
 
 export default function Multisig({ params }: { params: { id: number } }) {
   const router = useRouter()
-
+  const lang = Language()
   const navigate = (item: { route: string }) => {
     router.push(`/river/${params.id}/${item.route}`)
   }
@@ -78,11 +78,14 @@ export default function Multisig({ params }: { params: { id: number } }) {
       <Dropdown type="riverNav" onChange={navigate} currRoute={"multisig"} />
       <main className="border p-3 text-left">
         <div className="border px-4 py-2">
-          <div className="text-xs font-bold">Wallet address: {river.walletAddr}</div>
+          <div className="text-xs font-bold">
+            {lang.multisig.walletAddress}
+            {river.walletAddr}
+          </div>
         </div>
         {/* Member List */}
         <div>
-          <div className="my-4 text-lg font-bold">Member List (threshold: 1/3)</div>
+          <div className="my-4 text-lg font-bold">{lang.multisig.memberList}(threshold: 1/3)</div>
           <div className="max-h-[120px] overflow-scroll border px-4 py-2">
             {river.stewards.map((address, i) => (
               <div className="text-xs" key={i}>
@@ -93,7 +96,7 @@ export default function Multisig({ params }: { params: { id: number } }) {
         </div>
         {/* Proposal List */}
         <div>
-          <div className="my-4 text-lg font-bold">Proposals</div>
+          <div className="my-4 text-lg font-bold">{lang.multisig.proposal}</div>
           <div className="">
             {proposals.map((proposal, i) => (
               <Proposal
@@ -115,7 +118,7 @@ export default function Multisig({ params }: { params: { id: number } }) {
               }}
               customClass="w-full"
             >
-              Transfer proposal
+              {lang.multisig.transferProposal}
             </Button>
           </div>
           <div className="text-center">
@@ -125,7 +128,7 @@ export default function Multisig({ params }: { params: { id: number } }) {
               }}
               customClass="w-full"
             >
-              Agreement update proposal
+              {lang.multisig.agreeUpdate}
             </Button>
           </div>
           <div className="text-center">
@@ -135,7 +138,7 @@ export default function Multisig({ params }: { params: { id: number } }) {
               }}
               customClass="w-full"
             >
-              Dataset update proposal
+              {lang.multisig.datasetUpdate}
             </Button>
           </div>
           <Modal

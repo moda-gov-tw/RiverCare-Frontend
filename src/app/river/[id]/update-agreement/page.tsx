@@ -49,11 +49,11 @@ export default function UpdateAgreement({
   return (
     <main className="p-6 text-left">
       {isSuccess ? (
-        <div className="mx-auto mb-8 text-center text-lg">Proposal created successfully</div>
+        <div className="mx-auto mb-8 text-center text-lg">{lang.proposal.successful}</div>
       ) : (
         <>
           <div>
-            <div>River&apos;s agreement:</div>
+            <div>{lang.createRiver.agreement.label}</div>
             <Input
               value={agreement}
               type="text-area"
@@ -63,7 +63,7 @@ export default function UpdateAgreement({
           </div>
           <div className="my-4 w-full text-center">
             <Button onClick={updateAgreement} disabled={!validated()}>
-              Create!
+              {lang.createRiver.create}
             </Button>
           </div>
         </>

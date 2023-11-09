@@ -13,6 +13,7 @@
       "title": "My Page"
     }
   ],
+
   "faq": [
     {
       "Q": "qqq1",
@@ -27,7 +28,9 @@
       "A": "aaa1"
     }
   ],
+
   "createRiver": {
+    "title": "Create River",
     "name": {
       "label": "River's name",
       "placeholder": "Please enter the name of river"
@@ -44,13 +47,65 @@
       "label": "River's dataset",
       "placeholder": "Please upload the detail data of river(JSON file)"
     },
+    "upload": "Upload a json file.",
     "create": "Create!",
-    "success": "River successfully created!"
+    "success": "River successfully created!",
+    "note": "(Need agreement from more than 1/3)"
   },
+
+  "createEvent": {
+    "name": {
+      "label": "Event's name",
+      "placeholder": "Please enter the name of event"
+    },
+    "description": {
+      "label": "Event's description",
+      "placeholder": "Please enter the description of event"
+    },
+    "editions": {
+      "label": "Event's edition",
+      "placeholder": "enter the edition, if left blank, it represents an unlimited edition."
+    },
+    "approved": "Approve!",
+    "join": "Join event!"
+  },
+
+  "eventInfo": {
+    "createTime": "Create Time:",
+    "creator": "Created by:",
+    "edition": "Editions:",
+    "participants": "Participants:",
+    "approveRate": "Approve rate:",
+    "total": "Total editions:",
+    "copy": "Copy link",
+    "qrcodeDownload": "Download QR code"
+  },
+
+  "riverList": {
+    "title": "River List",
+    "name": "Name",
+    "createTime": "Create Time",
+    "generation": "Generation",
+    "status": "Status",
+    "buttons": {
+      "view": "View"
+    }
+  },
+
+  "multisig": {
+    "walletAddress": "Wallet Address",
+    "memberList": "Memeber list",
+    "proposal": "Proposals",
+    "transferProposal": "Transfer proposal",
+    "datasetUpdate": "Dataset update proposal",
+    "agreeUpdate": "Agreement update proposal"
+  },
+
   "sortMethod": [
     { "route": "created-time", "option": "Created time" },
     { "route": "name", "option": "River name" }
   ],
+
   "myPage": [
     { "route": "", "option": "Stewardship tokens" },
     { "route": "event-tokens", "option": "Event tokens" },
@@ -63,9 +118,60 @@
     { "route": "create-event", "option": "Create event" },
     { "route": "multisig", "option": "River wallet" }
   ],
+
   "proposal": {
     "status": ["dead", "proposing", "approved"],
-    "transactionType": ["Transfer tezos", "Update agreement", "Update dataset"]
+    "transactionType": ["Transfer tezos", "Update agreement", "Update dataset"],
+    "successful": "Proposal created successfully",
+    "targetAddress": "Target address:",
+    "amount": "Amount(tez):",
+    "address": "Address",
+    "amounts": "Amount",
+    "content": "Content",
+    "function": "Function",
+    "ipfs": "Ipfs data",
+    "approveRate": "Approve rate :",
+    "resolve": "Resolve",
+    "sign": "Sign"
   },
-  "alert": "Sorry, please connect the wallet and try it again"
+
+  "alert": "Sorry, please connect the wallet and try it again",
+
+  "hint": "Please connect the wallet first",
+
+  "homePage": {
+    "title": "RiverCare",
+    "description": "RiverCare, the decentralized identity based on the stewardship's care actions",
+    "buttons": {
+      "createRiver": "create River",
+      "riverList": "River List",
+      "connect": "Connecct"
+    }
+  },
+
+  "eventCard": {
+    "approve": "Approve Event"
+  },
+
+  "riverCard": {
+    "people": "people",
+    "in": "in",
+    "day": "days",
+    "agreement": "Agreement"
+  },
+
+  "schedule": {
+    "activated": "Activated",
+    "dedline": "Deadline",
+    "until": "Until activated",
+    "activate": "Activate",
+    "months": "3M",
+    "gen": "Gen"
+  },
+
+  "joinRiver": {
+    "activated": "Activated",
+    "agree": "I agree for above",
+    "join": "Join!"
+  }
 }

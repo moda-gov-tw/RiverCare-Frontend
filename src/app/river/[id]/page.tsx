@@ -139,6 +139,9 @@ export default function River({ params }: { params: { id: number } }) {
 
   return (
     <>
+      <div className="MainText mb-6 mt-4 font-monda text-5xl font-bold text-title">
+        {river.name}
+      </div>
       <Dropdown type="riverNav" onChange={navigate} />
       <main className="border p-4 font-monda">
         {isSuccess ? (
@@ -170,7 +173,7 @@ export default function River({ params }: { params: { id: number } }) {
                 <>
                   {needActivate ? (
                     <div className="my-2">
-                      <Button onClick={activate}>Activate!</Button>
+                      <Button onClick={activate}>{lang.joinRiver.activated}</Button>
                     </div>
                   ) : (
                     river.gen === 0 && (
@@ -179,13 +182,13 @@ export default function River({ params }: { params: { id: number } }) {
                           <Button style={ButtonStyle.highlight} onClick={signAgree}>
                             <div className="flex">
                               {agreed && <Image src={Check} alt="" width={24} />}
-                              <span className="ml-4 text-black">I agree for above</span>
+                              <span className="ml-4 text-black">{lang.joinRiver.agree}</span>
                             </div>
                           </Button>
                         </div>
                         <div className="my-2">
                           <Button onClick={join} disabled={!agreed}>
-                            Join!
+                            {lang.joinRiver.join}
                           </Button>
                         </div>
                       </>

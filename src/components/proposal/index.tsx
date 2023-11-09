@@ -97,20 +97,20 @@ const Proposal = ({
         {showDetail && (
           <div>
             <div className="mt-2">
-              <div className="font-bold">Content</div>
+              <div className="font-bold">{lang.proposal.content}</div>
               <div className="mx-0 flex justify-between gap-2 text-xs">
                 <div>
-                  <div className="text-[#969696]">Function</div>
+                  <div className="text-[#969696]">{lang.proposal.function}</div>
                   <div className="">{title}</div>
                 </div>
                 {proposal.transactionType === ProposalType.transferTezos ? (
                   <div>
-                    <div className="text-[#969696]">Amount</div>
+                    <div className="text-[#969696]">{lang.proposal.amount}</div>
                     <div className="">{proposal.transferMutez / 1000000} tez</div>
                   </div>
                 ) : (
                   <div>
-                    <div className="text-[#969696]">ipfs data</div>
+                    <div className="text-[#969696]">{lang.proposal.ipfs}</div>
                     <div className="">
                       {proposal.agreement && <Link href={`ipfs/${proposal.agreement}`} />}
                       {proposal.dataset && <Link href={`ipfs/${proposal.dataset}`} />}
@@ -119,14 +119,17 @@ const Proposal = ({
                 )}
                 {proposal.transactionType === ProposalType.transferTezos && (
                   <div>
-                    <div className="text-[#969696]">Address</div>
+                    <div className="text-[#969696]">{lang.proposal.address}</div>
                     <div className="">{showWallet({ wallet: proposal.targetAddr })}</div>
                   </div>
                 )}
               </div>
             </div>
             <div className="mt-4">
-              <div className="font-bold">Approved rate: {approvedRatio * 100}%</div>
+              <div className="font-bold">
+                {lang.proposal.approveRate}
+                {approvedRatio * 100}%
+              </div>
               <div className="my-2">
                 <Progress value={3} total={100} />
               </div>
@@ -137,11 +140,11 @@ const Proposal = ({
           <div className="flex w-full gap-1 p-2">
             {isApproved() ? (
               <Button style={ButtonStyle.primary} onClick={resolve}>
-                Resolve
+                {lang.proposal.resolve}
               </Button>
             ) : (
               <Button style={ButtonStyle.primary} onClick={sign}>
-                Sign
+                {lang.proposal.sign}
               </Button>
             )}
           </div>

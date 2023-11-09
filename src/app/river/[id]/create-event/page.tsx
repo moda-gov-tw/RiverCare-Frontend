@@ -80,31 +80,33 @@ export default function CreateEvent({ params }: { params: { id: number } }) {
         {!isSuccess ? (
           <>
             <div className="mb-4">
-              <div className="mb-2">Event&apos;s name:</div>
-              <Input value={name} placeholder={"enter name"} onChange={setName} />
+              <div className="mb-2">{lang.createEvent.name.label}</div>
+              <Input
+                value={name}
+                placeholder={lang.createEvent.name.placeholder}
+                onChange={setName}
+              />
             </div>
             <div>
-              <div>Event&apos;s description:</div>
+              <div>{lang.createEvent.description.label}</div>
               <Input
                 value={description}
                 type="text-area"
-                placeholder={"enter description"}
+                placeholder={lang.createEvent.description.placeholder}
                 onChange={setDescription}
               />
             </div>
             <div>
-              <div>Event&apos;s editions</div>
+              <div>{lang.createEvent.editions.label}</div>
               <Input
                 value={editions}
-                placeholder={
-                  "enter the edition, if left blank, it represents an unlimited edition."
-                }
+                placeholder={lang.createEvent.editions.placeholder}
                 onChange={setEditions}
               />
             </div>
             <div className="my-4 w-full text-center">
               <Button onClick={create} disabled={!validated()}>
-                Create!
+                {lang.createRiver.create}
               </Button>
             </div>
           </>
