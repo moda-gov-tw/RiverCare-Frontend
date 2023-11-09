@@ -136,7 +136,7 @@ export default function Event({ params }: { params: { id: number } }) {
           {address && river.stewards.indexOf(address) >= 0 && !approved && (
             <div className="border-b-2 pb-8">
               <Button style={ButtonStyle.primary} onClick={approve}>
-                Approve
+                {lang.createEvent.approved}
               </Button>
             </div>
           )}
@@ -147,13 +147,13 @@ export default function Event({ params }: { params: { id: number } }) {
                 <Button style={ButtonStyle.highlight} onClick={signAgree}>
                   <div className="flex">
                     {agreed && <Image src={Check} alt="" width={24} />}
-                    <span className="ml-4 text-black">I agree for above</span>
+                    <span className="ml-4 text-black">{lang.joinRiver.agree}</span>
                   </div>
                 </Button>
               </div>
               <div className="my-2">
                 <Button onClick={join} disabled={!agreed}>
-                  Join event!
+                  {lang.createEvent.join}
                 </Button>
               </div>
             </>

@@ -10,10 +10,11 @@ import { useState } from "react"
 import * as htmlToImage from "html-to-image"
 import QRCodeContainer from "../qrcode-container"
 import { baseUrl } from "@/constants"
+import { Language } from "@/utils/language"
 
 const EventToken = ({ event, isHost }: { event: Event; isHost?: boolean }) => {
   let claimUrl = `${baseUrl}/event/${event.uid}`
-
+  const lang = Language()
   const [isCopied, setIsCopied] = useState(false)
   const copyUrl = () => {
     setIsCopied(true)
@@ -42,8 +43,13 @@ const EventToken = ({ event, isHost }: { event: Event; isHost?: boolean }) => {
         <Image className="mx-auto" src={EventTokenSrc} alt="" width={200} height={200} />
       </Link>
       <div className="">{event.name}</div>
-      <div className="">Totla editions: {event.editions}</div>
-      <div className="mb-4">Participants: {event.participantsCount}</div>
+      <div className="">
+        {lang.eventInfo.total}
+        {event.editions}
+      </div>
+      <div className="mb-4">
+        {lang.eventInfo.participants} {event.participantsCount}
+      </div>
       {isHost && (
         <>
           <div className="border-2"></div>
@@ -55,7 +61,7 @@ const EventToken = ({ event, isHost }: { event: Event; isHost?: boolean }) => {
             <div className="h-6 w-6">
               <Image src={Copy} alt="COPY" />
             </div>
-            <div>Copy link</div>
+            <div>{lang.eventInfo.copy}</div>
             {isCopied && (
               <div className="bg-secondary absolute right-[-80%] animate-pulse whitespace-nowrap rounded-md bg-primary px-2 text-sm text-white">
                 {`- copied -`}
@@ -68,7 +74,7 @@ const EventToken = ({ event, isHost }: { event: Event; isHost?: boolean }) => {
               <Image src={Download} alt="DOWNLOAD" />
             </div>
             <button className="" onClick={(e) => downloadQR("qrcode")}>
-              Download QR code
+              {lang.eventInfo.qrcodeDownload}
             </button>
           </div>
         </>

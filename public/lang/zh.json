@@ -27,14 +27,16 @@
       "A": "aaa1"
     }
   ],
+
   "createRiver": {
+    "title": "創建河流",
     "name": {
       "label": "河流名稱",
       "placeholder": "請輸入河流名稱"
     },
     "description": {
-      "label": "河流敘述",
-      "placeholder": "請輸入一段河流的敘述"
+      "label": "河流說明",
+      "placeholder": "請輸入一段河流的說明"
     },
     "agreement": {
       "label": "河流公約",
@@ -44,27 +46,131 @@
       "label": "河流資料",
       "placeholder": "請上傳河流的細節描述 JSON 檔案"
     },
+    "upload": "上傳 JSON 檔案",
     "create": "建立",
-    "success": "成功建立河流!"
+    "success": "成功建立河流!",
+    "note": "(需要 1/3 以上同意)"
   },
+
+  "createEvent": {
+    "name": {
+      "label": "事件名稱",
+      "placeholder": "請輸入事件名稱"
+    },
+    "description": {
+      "label": "事件說明",
+      "placeholder": "請輸入事件說明"
+    },
+    "editions": {
+      "label": "事件數量",
+      "placeholder": "請輸入事件數量，留空則代表無限制。"
+    },
+    "approved": "接受",
+    "join": "參與活動"
+  },
+
+  "eventInfo": {
+    "createTime": "建立時間:",
+    "creator": "建立者:",
+    "edition": "數量:",
+    "participants": "參與者:",
+    "approveRate": "通過率:",
+    "total": "總數量:",
+    "copy": "複製連結",
+    "qrcodeDownload": "下載QR code"
+  },
+
+  "riverList": {
+    "title": "河流列表",
+    "name": "名稱",
+    "createTime": "創建時間",
+    "generation": "世代",
+    "status": "狀態",
+    "buttons": {
+      "view": "查看"
+    }
+  },
+
+  "multisig": {
+    "walletAddress": "錢包地址",
+    "memberList": "成員列表",
+    "proposal": "提案",
+    "transferProposal": "提出轉讓建議",
+    "datasetUpdate": "提出更新資料建議",
+    "agreeUpdate": "提出更新公約建議"
+  },
+
   "sortMethod": [
     { "route": "created-time", "option": "創建時間" },
     { "route": "name", "option": "河流名稱" }
   ],
+
   "myPage": [
     { "route": "", "option": "河流關懷代幣" },
     { "route": "event-tokens", "option": "事件代幣" },
     { "route": "hosted-events", "option": "主辦事件" }
   ],
+
   "riverNav": [
     { "route": "", "option": "資訊" },
     { "route": "events", "option": "事件列表" },
     { "route": "create-event", "option": "建立事件" },
     { "route": "multisig", "option": "河流錢包" }
   ],
+
   "proposal": {
-    "status": ["dead", "提議中", "通過"],
-    "transactionType": ["傳送 tezos", "更新公約", "更新河流資料"]
+    "status": ["死亡", "提案中", "通過"],
+    "transactionType": ["傳送tezos", "更新公約", "更新資料"],
+    "successful": "提案建立成功",
+    "targetAddress": "接收錢包地址",
+    "amount": "金額(tez):",
+    "address": "錢包地址",
+    "amounts": "數量",
+    "content": "內容",
+    "function": "用途",
+    "ipfs": "Ipfs資料",
+    "approveRate": "通過率:",
+    "resolve": "執行",
+    "sign": "簽名"
   },
-  "alert": "抱歉，請連結錢包並重新操作一次。"
+
+  "alert": "抱歉，請連結錢包並重新操作一次。",
+
+  "hint": "請先連結錢包",
+
+  "homePage": {
+    "title": "RiverCare",
+    "description": "建立在關懷者行動基礎上的非人存在去中心化身分",
+    "buttons": {
+      "createRiver": "創建河流",
+      "riverList": "河流列表",
+      "connect": "連結錢包"
+    }
+  },
+
+  "eventCard": {
+    "approve": "核准事件"
+  },
+
+  "riverCard": {
+    "people": "人",
+    "in": "剩餘",
+    "day": "天",
+    "agreement": "河流公約"
+  },
+
+  "schedule": {
+    "activated": "啟動",
+    "dedline": "截止日",
+    "until": "直到再次啟動",
+    "activate": "啟動",
+    "months": "3個月",
+    "gen": "世代"
+  },
+
+  "joinRiver": {
+    "activated": "啟動!",
+    "agree": "我同意上述公約",
+    "join": "加入!"
+  }
 }

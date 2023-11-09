@@ -3,6 +3,7 @@ import { useContext } from "react"
 import Button, { ButtonStyle } from "../button"
 import EventInfo from "./event-info"
 import { Event } from "@/interfaces/event.interface"
+import { Language } from "@/utils/language"
 
 const EventCard = ({
   event,
@@ -15,6 +16,7 @@ const EventCard = ({
   showApprove: boolean
   onClick?: any
 }) => {
+  const lang = Language()
   return (
     <div className="relative mx-auto my-2 border p-4">
       <div className="absolute left-3 top-2 text-2xl text-[#BCBCBC]">#{event.tokenId}</div>
@@ -22,7 +24,7 @@ const EventCard = ({
       <EventInfo event={event} stewardsCount={stewardsCount} />
       {showApprove && (
         <Button style={ButtonStyle.primary} onClick={onClick}>
-          Approve Event
+          {lang.eventCard.approve}
         </Button>
       )}
       <div className="my-4"></div>

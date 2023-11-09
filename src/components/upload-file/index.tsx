@@ -1,9 +1,10 @@
 "use client"
 import { useState } from "react"
+import { Language } from "@/utils/language"
 
 const UploadFile = ({ onChange }: { onChange?: any }) => {
   const [filename, setFilename] = useState<string>()
-
+  const lang = Language()
   const readFile = (event: any) => {
     const fileReader = new FileReader()
     const { files } = event.target
@@ -21,7 +22,7 @@ const UploadFile = ({ onChange }: { onChange?: any }) => {
     <div className="relative my-[20px] flex w-[220px] bg-white text-center hover:cursor-pointer">
       <div className="absolute left-1/2  top-1/2 flex h-[50px] w-full -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-white hover:cursor-pointer">
         <div className="w-full rounded border border-dashed bg-white px-5 py-6 hover:cursor-pointer">
-          {filename !== undefined ? filename : "Upload a json file"}
+          {filename !== undefined ? filename : lang.createRiver.upload}
         </div>
       </div>
       <input

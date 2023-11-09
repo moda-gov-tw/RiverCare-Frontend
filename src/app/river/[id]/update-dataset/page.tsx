@@ -50,18 +50,18 @@ export default function UpdateDataset({
   return (
     <main className="p-6 text-left">
       {isSuccess ? (
-        <div className="mx-auto mb-8 text-center text-lg">Proposal created successfully</div>
+        <div className="mx-auto mb-8 text-center text-lg">{lang.proposal.successful}</div>
       ) : (
         <>
           <div className="w-full">
-            <div>River&apos;s dataset:</div>
+            <div>{lang.createRiver.dataset.label}</div>
             <div className="flex justify-center py-8">
               <UploadFile onChange={setDataset} />
             </div>
           </div>
           <div className="my-4 w-full text-center">
             <Button onClick={updateDataset} disabled={!validated()}>
-              Create!
+              {lang.createRiver.create}
             </Button>
           </div>
         </>

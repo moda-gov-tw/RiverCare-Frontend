@@ -1,5 +1,6 @@
 import { RiverStatus } from "@/interfaces/river.interface"
 import React from "react"
+import { Language } from "@/utils/language"
 
 const Dot = ({ text, disabled }: { text?: string; disabled?: boolean }) => {
   return (
@@ -74,10 +75,21 @@ const Line = ({
 }
 
 const Schedule = ({ gen, needActivate }: { gen: number; needActivate: boolean }) => {
-  let dotText = ["Activated", `Gen ${gen} deadline`, "Activate", `Gen ${gen + 1} deadline`]
+  const lang = Language()
+
+  let dotText = [
+    `${lang.schedule.activated}`,
+    `Gen ${gen}${lang.schedule.dedline}`,
+    `${lang.schedule.activate}`,
+    `Gen ${gen + 1}${lang.schedule.dedline}`
+  ]
   let dotDisabled = [false, true, true, true]
-  let lineBottomText = ["3M", "", "3M"]
-  let lineTopText = [`Gen ${gen}`, "Until activated", `Gen ${gen + 1}`]
+  let lineBottomText = [`${lang.schedule.months}`, "", `${lang.schedule.months}`]
+  let lineTopText = [
+    `${lang.schedule.gen}${gen}`,
+    `${lang.schedule.until}`,
+    `${lang.schedule.gen} ${gen + 1}`
+  ]
   let lineDisabled = [false, true, true]
 
   if (gen === 0) {

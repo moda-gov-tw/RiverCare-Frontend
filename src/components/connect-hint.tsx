@@ -1,4 +1,8 @@
+"use client"
+
+import { Language } from "@/utils/language"
 const ConnectHint = ({}) => {
-  return <div className="my-24 font-bold"> Please connect the wallet first</div>
+  const lang = Language()
+  return <div className="my-24 font-bold"> {lang.hint}</div>
 }
 export default ConnectHint

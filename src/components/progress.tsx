@@ -1,6 +1,8 @@
+"use client"
+import { Language } from "@/utils/language"
 const Progress = ({ value, total }: { value: number; total: number }) => {
   let rate = (value / total) * 100
-
+  const lang = Language()
   return (
     <div className="flex flex-col items-center gap-2">
       <div className="flex h-6 w-full flex-row items-start border bg-white">
@@ -17,7 +19,7 @@ const Progress = ({ value, total }: { value: number; total: number }) => {
           </div>
         </div>
       </div>
-      <div className="ml-0 w-full text-xs text-primary">(Need agreement from more than 1/3)</div>
+      <div className="ml-0 w-full text-xs text-primary">{lang.createRiver.note}</div>
     </div>
   )
 }

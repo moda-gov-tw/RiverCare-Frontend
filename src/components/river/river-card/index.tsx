@@ -1,10 +1,14 @@
+"use client"
 import { River } from "@/interfaces/river.interface"
 import Button from "../../button"
 import RiverInfo from "../river-info"
 import Image from "next/image"
 import StewardshipTokenSrc from "@/../public/images/stewardship-token.png"
+import { Language } from "@/utils/language"
 
 const RiverCard = ({ river }: { river: River }) => {
+  const lang = Language()
+
   return (
     <div className="mx-auto my-2 border bg-white p-4 font-monda">
       {/* <Image
@@ -22,7 +26,7 @@ const RiverCard = ({ river }: { river: River }) => {
         // ownersCount={river.stewardsCount}
       />
       <div className="mb-6 mt-2">
-        <Button href={`/river/${river.id}`}>View</Button>
+        <Button href={`/river/${river.id}`}>{lang.riverList.buttons.view}</Button>
       </div>
     </div>
   )

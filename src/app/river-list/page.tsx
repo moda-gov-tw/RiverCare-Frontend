@@ -3,8 +3,10 @@
 import Dropdown from "@/components/dropdown"
 import RiverCard from "@/components/river/river-card"
 import { River, RiverStatus } from "@/interfaces/river.interface"
+import { Language } from "@/utils/language"
 
 export default function RiverList() {
+  const lang = Language()
   const getRivers = () => {
     let mockdata: River = {
       id: 0,
@@ -35,7 +37,9 @@ export default function RiverList() {
 
   return (
     <main className="">
-      <div className="MainText mb-6 mt-4 font-monda text-5xl font-bold text-title">River List</div>
+      <div className="MainText mb-6 mt-4 font-monda text-5xl font-bold text-title">
+        {lang.riverList.title}
+      </div>
       <Dropdown type="sorting" onChange={setSortMethod} />
       {rivers && rivers.map((river, i) => <RiverCard key={i} river={river} />)}
     </main>

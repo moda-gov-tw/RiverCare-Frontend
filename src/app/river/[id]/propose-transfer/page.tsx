@@ -51,11 +51,11 @@ export default function ProposeTransfer({
   return (
     <main className="p-6 text-left">
       {isSuccess ? (
-        <div className="mx-auto mb-8 text-center text-lg">Proposal created successfully</div>
+        <div className="mx-auto mb-8 text-center text-lg">{lang.proposal.successful}</div>
       ) : (
         <>
           <div>
-            <div>Target address:</div>
+            <div>{lang.proposal.targetAddress}</div>
             <Input
               value={targetAddr}
               type="text"
@@ -64,7 +64,7 @@ export default function ProposeTransfer({
             />
           </div>
           <div>
-            <div>Amount(tez):</div>
+            <div>{lang.proposal.amount}</div>
             <Input
               value={amount}
               type="text"
@@ -74,7 +74,7 @@ export default function ProposeTransfer({
           </div>
           <div className="my-4 w-full text-center">
             <Button onClick={proposeTransfer} disabled={!validated()}>
-              Create!
+              {lang.createRiver.create}
             </Button>
           </div>
         </>
