@@ -165,7 +165,7 @@
 
   "schedule": {
     "activated": "Activated",
-    "dedline": "Deadline",
+    "deadline": "End",
     "until": "Until activated",
     "activate": "Activate",
     "months": "3M",

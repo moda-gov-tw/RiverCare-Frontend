@@ -18,11 +18,11 @@ export const LanguageController = ({ mobile }: { mobile: boolean }) => {
   }, [])
 
   let mobileStyle = "py-4"
-  let desktopStyle = "absolute w-[90px] top-[30px] flex w-full flex-col bg-gray"
+  let desktopStyle = "absolute w-[150px] -left-[26px] top-[46px] flex w-full flex-col bg-gray"
 
   return (
     <div
-      className="MainText relative mx-auto flex flex-col items-center text-white hover:cursor-pointer"
+      className="MainText relative mx-auto flex flex-col items-center font-bold text-white hover:cursor-pointer"
       onClick={() => setIsLangOpen(!isLangOpen)}
     >
       {/* Button */}
@@ -39,7 +39,7 @@ export const LanguageController = ({ mobile }: { mobile: boolean }) => {
             <button
               key={i}
               onClick={() => switchLanguage(key)}
-              className="px-4 py-1 hover:text-black"
+              className="px-4 py-1 text-left hover:text-primary"
             >
               {value}
             </button>

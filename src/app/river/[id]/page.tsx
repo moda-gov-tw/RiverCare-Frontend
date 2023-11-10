@@ -132,7 +132,7 @@ export default function River({ params }: { params: { id: number } }) {
   return (
     <>
       <div className="MainText mb-6 mt-4 font-monda text-5xl font-bold text-title">
-        {river.name}
+        {riverData?.name}
       </div>
       <Dropdown type="riverNav" onChange={navigate} />
       <main className="border p-4 font-monda">

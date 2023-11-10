@@ -1,19 +1,23 @@
+"use client"
+
 // import Dropdown from "@/components/dropdown"
 import RiverCard from "@/components/river/river-card"
 import { apiUrl } from "@/constants"
-import { River, RiverStatus } from "@/interfaces/river.interface"
+import { River } from "@/interfaces/river.interface"
+import useSWR from "swr"
 import { Language } from "@/utils/language"
-import { useEffect, useState } from "react"
 
-async function getRivers() {
-  const res = await fetch(`${apiUrl}/rivers`)
-  if (!res.ok) return
-  return res.json()
-}
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
-export default async function RiverList() {
+export default function RiverList() {
   const lang = Language()
-  const rivers = (await getRivers()) as River[]
+
+  let rivers: River | null = null
+
+  const { data } = useSWR(`${apiUrl}/rivers/`, fetcher)
+  if (data !== undefined && !data.error) {
+    rivers = data
+  }
 
   return (
     <main className="">
@@ -21,7 +25,7 @@ export default async function RiverList() {
         {lang.riverList.title}
       </div>
       {/* <Dropdown type="sorting" onChange={setSortMethod} /> */}
-      {rivers && rivers.length > 0 ? (
+      {Array.isArray(rivers) && rivers?.length > 0 ? (
         rivers.map((river, i) => <RiverCard key={i} river={river} />)
       ) : (
         <div className="font-monda">- No river found -</div>

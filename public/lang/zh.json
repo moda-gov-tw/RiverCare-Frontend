@@ -164,7 +164,7 @@
 
   "schedule": {
     "activated": "啟動",
-    "dedline": "截止日",
+    "deadline": "截止日",
     "until": "直到再次啟動",
     "activate": "啟動",
     "months": "3個月",
