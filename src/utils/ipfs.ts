@@ -1,6 +1,6 @@
 import { assetsUrl } from "@/constants"
 
-const serverUrl = `https://${assetsUrl}/api/internal/ipfs/upload`
+const serverUrl = `${assetsUrl}/api/internal/ipfs/upload`
 
 export const uploadToIpfs = async (data: any) => {
   const metadata = JSON.stringify(data)

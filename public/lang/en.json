@@ -1,4 +1,7 @@
 {
+  "river": {
+    "status": ["dead", "alive"]
+  },
   "menu": [
     {
       "route": "create-river",

@@ -4,4 +4,14 @@ const nextConfig = {
   output: "standalone"
 }
 
-module.exports = nextConfig
+module.exports = {
+  ...nextConfig,
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: `https://rivercare.imlab.app/api/:path*`
+      }
+    ]
+  }
+}

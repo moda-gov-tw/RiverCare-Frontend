@@ -15,29 +15,21 @@ import Dropdown from "@/components/dropdown"
 import { useRouter } from "next/navigation"
 import { Language } from "@/utils/language"
 import Loading from "./loading"
+import { apiUrl } from "@/constants"
+import useSWR from "swr"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function River({ params }: { params: { id: number } }) {
-  let mockdata: River = {
-    id: 0,
-    name: "磺溪",
-    agreement: "ipfs://QmbxnccENRW6awW1bUmZYGc4v81hEdHZnDz88vRD6Hyawc",
-    dataset: "ipfs",
-    gen: 1,
-    createdTime: "2023-09-30 22:25",
-    expiredTime: "2023-10-10 22:25",
-    status: RiverStatus.dead,
-    stewards: ["tz1123"],
-    stewardsCount: 1,
-    currentTokenId: 0,
-    currentTokenContract: "KT11111",
-    events: [],
-    walletAddr: "KT1NeZApGbSQicX3672TQAeL21Cg6fQ3Q9fe",
-    proposals: []
+  let riverData: River | null = null
+
+  const { data } = useSWR(params.id ? `${apiUrl}/rivers/${params.id}` : null, fetcher)
+  if (data !== undefined && !data.error) {
+    riverData = data
   }
 
   const lang = Language()
   const router = useRouter()
-  const [river, setRiver] = useState(mockdata)
   const [agreed, setAgreed] = useState(false)
   const [publicKey, setPublicKey] = useState("")
   const [signature, setSignature] = useState("")
@@ -45,18 +37,20 @@ export default function River({ params }: { params: { id: number } }) {
   const [showOverlay, setShowOverlay] = useState<boolean>(false)
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
-  let needActivate = new Date(river.expiredTime) < new Date()
+  let expiredTime = riverData?.expiredTime
+  let needActivate: boolean =
+    expiredTime !== null && expiredTime !== undefined && new Date(expiredTime) < new Date()
 
   const { address, claimStewardship, sign, activateRiver, reactivateRiver } = useContext(Context)
 
   const signAgree = () => {
     setShowOverlay(true)
-    if (!address) {
+    if (!address || !riverData) {
       alert(lang.alert)
       setShowOverlay(false)
       return
     }
-    sign(river.agreement)
+    sign(riverData.agreement)
       .then((res) => {
         setShowOverlay(false)
         if (res) {
@@ -74,12 +68,12 @@ export default function River({ params }: { params: { id: number } }) {
   const join = () => {
     setShowOverlay(true)
 
-    if (!address || !publicKey || !signature) {
+    if (!address || !publicKey || !signature || !riverData) {
       alert(lang.alert)
       setShowOverlay(false)
       return
     }
-    claimStewardship(river.walletAddr, publicKey, signature)
+    claimStewardship(riverData.walletAddr, publicKey, signature)
       .then((res) => {
         setShowOverlay(false)
         if (res) {
@@ -96,13 +90,13 @@ export default function River({ params }: { params: { id: number } }) {
   const activate = () => {
     setShowOverlay(true)
 
-    if (!address) {
+    if (!address || !riverData) {
       alert(lang.alert)
       setShowOverlay(false)
       return
     }
-    if (river.gen === 0) {
-      activateRiver(river.walletAddr)
+    if (riverData.gen === 0) {
+      activateRiver(riverData.walletAddr)
         .then((res) => {
           setShowOverlay(false)
           if (res) {
@@ -114,7 +108,7 @@ export default function River({ params }: { params: { id: number } }) {
           setShowOverlay(false)
         })
     } else
-      reactivateRiver(river.walletAddr)
+      reactivateRiver(riverData.walletAddr)
         .then((res) => {
           setShowOverlay(false)
           if (res) {
@@ -134,8 +128,6 @@ export default function River({ params }: { params: { id: number } }) {
   const navigate = (item: { route: string }) => {
     router.push(`/river/${params.id}/${item.route}`)
   }
-
-  if (river.gen === 0 && new Date(river.expiredTime) < new Date()) needActivate = true
 
   return (
     <>
@@ -157,17 +149,18 @@ export default function River({ params }: { params: { id: number } }) {
               <Success message="Successfully activated!" />
             </div>
           )
-        ) : (
+        ) : riverData ? (
           <>
-            <Schedule gen={river.gen} needActivate={needActivate} />
+            <Schedule gen={riverData.gen} needActivate={needActivate} />
             <RiverInfo
-              createdTime={river.createdTime}
-              gen={river.gen}
-              status={river.status}
-              ownersCount={river.stewardsCount}
-              expiredTime={river.expiredTime}
+              createdTime={riverData.createdTime}
+              gen={riverData.gen}
+              status={riverData.status}
+              ownersCount={riverData.stewardsCount}
+              expiredTime={riverData.expiredTime}
             />
-            <RiverAgreement agreement={river.agreement} />
+            <RiverAgreement agreement={riverData.dataset} />
+            {/* <RiverAgreement agreement={riverData.agreement} /> */}
             <div className="flex flex-col">
               {address && (
                 <>
@@ -176,7 +169,7 @@ export default function River({ params }: { params: { id: number } }) {
                       <Button onClick={activate}>{lang.joinRiver.activated}</Button>
                     </div>
                   ) : (
-                    river.gen === 0 && (
+                    riverData.gen === 0 && (
                       <>
                         <div className="my-2">
                           <Button style={ButtonStyle.highlight} onClick={signAgree}>
@@ -198,6 +191,8 @@ export default function River({ params }: { params: { id: number } }) {
               )}
             </div>
           </>
+        ) : (
+          <div>River not found</div>
         )}
         {/* Overlay */}
         {showOverlay && (
