@@ -74,7 +74,7 @@
   },
 
   "eventInfo": {
-    "createTime": "Create Time:",
+    "createTime": "Created Time:",
     "creator": "Created by:",
     "edition": "Editions:",
     "participants": "Participants:",
@@ -87,7 +87,7 @@
   "riverList": {
     "title": "River List",
     "name": "Name",
-    "createTime": "Create Time",
+    "createTime": "Created Time",
     "generation": "Generation",
     "status": "Status",
     "buttons": {

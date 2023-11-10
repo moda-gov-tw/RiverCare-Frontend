@@ -20,7 +20,7 @@ const Proposal = ({
   onFinish
 }: {
   proposal: Proposal
-  river: River
+  river: River | null
   onSend?: any
   onFinish?: any
 }) => {
@@ -32,7 +32,7 @@ const Proposal = ({
   let title = lang.proposal.transactionType[proposal.transactionType]
   let status = lang.proposal.status[proposal.status]
 
-  let approvedRatio = proposal.approvalCount / river.stewardsCount
+  let approvedRatio = river ? proposal.approvalCount / river.stewardsCount : 0
 
   const [showDetail, setShowDetail] = useState(false)
 
@@ -42,7 +42,7 @@ const Proposal = ({
 
   const sign = () => {
     onSend()
-    if (!address || !river.walletAddr) {
+    if (!address || !river || !river.walletAddr) {
       alert(lang.alert)
       onFinish()
       return
@@ -60,7 +60,7 @@ const Proposal = ({
 
   const resolve = () => {
     onSend()
-    if (!address || !river.walletAddr) {
+    if (!address || !river || !river.walletAddr) {
       alert(lang.alert)
       onFinish()
       return
