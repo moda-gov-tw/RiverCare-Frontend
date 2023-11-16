@@ -4,6 +4,7 @@ import type { Metadata } from "next"
 import localFont from "next/font/local"
 import Footer from "@/components/footer"
 import { ContextProvider } from "@/context"
+import { headers } from "next/headers"
 
 export const metadata: Metadata = {
   title: "Rivercare",
@@ -25,12 +26,13 @@ const monda = localFont({
 })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const nonce = headers().get("x-nonce")
   return (
     <html lang="en">
       <body className={`${monda.variable}`}>
         <ContextProvider>
           <Header />
-          <div className="flex flex-col items-center justify-between p-4 ">{children}</div>
+          <div className="flex flex-col items-center justify-between p-4">{children}</div>
           <div className="fixed left-0 top-0 -z-10 h-screen w-screen bg-mainBg bg-cover bg-no-repeat"></div>
         </ContextProvider>
       </body>
