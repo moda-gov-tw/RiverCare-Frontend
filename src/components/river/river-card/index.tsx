@@ -23,6 +23,7 @@ const RiverCard = ({ river }: { river: River }) => {
         createdTime={river.createdTime}
         gen={river.gen}
         status={river.status}
+        expiredTime={river.expiredTime}
         // ownersCount={river.stewardsCount}
       />
       <div className="mb-6 mt-2">

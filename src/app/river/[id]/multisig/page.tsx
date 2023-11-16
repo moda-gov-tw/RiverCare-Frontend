@@ -9,9 +9,9 @@ import { useRouter } from "next/navigation"
 import { useContext, useState } from "react"
 import { River, RiverStatus } from "@/interfaces/river.interface"
 import Modal from "react-modal"
-import UpdateAgreement from "../update-agreement/page"
-import UpdateDataset from "../update-dataset/page"
-import ProposeTransfer from "../propose-transfer/page"
+import UpdateAgreement from "../../../../components/proposal/update-agreement/page"
+import UpdateDataset from "../../../../components/proposal/update-dataset/page"
+import ProposeTransfer from "../../../../components/proposal/propose-transfer/page"
 import Loading from "../loading"
 import useSWR from "swr"
 import { API_URL } from "@/environments/environment"
@@ -57,7 +57,7 @@ export default function Multisig({ params }: { params: { id: number } }) {
           <>
             <div className="border px-4 py-2">
               <div className="text-xs font-bold">
-                {lang.multisig.walletAddress}
+                {lang.multisig.walletAddress}&nbsp;
                 {river.walletAddr}
               </div>
             </div>
