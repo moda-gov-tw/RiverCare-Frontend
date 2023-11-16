@@ -9,11 +9,11 @@ import Link from "next/link"
 import { useState } from "react"
 import * as htmlToImage from "html-to-image"
 import QRCodeContainer from "../qrcode-container"
-import { baseUrl } from "@/constants"
+import { BASE_URL } from "@/environments/environment"
 import { Language } from "@/utils/language"
 
 const EventToken = ({ event, isHost }: { event: Event; isHost?: boolean }) => {
-  let claimUrl = `${baseUrl}/event/${event.uid}`
+  let claimUrl = `${BASE_URL}/event/${event.uid}`
   const lang = Language()
   const [isCopied, setIsCopied] = useState(false)
   const copyUrl = () => {

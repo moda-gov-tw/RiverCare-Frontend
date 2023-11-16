@@ -10,24 +10,17 @@ import Loading from "../loading"
 import { Language } from "@/utils/language"
 import { River, RiverStatus } from "@/interfaces/river.interface"
 import Success from "@/components/success"
+import useSWR from "swr"
+import { API_URL } from "@/environments/environment"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function CreateEvent({ params }: { params: { id: number } }) {
-  let river: River = {
-    id: 0,
-    name: "磺溪",
-    agreement: "ipfs://QmbxnccENRW6awW1bUmZYGc4v81hEdHZnDz88vRD6Hyawc",
-    dataset: "ipfs",
-    gen: 2,
-    createdTime: "2023-09-30 22:25",
-    expiredTime: "2023-10-30 22:25",
-    status: RiverStatus.alive,
-    stewards: ["tz1123"],
-    stewardsCount: 1,
-    currentTokenId: 0,
-    currentTokenContract: "KT11111",
-    events: [],
-    walletAddr: "KT1NeZApGbSQicX3672TQAeL21Cg6fQ3Q9fe",
-    proposals: []
+  let river: River | null = null
+
+  const { data } = useSWR(params.id ? `${API_URL}/rivers/${params.id}` : null, fetcher)
+  if (data !== undefined && !data?.error) {
+    river = data
   }
 
   const lang = Language()
@@ -54,7 +47,7 @@ export default function CreateEvent({ params }: { params: { id: number } }) {
   const create = () => {
     setShowOverlay(true)
 
-    if (!validated() || !address || !river.walletAddr) {
+    if (!validated() || !address || !river || !river.walletAddr) {
       alert(lang.alert)
       setShowOverlay(false)
       return
@@ -114,7 +107,7 @@ export default function CreateEvent({ params }: { params: { id: number } }) {
           <Success
             imgSrc="/images/event-token.png"
             message={"Event successfully created!"}
-            buttonLink={`/my-page/event-tokens`}
+            buttonLink={`/my-page/hosted-events`}
             buttonText={"Go"}
           />
         )}

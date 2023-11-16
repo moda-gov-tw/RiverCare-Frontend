@@ -7,7 +7,7 @@ import { TezosToolkit, MichelsonMap } from "@taquito/taquito"
 import { char2Bytes } from "@taquito/utils"
 import { AccountInfo, Network, RequestSignPayloadInput, SigningType } from "@airgap/beacon-types"
 import { ContextState } from "@/interfaces/context.interface"
-import { riverFactory } from "./constants"
+import { RIVER_FACTORY } from "./environments/environment"
 
 const TEZOS = new TezosToolkit(NODE_URL)
 const WALLET = new BeaconWallet({
@@ -100,7 +100,7 @@ export const ContextProvider = (props: any) => {
     metadataUri: string
   ) => {
     return await TEZOS.wallet
-      .at(riverFactory)
+      .at(RIVER_FACTORY)
       .then(async (c) =>
         c.methodsObject
           .create_multisig({

@@ -22,5 +22,5 @@ export declare interface Proposal {
   createdTime: string
   expiredTime: string
   approvals: string[]
-  approvalCount: number
+  approvalsCount: number
 }

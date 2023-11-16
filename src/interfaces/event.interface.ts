@@ -11,5 +11,5 @@ export declare interface Event {
   participants: string[]
   participantsCount: number
   approvals: string[]
-  approvalCount: number
+  approvalsCount: number
 }

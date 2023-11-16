@@ -12,14 +12,17 @@ const EventCard = ({
   onClick
 }: {
   event: Event
-  stewardsCount: number
+  stewardsCount: number | undefined
   showApprove: boolean
   onClick?: any
 }) => {
   const lang = Language()
+
+  const eventId = parseInt(event.uid.split("-")[1])
+
   return (
     <div className="relative mx-auto my-2 border p-4">
-      <div className="absolute left-3 top-2 text-2xl text-[#BCBCBC]">#{event.tokenId}</div>
+      <div className="absolute left-3 top-2 text-2xl text-[#BCBCBC]">#{eventId}</div>
       <div className="mt-4 text-2xl font-bold">{event.name}</div>
       <EventInfo event={event} stewardsCount={stewardsCount} />
       {showApprove && (

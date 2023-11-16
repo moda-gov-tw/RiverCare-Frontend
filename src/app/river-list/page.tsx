@@ -1,38 +1,22 @@
 "use client"
 
-import Dropdown from "@/components/dropdown"
+// import Dropdown from "@/components/dropdown"
 import RiverCard from "@/components/river/river-card"
+import { API_URL } from "@/environments/environment"
 import { River, RiverStatus } from "@/interfaces/river.interface"
+import useSWR from "swr"
 import { Language } from "@/utils/language"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function RiverList() {
   const lang = Language()
-  const getRivers = () => {
-    let mockdata: River = {
-      id: 0,
-      name: "磺溪",
-      agreement: "agreement",
-      dataset: "ipfs",
-      gen: 0,
-      createdTime: "2023-09-30 22:25",
-      expiredTime: "",
-      status: RiverStatus.alive,
-      stewards: ["tz1123"],
-      stewardsCount: 1,
-      currentTokenId: 0,
-      currentTokenContract: "KT11111",
-      events: [],
-      walletAddr: "KT1NeZApGbSQicX3672TQAeL21Cg6fQ3Q9fe",
-      proposals: []
-    }
 
-    return Array.from(Array(10).keys()).map((temp, i) => mockdata)
-  }
+  let rivers: River | null = null
 
-  const rivers = getRivers()
-
-  const setSortMethod = (item: { route: string }) => {
-    console.log(item.route)
+  const { data } = useSWR(`${API_URL}/rivers/`, fetcher)
+  if (data !== undefined && !data?.error) {
+    rivers = data.river
   }
 
   return (
@@ -40,8 +24,12 @@ export default function RiverList() {
       <div className="MainText mb-6 mt-4 font-monda text-5xl font-bold text-title">
         {lang.riverList.title}
       </div>
-      <Dropdown type="sorting" onChange={setSortMethod} />
-      {rivers && rivers.map((river, i) => <RiverCard key={i} river={river} />)}
+      {/* <Dropdown type="sorting" onChange={setSortMethod} /> */}
+      {Array.isArray(rivers) && rivers?.length > 0 ? (
+        rivers.map((river, i) => <RiverCard key={i} river={river} />)
+      ) : (
+        <div className="font-monda">- No river found -</div>
+      )}
     </main>
   )
 }

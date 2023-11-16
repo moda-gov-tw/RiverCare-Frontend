@@ -9,7 +9,7 @@ const Dot = ({ text, disabled }: { text?: string; disabled?: boolean }) => {
         className={`h-[18px] w-[18px] rounded-full ${disabled ? " bg-[#D9D9D9]" : "bg-primary"}`}
       />
       <div
-        className={`absolute left-1/2 top-6 -translate-x-1/2 text-xs font-bold ${
+        className={`absolute left-1/2 top-6 w-[40px] -translate-x-1/2 text-center text-xs font-bold  ${
           disabled ? " text-[#D9D9D9]" : "text-primary"
         }`}
       >
@@ -79,14 +79,14 @@ const Schedule = ({ gen, needActivate }: { gen: number; needActivate: boolean })
 
   let dotText = [
     `${lang.schedule.activated}`,
-    `Gen ${gen}${lang.schedule.dedline}`,
+    `Gen ${gen} ${lang.schedule.deadline}`,
     `${lang.schedule.activate}`,
-    `Gen ${gen + 1}${lang.schedule.dedline}`
+    `Gen ${gen + 1} ${lang.schedule.deadline}`
   ]
   let dotDisabled = [false, true, true, true]
   let lineBottomText = [`${lang.schedule.months}`, "", `${lang.schedule.months}`]
   let lineTopText = [
-    `${lang.schedule.gen}${gen}`,
+    `${lang.schedule.gen} ${gen}`,
     `${lang.schedule.until}`,
     `${lang.schedule.gen} ${gen + 1}`
   ]

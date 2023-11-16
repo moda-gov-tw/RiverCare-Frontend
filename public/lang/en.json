@@ -1,4 +1,7 @@
 {
+  "river": {
+    "status": ["dead", "alive"]
+  },
   "menu": [
     {
       "route": "create-river",
@@ -63,15 +66,15 @@
       "placeholder": "Please enter the description of event"
     },
     "editions": {
-      "label": "Event's edition",
-      "placeholder": "enter the edition, if left blank, it represents an unlimited edition."
+      "label": "Participants count(token edition)",
+      "placeholder": "enter the participants count(token edition), if left blank, it represents an unlimited edition."
     },
-    "approved": "Approve!",
+    "approved": "Approve this event",
     "join": "Join event!"
   },
 
   "eventInfo": {
-    "createTime": "Create Time:",
+    "createTime": "Created Time:",
     "creator": "Created by:",
     "edition": "Editions:",
     "participants": "Participants:",
@@ -84,7 +87,7 @@
   "riverList": {
     "title": "River List",
     "name": "Name",
-    "createTime": "Create Time",
+    "createTime": "Created Time",
     "generation": "Generation",
     "status": "Status",
     "buttons": {
@@ -132,6 +135,7 @@
     "ipfs": "Ipfs data",
     "approveRate": "Approve rate :",
     "resolve": "Resolve",
+    "resolved": "Resolved",
     "sign": "Sign"
   },
 
@@ -143,9 +147,9 @@
     "title": "RiverCare",
     "description": "RiverCare, the decentralized identity based on the stewardship's care actions",
     "buttons": {
-      "createRiver": "create River",
+      "createRiver": "Create River",
       "riverList": "River List",
-      "connect": "Connecct"
+      "connect": "Connect"
     }
   },
 
@@ -156,13 +160,15 @@
   "riverCard": {
     "people": "people",
     "in": "in",
-    "day": "days",
+    "days": "days",
+    "hours": "hours",
+    "ended": "ended",
     "agreement": "Agreement"
   },
 
   "schedule": {
     "activated": "Activated",
-    "dedline": "Deadline",
+    "deadline": "End",
     "until": "Until activated",
     "activate": "Activate",
     "months": "3M",

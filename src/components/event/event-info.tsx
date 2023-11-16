@@ -5,20 +5,29 @@ import Stewardship from "@/../public/images/stewardship.svg"
 import Approval from "@/../public/images/approval.svg"
 import Progress from "../progress"
 import { Language } from "@/utils/language"
+import { showDate, showWallet } from "@/utils/string"
 
-const EventInfo = ({ event, stewardsCount }: { event: Event; stewardsCount: number }) => {
+const EventInfo = ({
+  event,
+  stewardsCount
+}: {
+  event: Event
+  stewardsCount: number | undefined
+}) => {
   const lang = Language()
+  const approvedRatio =
+    stewardsCount && event.approvalsCount ? event.approvalsCount / stewardsCount : 0
   return (
     <div className="flex flex-col justify-between font-monda">
-      <div className="mx-auto px-4 text-left">
+      <div className="w-full px-4 py-1 text-left">
         <div className="mb-4 mt-2 text-lg text-[#595959]">{event.description}</div>
         <div className="my-2 font-semibold">
           {lang.eventInfo.createTime}
-          {event.createdTime}
+          {showDate(event.createdTime)}
         </div>
         <div className="my-2 font-semibold">
           {lang.eventInfo.creator}
-          {event.host}
+          {showWallet({ wallet: event.host })}
         </div>
         <div className="my-2 font-semibold">
           {lang.eventInfo.edition}
@@ -41,9 +50,9 @@ const EventInfo = ({ event, stewardsCount }: { event: Event; stewardsCount: numb
         <div className="my-4 flex items-center text-lg text-primary">
           <Image src={Approval} alt="" className="mr-4" width={28} />
           {lang.eventInfo.approveRate}{" "}
-          <span className="font-bold">&nbsp;{(event.approvalCount / stewardsCount) * 100}%</span>
+          <span className="font-bold">&nbsp;{approvedRatio * 100}%</span>
         </div>
-        <Progress value={event.approvalCount} total={stewardsCount} />
+        {stewardsCount && <Progress value={event.approvalsCount} total={stewardsCount} />}
       </div>
     </div>
   )
