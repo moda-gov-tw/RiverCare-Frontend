@@ -15,7 +15,7 @@ import Dropdown from "@/components/dropdown"
 import { useRouter } from "next/navigation"
 import { Language } from "@/utils/language"
 import Loading from "./loading"
-import { apiUrl } from "@/constants"
+import { API_URL } from "@/environments/environment"
 import useSWR from "swr"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
@@ -23,8 +23,8 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 export default function River({ params }: { params: { id: number } }) {
   let riverData: River | null = null
 
-  const { data } = useSWR(params.id ? `${apiUrl}/rivers/${params.id}` : null, fetcher)
-  if (data !== undefined && !data.error) {
+  const { data } = useSWR(params.id ? `${API_URL}/rivers/${params.id}` : null, fetcher)
+  if (data !== undefined && !data?.error) {
     riverData = data
   }
 
@@ -37,9 +37,10 @@ export default function River({ params }: { params: { id: number } }) {
   const [showOverlay, setShowOverlay] = useState<boolean>(false)
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
-  let expiredTime = riverData?.expiredTime
   let needActivate: boolean =
-    expiredTime !== null && expiredTime !== undefined && new Date(expiredTime) < new Date()
+    riverData?.expiredTime !== null &&
+    riverData?.expiredTime !== undefined &&
+    new Date(riverData?.expiredTime) < new Date()
 
   const { address, claimStewardship, sign, activateRiver, reactivateRiver } = useContext(Context)
 
@@ -159,8 +160,7 @@ export default function River({ params }: { params: { id: number } }) {
               ownersCount={riverData.stewardsCount}
               expiredTime={riverData.expiredTime}
             />
-            <RiverAgreement agreement={riverData.dataset} />
-            {/* <RiverAgreement agreement={riverData.agreement} /> */}
+            <RiverAgreement agreement={riverData.agreement} />
             <div className="flex flex-col">
               {address && (
                 <>
@@ -173,9 +173,9 @@ export default function River({ params }: { params: { id: number } }) {
                       <>
                         <div className="my-2">
                           <Button style={ButtonStyle.highlight} onClick={signAgree}>
-                            <div className="flex">
-                              {agreed && <Image src={Check} alt="" width={24} />}
-                              <span className="ml-4 text-black">{lang.joinRiver.agree}</span>
+                            <div className="flex text-black">
+                              {agreed ? <Image src={Check} alt="" width={24} /> : <span>▢</span>}
+                              <span className="ml-4">{lang.joinRiver.agree}</span>
                             </div>
                           </Button>
                         </div>

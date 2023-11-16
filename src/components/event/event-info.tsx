@@ -7,7 +7,13 @@ import Progress from "../progress"
 import { Language } from "@/utils/language"
 import { showDate, showWallet } from "@/utils/string"
 
-const EventInfo = ({ event, stewardsCount }: { event: Event; stewardsCount: number }) => {
+const EventInfo = ({
+  event,
+  stewardsCount
+}: {
+  event: Event
+  stewardsCount: number | undefined
+}) => {
   const lang = Language()
   const approvedRatio =
     stewardsCount && event.approvalsCount ? event.approvalsCount / stewardsCount : 0
@@ -46,7 +52,7 @@ const EventInfo = ({ event, stewardsCount }: { event: Event; stewardsCount: numb
           {lang.eventInfo.approveRate}{" "}
           <span className="font-bold">&nbsp;{approvedRatio * 100}%</span>
         </div>
-        <Progress value={event.approvalsCount} total={stewardsCount} />
+        {stewardsCount && <Progress value={event.approvalsCount} total={stewardsCount} />}
       </div>
     </div>
   )

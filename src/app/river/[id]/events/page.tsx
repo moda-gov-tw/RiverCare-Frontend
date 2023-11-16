@@ -3,26 +3,23 @@
 import Dropdown from "@/components/dropdown"
 import { useContext, useState, useEffect } from "react"
 import EventCard from "@/components/event/event-card"
-import { Event } from "@/interfaces/event.interface"
 import { useRouter } from "next/navigation"
 import { Context } from "@/context"
 import { Language } from "@/utils/language"
 import { River, RiverStatus } from "@/interfaces/river.interface"
 import Loading from "../loading"
 import useSWR from "swr"
-import { apiUrl } from "@/constants"
+import { API_URL } from "@/environments/environment"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function Events({ params }: { params: { id: number } }) {
   let river: River | null = null
 
-  const { data } = useSWR(params.id ? `${apiUrl}/rivers/${params.id}` : null, fetcher)
-  if (data !== undefined && !data.error) {
+  const { data } = useSWR(params.id ? `${API_URL}/rivers/${params.id}` : null, fetcher)
+  if (data !== undefined && !data?.error) {
     river = data
   }
-
-  let stewardsCount = 5
 
   const lang = Language()
 
@@ -33,10 +30,9 @@ export default function Events({ params }: { params: { id: number } }) {
   let showApprove =
     address !== undefined &&
     river !== null &&
+    !approved &&
     Array.isArray(river.stewards) &&
-    river.stewards.indexOf(address) >= 0 &&
-    !approved
-
+    river.stewards.indexOf(address) < 0
   const router = useRouter()
 
   const navigate = (item: { route: string }) => {
@@ -76,7 +72,7 @@ export default function Events({ params }: { params: { id: number } }) {
               <EventCard
                 key={i}
                 event={event}
-                stewardsCount={stewardsCount}
+                stewardsCount={river?.stewardsCount}
                 showApprove={showApprove}
                 onClick={() => {
                   approve(event.uid)

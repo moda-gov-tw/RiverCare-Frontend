@@ -12,7 +12,7 @@ const EventCard = ({
   onClick
 }: {
   event: Event
-  stewardsCount: number
+  stewardsCount: number | undefined
   showApprove: boolean
   onClick?: any
 }) => {

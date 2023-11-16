@@ -28,16 +28,16 @@ const Proposal = ({
   const { address, signProposal, resolveProposal } = useContext(Context)
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
-  let id = parseInt(proposal.uid)
+  let id = parseInt(proposal.uid.split("-")[1])
   let title = lang.proposal.transactionType[proposal.transactionType]
   let status = lang.proposal.status[proposal.status]
 
-  let approvedRatio = river ? proposal.approvalCount / river.stewardsCount : 0
+  let approvedRatio = river ? proposal.approvalsCount / river.stewardsCount : 0
 
   const [showDetail, setShowDetail] = useState(false)
 
   const isApproved = () => {
-    return approvedRatio >= 1 / approveRatioTotal && proposal.approvalCount >= approveLowerbound
+    return approvedRatio >= 1 / approveRatioTotal && proposal.approvalsCount >= approveLowerbound
   }
 
   const sign = () => {
@@ -84,7 +84,7 @@ const Proposal = ({
       >
         <div className="flex w-full justify-between">
           <div>
-            <span className="mx-1 font-bold text-[#969696]">#0</span>
+            <span className="mx-1 font-bold text-[#969696]"># {id}</span>
             <span className=""> {title} </span>
           </div>
           <div className="rounded border px-2"> {status} </div>
@@ -112,8 +112,12 @@ const Proposal = ({
                   <div>
                     <div className="text-[#969696]">{lang.proposal.ipfs}</div>
                     <div className="">
-                      {proposal.agreement && <Link href={`ipfs/${proposal.agreement}`} />}
-                      {proposal.dataset && <Link href={`ipfs/${proposal.dataset}`} />}
+                      {proposal.agreement && (
+                        <Link href={`ipfs/${proposal.agreement}`}>{proposal.agreement}</Link>
+                      )}
+                      {proposal.dataset && (
+                        <Link href={`ipfs/${proposal.dataset}`}>{proposal.dataset}</Link>
+                      )}
                     </div>
                   </div>
                 )}
@@ -131,7 +135,7 @@ const Proposal = ({
                 {approvedRatio * 100}%
               </div>
               <div className="my-2">
-                <Progress value={3} total={100} />
+                <Progress value={proposal.approvalsCount} total={river?.stewardsCount} />
               </div>
             </div>
           </div>
@@ -148,6 +152,9 @@ const Proposal = ({
               </Button>
             )}
           </div>
+        )}
+        {proposal.status === ProposalStatus.approved && (
+          <div className="text-center font-bold">{lang.proposal.resolved}</div>
         )}
       </div>
     </div>

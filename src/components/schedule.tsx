@@ -86,7 +86,7 @@ const Schedule = ({ gen, needActivate }: { gen: number; needActivate: boolean })
   let dotDisabled = [false, true, true, true]
   let lineBottomText = [`${lang.schedule.months}`, "", `${lang.schedule.months}`]
   let lineTopText = [
-    `${lang.schedule.gen}${gen}`,
+    `${lang.schedule.gen} ${gen}`,
     `${lang.schedule.until}`,
     `${lang.schedule.gen} ${gen + 1}`
   ]

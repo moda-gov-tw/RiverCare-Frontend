@@ -1,7 +1,7 @@
 "use client"
 import { Language } from "@/utils/language"
-const Progress = ({ value, total }: { value: number; total: number }) => {
-  let rate = (value / total) * 100
+const Progress = ({ value, total }: { value: number; total: number | undefined }) => {
+  let rate = total ? (value / total) * 100 : 0
   const lang = Language()
   return (
     <div className="flex flex-col items-center gap-2">

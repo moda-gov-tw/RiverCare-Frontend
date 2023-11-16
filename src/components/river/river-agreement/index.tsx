@@ -1,10 +1,10 @@
 "use client"
 
-import { assetsUrl } from "@/constants"
+import { ASSETS_URL } from "@/environments/environment"
 import useSWR from "swr"
 
 async function getAgreement(hash: string) {
-  const res = await fetch(`${assetsUrl}/ipfs/${hash}`)
+  const res = await fetch(`${ASSETS_URL}/ipfs/${hash}`)
   if (!res.ok) return
   return res.json()
 }
@@ -17,9 +17,9 @@ const RiverAgreement = ({ agreement }: { agreement: string }) => {
 
   const hash = agreement.split("ipfs://")[1]
   let strArr = undefined
-  const { data } = useSWR(agreement ? `${assetsUrl}/ipfs/${hash}` : null, fetcher)
-  if (data !== undefined && !data.error) {
-    strArr = data
+  const { data } = useSWR(agreement ? `${ASSETS_URL}/ipfs/${hash}` : null, fetcher)
+  if (data !== undefined && !data?.error) {
+    strArr = data.split("\n")
   }
 
   return (

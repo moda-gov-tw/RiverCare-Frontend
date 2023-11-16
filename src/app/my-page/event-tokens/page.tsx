@@ -3,41 +3,25 @@
 import ConnectHint from "@/components/connect-hint"
 import Dropdown from "@/components/dropdown"
 import EventToken from "@/components/token/event-token"
+import { API_URL } from "@/environments/environment"
 import { Context } from "@/context"
 import { Event } from "@/interfaces/event.interface"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
+import useSWR from "swr"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function EventTokens({ params }: { params: { wallet: string } }) {
-  const getTokens = () => {
-    let mockEvent: Event = {
-      uid: "1",
-      name: "River cleanup",
-      tokenId: 0,
-      tokenContract: "KT1111",
-      description: "this is the description of the river cleanup, this event is for......",
-      editions: 100,
-      amount: 100,
-      host: "tz1111",
-      createdTime: "2023-09-30 22:25",
-      participants: ["tz1111", "tz1111", "tz1111", "tz1111", "tz1111"],
-      participantsCount: 5,
-      approvals: ["tz1111", "tz1111", "tz1111"],
-      approvalCount: 3
-    }
+  const { address } = useContext(Context)
 
-    return Array.from(Array(3).keys()).map((temp, i) => mockEvent)
+  let events: Event[] | null = null
+  const { data: eventData } = useSWR(address ? `${API_URL}/${address}/eventTokens` : null, fetcher)
+  if (eventData !== undefined && !eventData?.error) {
+    events = eventData
   }
 
   const router = useRouter()
-  const [events, setEvents] = useState<Event[]>([])
-
-  const { address } = useContext(Context)
-
-  useEffect(() => {
-    let tokens = getTokens()
-    setEvents(tokens)
-  }, [])
 
   const navigate = (item: { route: string }) => {
     router.push(`/my-page/${item.route}`)
@@ -48,7 +32,9 @@ export default function EventTokens({ params }: { params: { wallet: string } }) 
     <>
       <Dropdown type="myPage" onChange={navigate} currRoute={"event-tokens"} />
       <main className="m-4 w-auto border bg-white text-left font-monda">
-        {events.length > 0 && events.map((event: Event, i) => <EventToken key={i} event={event} />)}
+        {events &&
+          events.length > 0 &&
+          events.map((event: Event, i) => <EventToken key={i} event={event} />)}
       </main>
     </>
   )

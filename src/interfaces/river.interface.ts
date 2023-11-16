@@ -8,6 +8,7 @@ export enum RiverStatus {
 export declare interface River {
   id: number
   name: string
+  description: string
   agreement: string
   dataset: string
   gen: number

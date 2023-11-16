@@ -57,18 +57,18 @@
 
   "createEvent": {
     "name": {
-      "label": "事件名稱",
-      "placeholder": "請輸入事件名稱"
+      "label": "活動名稱",
+      "placeholder": "請輸入活動名稱"
     },
     "description": {
-      "label": "事件說明",
-      "placeholder": "請輸入事件說明"
+      "label": "活動說明",
+      "placeholder": "請輸入活動說明"
     },
     "editions": {
-      "label": "事件數量",
-      "placeholder": "請輸入事件數量，留空則代表無限制。"
+      "label": "參與人數(代幣數量)",
+      "placeholder": "請輸入參與人數(可領取的代幣數量)，留空則代表無限制。"
     },
-    "approved": "接受",
+    "approved": "認可此活動",
     "join": "參與活動"
   },
 
@@ -98,9 +98,9 @@
     "walletAddress": "錢包地址",
     "memberList": "成員列表",
     "proposal": "提案",
-    "transferProposal": "提出轉讓建議",
-    "datasetUpdate": "提出更新資料建議",
-    "agreeUpdate": "提出更新公約建議"
+    "transferProposal": "提議轉帳",
+    "datasetUpdate": "提議更新資料",
+    "agreeUpdate": "提議更新公約"
   },
 
   "sortMethod": [
@@ -110,14 +110,14 @@
 
   "myPage": [
     { "route": "", "option": "河流關懷代幣" },
-    { "route": "event-tokens", "option": "事件代幣" },
-    { "route": "hosted-events", "option": "主辦事件" }
+    { "route": "event-tokens", "option": "活動代幣" },
+    { "route": "hosted-events", "option": "主辦活動" }
   ],
 
   "riverNav": [
     { "route": "", "option": "資訊" },
-    { "route": "events", "option": "事件列表" },
-    { "route": "create-event", "option": "建立事件" },
+    { "route": "events", "option": "活動列表" },
+    { "route": "create-event", "option": "建立活動" },
     { "route": "multisig", "option": "河流錢包" }
   ],
 
@@ -134,7 +134,8 @@
     "ipfs": "Ipfs資料",
     "approveRate": "通過率:",
     "resolve": "執行",
-    "sign": "簽名"
+    "resolved": "已送出交易",
+    "sign": "簽署提案"
   },
 
   "alert": "抱歉，請連結錢包並重新操作一次。",
@@ -152,20 +153,22 @@
   },
 
   "eventCard": {
-    "approve": "核准事件"
+    "approve": "核准活動"
   },
 
   "riverCard": {
     "people": "人",
     "in": "剩餘",
-    "day": "天",
+    "days": "天",
+    "hours": "小時",
+    "ended": "已截止",
     "agreement": "河流公約"
   },
 
   "schedule": {
     "activated": "啟動",
     "deadline": "截止日",
-    "until": "直到再次啟動",
+    "until": "等待啟動",
     "activate": "啟動",
     "months": "3個月",
     "gen": "世代"

@@ -13,7 +13,7 @@ import Success from "@/components/success"
 import { Language } from "@/utils/language"
 import Loading from "./loading"
 import useSWR from "swr"
-import { apiUrl } from "@/constants"
+import { API_URL } from "@/environments/environment"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
@@ -22,12 +22,12 @@ export default function Event({ params }: { params: { id: string } }) {
   let river: River | null = null
   let event: Event | null = null
 
-  const { data: riverData } = useSWR(riverId ? `${apiUrl}/rivers/${riverId}` : null, fetcher)
+  const { data: riverData } = useSWR(riverId ? `${API_URL}/rivers/${riverId}` : null, fetcher)
   if (riverData !== undefined && !riverData.error) {
     river = riverData
   }
-  const { data: eventData } = useSWR(params.id ? `${apiUrl}/events/${params.id}` : null, fetcher)
-  if (eventData !== undefined && !eventData.error) {
+  const { data: eventData } = useSWR(params.id ? `${API_URL}/events/${params.id}` : null, fetcher)
+  if (eventData !== undefined && !eventData?.error) {
     event = eventData
   }
 
@@ -110,56 +110,61 @@ export default function Event({ params }: { params: { id: string } }) {
   }
 
   return (
-    <main className="border bg-white p-4">
-      {event !== null && river !== null ? (
-        !isSuccess ? (
-          <>
-            <EventInfo event={event} stewardsCount={10} />
-            {address && river.stewards?.indexOf(address) >= 0 && !approved && (
-              <div className="border-b-2 pb-8">
-                <Button style={ButtonStyle.primary} onClick={approve}>
-                  {lang.createEvent.approved}
-                </Button>
-              </div>
-            )}
-            {address && event.participants.indexOf(address) < 0 && (
-              <>
-                <RiverAgreement agreement={river.agreement} />
-                <div className="my-2">
-                  <Button style={ButtonStyle.highlight} onClick={signAgree}>
-                    <div className="flex">
-                      {agreed && <Image src={Check} alt="" width={24} />}
-                      <span className="ml-4 text-black">{lang.joinRiver.agree}</span>
-                    </div>
+    <>
+      <div className="MainText mb-6 mt-4 font-monda text-5xl font-bold text-title">
+        {event?.name}
+      </div>
+      <main className="border bg-white p-4">
+        {event !== null && river !== null ? (
+          !isSuccess ? (
+            <>
+              <EventInfo event={event} stewardsCount={river.stewardsCount} />
+              {address && river.stewards?.indexOf(address) < 0 && !approved && (
+                <div className="border-b-2 pb-8">
+                  <Button style={ButtonStyle.primary} onClick={approve}>
+                    {lang.createEvent.approved}
                   </Button>
                 </div>
-                <div className="my-2">
-                  <Button onClick={join} disabled={!agreed}>
-                    {lang.createEvent.join}
-                  </Button>
-                </div>
-              </>
-            )}
-          </>
+              )}
+              {address && event.participants.indexOf(address) < 0 && (
+                <>
+                  <RiverAgreement agreement={river.agreement} />
+                  <div className="my-2">
+                    <Button style={ButtonStyle.highlight} onClick={signAgree}>
+                      <div className="flex">
+                        {agreed && <Image src={Check} alt="" width={24} />}
+                        <span className="ml-4 text-black">{lang.joinRiver.agree}</span>
+                      </div>
+                    </Button>
+                  </div>
+                  <div className="my-2">
+                    <Button onClick={join} disabled={!agreed}>
+                      {lang.createEvent.join}
+                    </Button>
+                  </div>
+                </>
+              )}
+            </>
+          ) : (
+            <div className="py-8">
+              <Success
+                imgSrc="/images/event-token.png"
+                message={"Successfully get event token"}
+                buttonLink={`/my-page/event-tokens`}
+                buttonText={"View my token"}
+              />
+            </div>
+          )
         ) : (
-          <div className="py-8">
-            <Success
-              imgSrc="/images/event-token.png"
-              message={"Successfully get event token"}
-              buttonLink={`/my-page`}
-              buttonText={"View my token"}
-            />
+          <div>- Event not found -</div>
+        )}
+        {/* Overlay */}
+        {showOverlay && (
+          <div className="fixed left-0 top-0 z-50 h-screen w-screen bg-black opacity-50">
+            <Loading />
           </div>
-        )
-      ) : (
-        <div>- Event not found -</div>
-      )}
-      {/* Overlay */}
-      {showOverlay && (
-        <div className="fixed left-0 top-0 z-50 h-screen w-screen bg-black opacity-50">
-          <Loading />
-        </div>
-      )}
-    </main>
+        )}
+      </main>
+    </>
   )
 }
