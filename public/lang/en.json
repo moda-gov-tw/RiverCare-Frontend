@@ -17,21 +17,6 @@
     }
   ],
 
-  "faq": [
-    {
-      "Q": "qqq1",
-      "A": "aaa1"
-    },
-    {
-      "Q": "qqq2",
-      "A": "aaa2"
-    },
-    {
-      "Q": "qqq3",
-      "A": "aaa1"
-    }
-  ],
-
   "createRiver": {
     "title": "Create River",
     "name": {
@@ -162,6 +147,7 @@
     "in": "in",
     "days": "days",
     "hours": "hours",
+    "mins": "mins",
     "ended": "ended",
     "agreement": "Agreement"
   },
@@ -179,5 +165,10 @@
     "activated": "Activated",
     "agree": "I agree for above",
     "join": "Join!"
+  },
+
+  "joinEvent": {
+    "success": "Successfully get event token",
+    "view": "View"
   }
 }

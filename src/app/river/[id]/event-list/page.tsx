@@ -23,16 +23,15 @@ export default function Events({ params }: { params: { id: number } }) {
 
   const lang = Language()
 
-  const [approved, setApproved] = useState(false)
   const [showOverlay, setShowOverlay] = useState<boolean>(false)
   const { address, approveEvent } = useContext(Context)
 
-  let showApprove =
+  let isSteward =
     address !== undefined &&
     river !== null &&
-    !approved &&
     Array.isArray(river.stewards) &&
-    river.stewards.indexOf(address) < 0
+    river.stewards.indexOf(address) >= 0
+
   const router = useRouter()
 
   const navigate = (item: { route: string }) => {
@@ -52,9 +51,6 @@ export default function Events({ params }: { params: { id: number } }) {
     approveEvent(river.walletAddr, eventId)
       .then((res) => {
         setShowOverlay(false)
-        if (res) {
-          setApproved(true)
-        }
       })
       .catch(() => {
         alert(lang.alert)
@@ -68,17 +64,20 @@ export default function Events({ params }: { params: { id: number } }) {
       <main className="">
         {river ? (
           <div>
-            {river.events?.map((event, i) => (
-              <EventCard
-                key={i}
-                event={event}
-                stewardsCount={river?.stewardsCount}
-                showApprove={showApprove}
-                onClick={() => {
-                  approve(event.uid)
-                }}
-              />
-            ))}
+            {river.events
+              ?.map((event, i) => (
+                <EventCard
+                  key={i}
+                  event={event}
+                  stewardsCount={river?.stewardsCount}
+                  showApprove={isSteward && address && event.approvals.indexOf(address) < 0}
+                  onClick={() => {
+                    approve(event.uid)
+                  }}
+                />
+              ))
+              .reverse() // For descending temporarily
+            }
           </div>
         ) : (
           <div>River not found</div>

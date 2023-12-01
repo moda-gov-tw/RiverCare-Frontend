@@ -169,7 +169,8 @@ export default function River({ params }: { params: { id: number } }) {
                       <Button onClick={activate}>{lang.joinRiver.activated}</Button>
                     </div>
                   ) : (
-                    riverData.gen === 0 && (
+                    riverData.gen === 0 &&
+                    riverData.stewards.indexOf(address) < 0 && (
                       <>
                         <div className="my-2">
                           <Button style={ButtonStyle.highlight} onClick={signAgree}>

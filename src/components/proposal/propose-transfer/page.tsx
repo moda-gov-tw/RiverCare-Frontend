@@ -23,7 +23,7 @@ export default function ProposeTransfer({
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
   const validated = () => {
-    let a = parseInt(amount)
+    let a = parseFloat(amount)
     if (isNaN(a) || a <= 0) return false
     if (!targetAddr || !(targetAddr.startsWith("tz") || targetAddr.startsWith("KT"))) return false
     return true

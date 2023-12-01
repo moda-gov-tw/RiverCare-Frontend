@@ -12,6 +12,7 @@ import { Context } from "@/context"
 import { useContext } from "react"
 import { showWallet } from "@/utils/string"
 import { River } from "@/interfaces/river.interface"
+import { ASSETS_URL } from "@/environments/environment"
 
 const Proposal = ({
   proposal,
@@ -76,6 +77,8 @@ const Proposal = ({
       })
   }
 
+  if (!address) return <div>Please connect wallet</div>
+
   return (
     <div className="m-0 mb-2 border text-left font-monda">
       <button
@@ -113,10 +116,20 @@ const Proposal = ({
                     <div className="text-[#969696]">{lang.proposal.ipfs}</div>
                     <div className="">
                       {proposal.agreement && (
-                        <Link href={`ipfs/${proposal.agreement}`}>{proposal.agreement}</Link>
+                        <Link
+                          href={`${ASSETS_URL}/ipfs/${proposal.agreement.split("ipfs://")[1]}`}
+                          target="blank"
+                        >
+                          {proposal.agreement}
+                        </Link>
                       )}
                       {proposal.dataset && (
-                        <Link href={`ipfs/${proposal.dataset}`}>{proposal.dataset}</Link>
+                        <Link
+                          href={`${ASSETS_URL}/ipfs/${proposal.dataset.split("ipfs://")[1]}`}
+                          target="blank"
+                        >
+                          {proposal.dataset}
+                        </Link>
                       )}
                     </div>
                   </div>
@@ -147,9 +160,11 @@ const Proposal = ({
                 {lang.proposal.resolve}
               </Button>
             ) : (
-              <Button style={ButtonStyle.primary} onClick={sign}>
-                {lang.proposal.sign}
-              </Button>
+              proposal.approvals.indexOf(address) < 0 && (
+                <Button style={ButtonStyle.primary} onClick={sign}>
+                  {lang.proposal.sign}
+                </Button>
+              )
             )}
           </div>
         )}
