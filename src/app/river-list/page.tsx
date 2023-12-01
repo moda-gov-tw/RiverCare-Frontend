@@ -14,7 +14,7 @@ export default function RiverList() {
 
   let rivers: River | null = null
 
-  const { data } = useSWR(`${API_URL}/rivers/`, fetcher)
+  const { data } = useSWR(`${API_URL}/rivers`, fetcher)
   if (data !== undefined && !data?.error) {
     rivers = data.river
   }
@@ -26,7 +26,7 @@ export default function RiverList() {
       </div>
       {/* <Dropdown type="sorting" onChange={setSortMethod} /> */}
       {Array.isArray(rivers) && rivers?.length > 0 ? (
-        rivers.map((river, i) => <RiverCard key={i} river={river} />)
+        rivers.map((river, i) => <RiverCard key={i} river={river} />).reverse() // For descending temporarily
       ) : (
         <div className="font-monda">- No river found -</div>
       )}

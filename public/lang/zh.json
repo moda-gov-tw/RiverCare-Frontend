@@ -16,20 +16,6 @@
       "title": "個人頁面"
     }
   ],
-  "faq": [
-    {
-      "Q": "qqq1",
-      "A": "aaa1"
-    },
-    {
-      "Q": "qqq2",
-      "A": "aaa2"
-    },
-    {
-      "Q": "qqq3",
-      "A": "aaa1"
-    }
-  ],
 
   "createRiver": {
     "title": "創建河流",
@@ -116,7 +102,7 @@
 
   "riverNav": [
     { "route": "", "option": "資訊" },
-    { "route": "events", "option": "活動列表" },
+    { "route": "event-list", "option": "活動列表" },
     { "route": "create-event", "option": "建立活動" },
     { "route": "multisig", "option": "河流錢包" }
   ],
@@ -134,7 +120,7 @@
     "ipfs": "Ipfs資料",
     "approveRate": "通過率:",
     "resolve": "執行",
-    "resolved": "已送出交易",
+    "resolved": "已完成",
     "sign": "簽署提案"
   },
 
@@ -161,6 +147,7 @@
     "in": "剩餘",
     "days": "天",
     "hours": "小時",
+    "mins": "分鐘",
     "ended": "已截止",
     "agreement": "河流公約"
   },
@@ -178,5 +165,10 @@
     "activated": "啟動!",
     "agree": "我同意上述公約",
     "join": "加入!"
+  },
+
+  "joinEvent": {
+    "success": "成功獲得活動代幣",
+    "view": "查看"
   }
 }

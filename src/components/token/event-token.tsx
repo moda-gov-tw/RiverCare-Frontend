@@ -9,10 +9,21 @@ import Link from "next/link"
 import { useState } from "react"
 import * as htmlToImage from "html-to-image"
 import QRCodeContainer from "../qrcode-container"
-import { BASE_URL } from "@/environments/environment"
+import { API_URL, BASE_URL } from "@/environments/environment"
 import { Language } from "@/utils/language"
+import useSWR from "swr"
 
-const EventToken = ({ event, isHost }: { event: Event; isHost?: boolean }) => {
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
+
+const EventToken = ({ event, isHost }: { event: any; isHost?: boolean }) => {
+  const { data: eventData } = useSWR(
+    event.eventId ? `${API_URL}/events/${event.eventId}` : null,
+    fetcher
+  )
+  if (eventData !== undefined && !eventData?.error) {
+    event = eventData
+  }
+
   let claimUrl = `${BASE_URL}/event/${event.uid}`
   const lang = Language()
   const [isCopied, setIsCopied] = useState(false)
@@ -44,8 +55,7 @@ const EventToken = ({ event, isHost }: { event: Event; isHost?: boolean }) => {
       </Link>
       <div className="">{event.name}</div>
       <div className="">
-        {lang.eventInfo.total}
-        {event.editions}
+        {lang.eventInfo.total} {event.editions}
       </div>
       <div className="mb-4">
         {lang.eventInfo.participants} {event.participantsCount}

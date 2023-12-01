@@ -29,9 +29,6 @@ export default function Mypage({ params }: { params: { wallet: string } }) {
   const navigate = (item: { route: string }) => {
     router.push(`/my-page/${item.route}`)
   }
-
-  console.log(stewardships)
-
   if (!address?.startsWith("tz")) return <ConnectHint />
   return (
     <>

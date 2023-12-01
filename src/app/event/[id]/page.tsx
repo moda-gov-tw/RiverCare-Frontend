@@ -126,32 +126,34 @@ export default function Event({ params }: { params: { id: string } }) {
                   </Button>
                 </div>
               )}
-              {address && event.participants.indexOf(address) < 0 && (
-                <>
-                  <RiverAgreement agreement={river.agreement} />
-                  <div className="my-2">
-                    <Button style={ButtonStyle.highlight} onClick={signAgree}>
-                      <div className="flex">
-                        {agreed && <Image src={Check} alt="" width={24} />}
-                        <span className="ml-4 text-black">{lang.joinRiver.agree}</span>
-                      </div>
-                    </Button>
-                  </div>
-                  <div className="my-2">
-                    <Button onClick={join} disabled={!agreed}>
-                      {lang.createEvent.join}
-                    </Button>
-                  </div>
-                </>
-              )}
+              {address &&
+                (event.participants === null ||
+                  (event.participants && event.participants.indexOf(address) < 0)) && (
+                  <>
+                    <RiverAgreement agreement={river.agreement} />
+                    <div className="my-2">
+                      <Button style={ButtonStyle.highlight} onClick={signAgree}>
+                        <div className="flex text-black">
+                          {agreed ? <Image src={Check} alt="" width={24} /> : <span>▢</span>}
+                          <span className="ml-4 text-black">{lang.joinRiver.agree}</span>
+                        </div>
+                      </Button>
+                    </div>
+                    <div className="my-2">
+                      <Button onClick={join} disabled={!agreed}>
+                        {lang.createEvent.join}
+                      </Button>
+                    </div>
+                  </>
+                )}
             </>
           ) : (
             <div className="py-8">
               <Success
                 imgSrc="/images/event-token.png"
-                message={"Successfully get event token"}
+                message={lang.joinEvent.success}
                 buttonLink={`/my-page/event-tokens`}
-                buttonText={"View my token"}
+                buttonText={lang.joinEvent.view}
               />
             </div>
           )

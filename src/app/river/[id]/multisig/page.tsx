@@ -79,15 +79,17 @@ export default function Multisig({ params }: { params: { id: number } }) {
             <div>
               <div className="my-4 text-lg font-bold">{lang.multisig.proposal}</div>
               <div className="">
-                {river?.proposals?.map((proposal, i) => (
-                  <Proposal
-                    key={i}
-                    proposal={proposal}
-                    river={river}
-                    onSend={openOverlay}
-                    onFinish={closeOverlay}
-                  />
-                ))}
+                {river?.proposals
+                  ?.map((proposal, i) => (
+                    <Proposal
+                      key={i}
+                      proposal={proposal}
+                      river={river}
+                      onSend={openOverlay}
+                      onFinish={closeOverlay}
+                    />
+                  ))
+                  .reverse()}
               </div>
             </div>
             {/* Create proposal modals */}

@@ -58,7 +58,9 @@ const RiverInfo = ({
               ? `${lang.riverCard.in} ${
                   dayLeft >= 1
                     ? dayLeft + " " + lang.riverCard.days
-                    : hourLeft + " " + lang.riverCard.hours
+                    : hourLeft >= 1
+                    ? hourLeft + " " + lang.riverCard.hours
+                    : minLeft + " " + lang.riverCard.mins
                 }`
               : lang.riverCard.ended}
             <div className="absolute left-[42px] top-[28px] text-xs">

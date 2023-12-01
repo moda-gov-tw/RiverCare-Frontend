@@ -13,7 +13,7 @@ const EventCard = ({
 }: {
   event: Event
   stewardsCount: number | undefined
-  showApprove: boolean
+  showApprove: boolean | undefined | ""
   onClick?: any
 }) => {
   const lang = Language()

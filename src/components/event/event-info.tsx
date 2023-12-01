@@ -40,7 +40,7 @@ const EventInfo = ({
           {lang.eventInfo.participants}{" "}
           <span className="font-bold">&nbsp;{event.participantsCount}</span>
         </div>
-        {event.participants.length > 0 && (
+        {event && event.participants && event.participants.length > 0 && (
           <div className="my-2 max-h-[120px] overflow-y-scroll border p-4 text-xs ">
             {event.participants.map((address, i) => (
               <div key={i}>{address}</div>

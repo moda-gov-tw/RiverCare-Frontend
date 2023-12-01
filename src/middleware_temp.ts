@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server"
-import { NODE_URL, ASSETS_URL } from "./environments/environment"
+import { NODE_URL, ASSETS_URL, API_URL } from "./environments/environment"
 
 export function middleware(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64")
