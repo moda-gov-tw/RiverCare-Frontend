@@ -169,6 +169,7 @@ export default function River({ params }: { params: { id: number } }) {
                     </div>
                   ) : (
                     riverData.gen === 0 &&
+                    riverData.stewards &&
                     riverData.stewards.indexOf(address) < 0 && (
                       <>
                         <div className="my-2">
