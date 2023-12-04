@@ -114,8 +114,8 @@ export default function Event({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <div className="MainText mb-6 mt-4 font-monda text-5xl font-bold text-title">
-        {event?.name}
+      <div className=" mb-6 mt-4 font-monda text-5xl font-bold text-title">
+        {event?.name && event.name.split("]")[1]}
       </div>
       <main className="border bg-white p-4">
         {event !== null && river !== null ? (

@@ -34,7 +34,7 @@ const Menu = ({
           onClick={onClick}
           className={`
               ${currPath === item.route ? "underline underline-offset-8" : ""}
-              MainText font-black text-white duration-300 hover:text-title`}
+              font-black text-deepgray duration-300 hover:text-title`}
         >
           {item.title}
         </Link>

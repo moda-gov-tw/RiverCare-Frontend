@@ -6,6 +6,7 @@ import EventToken from "@/components/token/event-token"
 import { BASE_URL } from "@/constants"
 import { Context } from "@/context"
 import { Event } from "@/interfaces/event.interface"
+import { Language } from "@/utils/language"
 import { useRouter } from "next/navigation"
 import { useContext } from "react"
 import useSWR from "swr"
@@ -25,6 +26,7 @@ export default function HostedEvents({ params }: { params: { wallet: string } })
     events = eventData
   }
 
+  const lang = Language()
   const router = useRouter()
 
   const navigate = (item: { route: string }) => {
@@ -34,6 +36,7 @@ export default function HostedEvents({ params }: { params: { wallet: string } })
   if (!address?.startsWith("tz")) return <ConnectHint />
   return (
     <>
+      <div className=" mb-6 mt-4 font-monda text-5xl font-bold text-title">{lang.myPageTitle}</div>
       <Dropdown type="myPage" onChange={navigate} currRoute={"hosted-events"} />
       <main className="m-4 w-auto border bg-white text-left font-monda">
         {events &&

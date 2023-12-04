@@ -121,19 +121,13 @@ export default function River({ params }: { params: { id: number } }) {
         })
   }
 
-  const isSteward = (address: string) => {
-    return false
-  }
-
   const navigate = (item: { route: string }) => {
     router.push(`/river/${params.id}/${item.route}`)
   }
 
   return (
     <>
-      <div className="MainText mb-6 mt-4 font-monda text-5xl font-bold text-title">
-        {riverData?.name}
-      </div>
+      <div className="mb-6 mt-4 font-monda text-5xl font-bold text-title">{riverData?.name}</div>
       <Dropdown type="riverNav" onChange={navigate} />
       <main className="border p-4 font-monda">
         {isSuccess ? (
@@ -141,12 +135,12 @@ export default function River({ params }: { params: { id: number } }) {
             <div>
               <Success
                 imgSrc="/images/stewardship-token.png"
-                message="Successfully received stewardship token!"
+                message={lang.joinRiver.successJoin}
               />
             </div>
           ) : (
             <div>
-              <Success message="Successfully activated!" />
+              <Success message={lang.joinRiver.successActivated} />
             </div>
           )
         ) : riverData ? (

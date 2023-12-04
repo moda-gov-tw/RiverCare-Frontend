@@ -68,9 +68,12 @@ export default function CreateEvent({ params }: { params: { id: number } }) {
 
   return (
     <>
+      <div className="mb-6 mt-4 font-monda text-5xl font-bold text-title">{river?.name}</div>
       <Dropdown type="riverNav" onChange={navigate} currRoute={"create-event"} />
       <main className="border p-6 text-left font-monda">
-        {!isSuccess ? (
+        {river?.gen === 0 ? (
+          <div className="text-center">{lang.unavailableInGenZero}</div>
+        ) : !isSuccess ? (
           <>
             <div className="mb-4">
               <div className="mb-2">{lang.createEvent.name.label}</div>
@@ -106,7 +109,7 @@ export default function CreateEvent({ params }: { params: { id: number } }) {
         ) : (
           <Success
             imgSrc="/images/event-token.png"
-            message={"Event successfully created!"}
+            message={lang.createEvent.success}
             buttonLink={`/my-page/hosted-events`}
             buttonText={"Go"}
           />

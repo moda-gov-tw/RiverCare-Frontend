@@ -124,14 +124,16 @@ const Proposal = ({
                     <div className="">
                       {proposal.agreement && (
                         <Link
+                          className="underline"
                           href={`${ASSETS_URL}/ipfs/${proposal.agreement.split("ipfs://")[1]}`}
                           target="blank"
                         >
-                          {proposal.agreement}
+                          <div className="break-words max-md:w-[200px]">{proposal.agreement}</div>
                         </Link>
                       )}
                       {proposal.dataset && (
                         <Link
+                          className="underline"
                           href={`${ASSETS_URL}/ipfs/${proposal.dataset.split("ipfs://")[1]}`}
                           target="blank"
                         >
@@ -152,7 +154,7 @@ const Proposal = ({
             <div className="mt-4">
               <div className="font-bold">
                 {lang.proposal.approveRate}
-                {approvedRatio * 100}%
+                {Math.round(approvedRatio * 100)}%
               </div>
               <div className="my-2">
                 <Progress value={proposal.approvalsCount} total={river?.stewardsCount} />

@@ -21,7 +21,7 @@ export default function RiverList() {
 
   return (
     <main className="">
-      <div className="MainText mb-6 mt-4 font-monda text-5xl font-bold text-title">
+      <div className=" mb-6 mt-4 font-monda text-5xl font-bold text-title">
         {lang.riverList.title}
       </div>
       {/* <Dropdown type="sorting" onChange={setSortMethod} /> */}
