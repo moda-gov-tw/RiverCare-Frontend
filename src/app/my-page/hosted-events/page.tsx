@@ -3,11 +3,11 @@
 import ConnectHint from "@/components/connect-hint"
 import Dropdown from "@/components/dropdown"
 import EventToken from "@/components/token/event-token"
-import { API_URL } from "@/environments/environment"
+import { BASE_URL } from "@/constants"
 import { Context } from "@/context"
 import { Event } from "@/interfaces/event.interface"
 import { useRouter } from "next/navigation"
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import useSWR from "swr"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
@@ -17,7 +17,10 @@ export default function HostedEvents({ params }: { params: { wallet: string } })
 
   const { address } = useContext(Context)
 
-  const { data: eventData } = useSWR(address ? `${API_URL}/${address}/hostedEvents` : null, fetcher)
+  const { data: eventData } = useSWR(
+    address ? `${BASE_URL}/api/${address}/hostedEvents` : null,
+    fetcher
+  )
   if (eventData !== undefined && !eventData?.error) {
     events = eventData
   }

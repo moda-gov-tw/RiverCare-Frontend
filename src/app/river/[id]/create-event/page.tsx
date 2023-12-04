@@ -8,17 +8,17 @@ import { useState, useContext } from "react"
 import { Context } from "@/context"
 import Loading from "../loading"
 import { Language } from "@/utils/language"
-import { River, RiverStatus } from "@/interfaces/river.interface"
+import { River } from "@/interfaces/river.interface"
 import Success from "@/components/success"
 import useSWR from "swr"
-import { API_URL } from "@/environments/environment"
+import { BASE_URL } from "@/constants"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function CreateEvent({ params }: { params: { id: number } }) {
   let river: River | null = null
 
-  const { data } = useSWR(params.id ? `${API_URL}/rivers/${params.id}` : null, fetcher)
+  const { data } = useSWR(params.id ? `${BASE_URL}/api/rivers/${params.id}` : null, fetcher)
   if (data !== undefined && !data?.error) {
     river = data
   }

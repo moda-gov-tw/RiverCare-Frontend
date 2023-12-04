@@ -13,7 +13,7 @@ import Success from "@/components/success"
 import { Language } from "@/utils/language"
 import Loading from "./loading"
 import useSWR from "swr"
-import { API_URL } from "@/environments/environment"
+import { BASE_URL } from "@/constants"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
@@ -22,11 +22,14 @@ export default function Event({ params }: { params: { id: string } }) {
   let river: River | null = null
   let event: Event | null = null
 
-  const { data: riverData } = useSWR(riverId ? `${API_URL}/rivers/${riverId}` : null, fetcher)
+  const { data: riverData } = useSWR(riverId ? `${BASE_URL}/api/rivers/${riverId}` : null, fetcher)
   if (riverData !== undefined && !riverData.error) {
     river = riverData
   }
-  const { data: eventData } = useSWR(params.id ? `${API_URL}/events/${params.id}` : null, fetcher)
+  const { data: eventData } = useSWR(
+    params.id ? `${BASE_URL}/api/events/${params.id}` : null,
+    fetcher
+  )
   if (eventData !== undefined && !eventData?.error) {
     event = eventData
   }

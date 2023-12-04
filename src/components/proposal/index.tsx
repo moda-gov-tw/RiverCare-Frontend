@@ -6,13 +6,17 @@ import { Language } from "@/utils/language"
 import { FlipArrow } from "../flip-arrow"
 import { useState } from "react"
 import Progress from "../progress"
-import { approveLowerbound, approveRatioTotal } from "@/constants"
+import {
+  ASSETS_URL,
+  APPROVAL_LOWER_BOUND,
+  APPROVAL_RATIO_NUMBER,
+  APPROVAL_RATIO_TOTAL
+} from "@/constants"
 import Link from "next/link"
 import { Context } from "@/context"
 import { useContext } from "react"
 import { showWallet } from "@/utils/string"
 import { River } from "@/interfaces/river.interface"
-import { ASSETS_URL } from "@/environments/environment"
 
 const Proposal = ({
   proposal,
@@ -38,7 +42,10 @@ const Proposal = ({
   const [showDetail, setShowDetail] = useState(false)
 
   const isApproved = () => {
-    return approvedRatio >= 1 / approveRatioTotal && proposal.approvalsCount >= approveLowerbound
+    return (
+      approvedRatio >= APPROVAL_RATIO_NUMBER / APPROVAL_RATIO_TOTAL &&
+      proposal.approvalsCount >= APPROVAL_LOWER_BOUND
+    )
   }
 
   const sign = () => {

@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from "next/server"
-import { NODE_URL, ASSETS_URL, API_URL } from "./environments/environment"
+import { NODE_URL, ASSETS_URL, BASE_URL } from "@/constants"
 
 export function middleware(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64")
@@ -11,6 +11,7 @@ export function middleware(request: NextRequest) {
       'self' 
       https://*.papers.tech
       wss://relay.walletconnect.com
+      ${BASE_URL}
       ${ASSETS_URL}
       ${NODE_URL};
     style-src

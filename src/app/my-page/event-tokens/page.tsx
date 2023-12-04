@@ -3,7 +3,7 @@
 import ConnectHint from "@/components/connect-hint"
 import Dropdown from "@/components/dropdown"
 import EventToken from "@/components/token/event-token"
-import { API_URL } from "@/environments/environment"
+import { BASE_URL } from "@/constants"
 import { Context } from "@/context"
 import { Event } from "@/interfaces/event.interface"
 import { useRouter } from "next/navigation"
@@ -16,7 +16,10 @@ export default function EventTokens({ params }: { params: { wallet: string } }) 
   const { address } = useContext(Context)
 
   let events: Event[] | null = null
-  const { data: eventData } = useSWR(address ? `${API_URL}/${address}/eventTokens` : null, fetcher)
+  const { data: eventData } = useSWR(
+    address ? `${BASE_URL}/api/${address}/eventTokens` : null,
+    fetcher
+  )
   if (eventData !== undefined && !eventData?.error) {
     events = eventData
   }

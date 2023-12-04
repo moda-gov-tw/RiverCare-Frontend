@@ -1,4 +1,4 @@
-import { ASSETS_URL } from "@/environments/environment"
+import { ASSETS_URL } from "@/constants"
 
 const serverUrl = `${ASSETS_URL}/api/internal/ipfs/upload`
 

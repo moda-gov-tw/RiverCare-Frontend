@@ -4,18 +4,17 @@ import Button, { ButtonStyle } from "@/components/button"
 import RiverAgreement from "@/components/river/river-agreement"
 import RiverInfo from "@/components/river/river-info"
 import Schedule from "@/components/schedule"
-import { River, RiverStatus } from "@/interfaces/river.interface"
+import { River } from "@/interfaces/river.interface"
 import Image from "next/image"
 import { useContext, useState } from "react"
 import Check from "@/../public/images/check.png"
-import StewardshipTokenImg from "@/../public/images/stewardship-token.png"
 import { Context } from "@/context"
 import Success from "@/components/success"
 import Dropdown from "@/components/dropdown"
 import { useRouter } from "next/navigation"
 import { Language } from "@/utils/language"
 import Loading from "./loading"
-import { API_URL } from "@/environments/environment"
+import { BASE_URL } from "@/constants"
 import useSWR from "swr"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
@@ -23,7 +22,7 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 export default function River({ params }: { params: { id: number } }) {
   let riverData: River | null = null
 
-  const { data } = useSWR(params.id ? `${API_URL}/rivers/${params.id}` : null, fetcher)
+  const { data } = useSWR(params.id ? `${BASE_URL}/api/rivers/${params.id}` : null, fetcher)
   if (data !== undefined && !data?.error) {
     riverData = data
   }

@@ -2,12 +2,12 @@
 
 import React, { createContext, useState } from "react"
 import { BeaconWallet } from "@taquito/beacon-wallet"
-import { NETWORK_TYPE, NODE_URL } from "@/environments/environment"
+import { NETWORK_TYPE } from "@/constants"
 import { TezosToolkit, MichelsonMap } from "@taquito/taquito"
 import { char2Bytes } from "@taquito/utils"
 import { AccountInfo, Network, RequestSignPayloadInput, SigningType } from "@airgap/beacon-types"
 import { ContextState } from "@/interfaces/context.interface"
-import { RIVER_FACTORY } from "./environments/environment"
+import { RIVER_FACTORY, NODE_URL } from "@/constants"
 
 const TEZOS = new TezosToolkit(NODE_URL)
 const WALLET = new BeaconWallet({

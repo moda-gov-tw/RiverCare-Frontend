@@ -6,17 +6,17 @@ import EventCard from "@/components/event/event-card"
 import { useRouter } from "next/navigation"
 import { Context } from "@/context"
 import { Language } from "@/utils/language"
-import { River, RiverStatus } from "@/interfaces/river.interface"
+import { River } from "@/interfaces/river.interface"
 import Loading from "../loading"
 import useSWR from "swr"
-import { API_URL } from "@/environments/environment"
+import { BASE_URL } from "@/constants"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export default function Events({ params }: { params: { id: number } }) {
   let river: River | null = null
 
-  const { data } = useSWR(params.id ? `${API_URL}/rivers/${params.id}` : null, fetcher)
+  const { data } = useSWR(params.id ? `${BASE_URL}/api/rivers/${params.id}` : null, fetcher)
   if (data !== undefined && !data?.error) {
     river = data
   }

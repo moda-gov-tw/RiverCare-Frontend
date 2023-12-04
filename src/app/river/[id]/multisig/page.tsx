@@ -6,15 +6,15 @@ import Proposal from "@/components/proposal"
 import { ProposalType } from "@/interfaces/proposal.interface"
 import { Language } from "@/utils/language"
 import { useRouter } from "next/navigation"
-import { useContext, useState } from "react"
-import { River, RiverStatus } from "@/interfaces/river.interface"
+import { useState } from "react"
+import { River } from "@/interfaces/river.interface"
 import Modal from "react-modal"
 import UpdateAgreement from "../../../../components/proposal/update-agreement/page"
 import UpdateDataset from "../../../../components/proposal/update-dataset/page"
 import ProposeTransfer from "../../../../components/proposal/propose-transfer/page"
 import Loading from "../loading"
 import useSWR from "swr"
-import { API_URL } from "@/environments/environment"
+import { BASE_URL } from "@/constants"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
@@ -27,7 +27,7 @@ export default function Multisig({ params }: { params: { id: number } }) {
 
   let river: River | null = null
 
-  const { data } = useSWR(params.id ? `${API_URL}/rivers/${params.id}` : null, fetcher)
+  const { data } = useSWR(params.id ? `${BASE_URL}/api/rivers/${params.id}` : null, fetcher)
   if (data !== undefined && !data?.error) {
     river = data
   }
