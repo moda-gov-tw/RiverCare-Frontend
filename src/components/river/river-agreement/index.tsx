@@ -1,6 +1,6 @@
 "use client"
 
-import { ASSETS_URL } from "@/environments/environment"
+import { ASSETS_URL } from "@/constants"
 import useSWR from "swr"
 
 async function getAgreement(hash: string) {

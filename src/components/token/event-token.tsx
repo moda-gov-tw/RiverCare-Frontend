@@ -9,7 +9,7 @@ import Link from "next/link"
 import { useState } from "react"
 import * as htmlToImage from "html-to-image"
 import QRCodeContainer from "../qrcode-container"
-import { API_URL, BASE_URL } from "@/environments/environment"
+import { BASE_URL } from "@/constants"
 import { Language } from "@/utils/language"
 import useSWR from "swr"
 
@@ -17,7 +17,7 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 const EventToken = ({ event, isHost }: { event: any; isHost?: boolean }) => {
   const { data: eventData } = useSWR(
-    event.eventId ? `${API_URL}/events/${event.eventId}` : null,
+    event.eventId ? `${BASE_URL}/api/events/${event.eventId}` : null,
     fetcher
   )
   if (eventData !== undefined && !eventData?.error) {

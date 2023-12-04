@@ -2,8 +2,8 @@
 
 // import Dropdown from "@/components/dropdown"
 import RiverCard from "@/components/river/river-card"
-import { API_URL } from "@/environments/environment"
-import { River, RiverStatus } from "@/interfaces/river.interface"
+import { BASE_URL } from "@/constants"
+import { River } from "@/interfaces/river.interface"
 import useSWR from "swr"
 import { Language } from "@/utils/language"
 
@@ -14,7 +14,7 @@ export default function RiverList() {
 
   let rivers: River | null = null
 
-  const { data } = useSWR(`${API_URL}/rivers`, fetcher)
+  const { data } = useSWR(`${BASE_URL}/api/rivers`, fetcher)
   if (data !== undefined && !data?.error) {
     rivers = data.river
   }

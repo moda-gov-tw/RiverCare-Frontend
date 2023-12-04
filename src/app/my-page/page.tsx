@@ -2,14 +2,12 @@
 
 import ConnectHint from "@/components/connect-hint"
 import Dropdown from "@/components/dropdown"
-import EventToken from "@/components/token/event-token"
 import StewardshipToken from "@/components/token/stewardship-token"
-import { API_URL } from "@/environments/environment"
 import { Context } from "@/context"
-import { Event } from "@/interfaces/event.interface"
-import { River, RiverStatus } from "@/interfaces/river.interface"
+import { BASE_URL } from "@/constants"
+import { River } from "@/interfaces/river.interface"
 import { useRouter } from "next/navigation"
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 import useSWR from "swr"
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
@@ -21,7 +19,7 @@ export default function Mypage({ params }: { params: { wallet: string } }) {
 
   let stewardships: River[] | null = null
 
-  const { data } = useSWR(address ? `${API_URL}/${address}/stewardshipTokens` : null, fetcher)
+  const { data } = useSWR(address ? `${BASE_URL}/api/${address}/stewardshipTokens` : null, fetcher)
   if (data !== undefined && !data?.error) {
     stewardships = data
   }
