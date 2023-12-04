@@ -12,6 +12,7 @@
     --title-color: #7aafff;
     --white: #ffffff;
     --gray: #f4f4f4;
+    --deep-gray: #545454;
     --black: #000000;
   }
 }
@@ -20,9 +21,4 @@ body {
   color: var(--black);
   background: var(--white);
   text-align: center;
-}
-
-.MainText {
-  -webkit-text-stroke-width: 0.8px;
-  -webkit-text-stroke-color: black;
 }

@@ -50,7 +50,7 @@ const EventInfo = ({
         <div className="my-4 flex items-center text-lg text-primary">
           <Image src={Approval} alt="" className="mr-4" width={28} />
           {lang.eventInfo.approveRate}{" "}
-          <span className="font-bold">&nbsp;{approvedRatio * 100}%</span>
+          <span className="font-bold">&nbsp;{Math.round(approvedRatio * 100)}%</span>
         </div>
         {stewardsCount && <Progress value={event.approvalsCount} total={stewardsCount} />}
       </div>

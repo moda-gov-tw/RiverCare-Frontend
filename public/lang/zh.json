@@ -38,7 +38,7 @@
     "upload": "上傳 JSON 檔案",
     "create": "建立",
     "success": "成功建立河流!",
-    "note": "(需要 1/3 以上同意)"
+    "note": "(需要 %%NUMBER%%/%%TOTAL%% 以上同意)"
   },
 
   "createEvent": {
@@ -55,6 +55,7 @@
       "placeholder": "請輸入參與人數(可領取的代幣數量)，留空則代表無限制。"
     },
     "approved": "認可此活動",
+    "success": "成功建立活動",
     "join": "參與活動"
   },
 
@@ -100,6 +101,9 @@
     { "route": "hosted-events", "option": "主辦活動" }
   ],
 
+  "myPageTitle": "個人頁面",
+  "unavailableInGenZero": "此功能無法在 Gen 0 中使用",
+
   "riverNav": [
     { "route": "", "option": "資訊" },
     { "route": "event-list", "option": "活動列表" },
@@ -108,7 +112,7 @@
   ],
 
   "proposal": {
-    "status": ["死亡", "提案中", "通過"],
+    "status": ["死亡", "提案中", "已通過"],
     "transactionType": ["傳送tezos", "更新公約", "更新資料"],
     "successful": "提案建立成功",
     "targetAddress": "接收錢包地址",
@@ -121,7 +125,7 @@
     "approveRate": "通過率:",
     "resolve": "執行",
     "resolved": "已完成",
-    "sign": "簽署提案"
+    "sign": "簽署同意"
   },
 
   "alert": "抱歉，請連結錢包並重新操作一次。",
@@ -164,6 +168,8 @@
   "joinRiver": {
     "activated": "啟動!",
     "agree": "我同意上述公約",
+    "successJoin": "成功獲得河流關懷代幣",
+    "successActivated": "成功啟動",
     "join": "加入!"
   },
 

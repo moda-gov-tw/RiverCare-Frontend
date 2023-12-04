@@ -19,6 +19,7 @@ const config: Config = {
         title: "var(--title-color)",
         white: "var(--white)",
         gray: "var(--gray)",
+        deepgray: "var(--deep-gray)",
         black: "var(--black)"
       }
     },

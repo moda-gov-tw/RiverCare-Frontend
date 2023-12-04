@@ -1,4 +1,5 @@
 "use client"
+import { APPROVAL_RATIO_NUMBER, APPROVAL_RATIO_TOTAL } from "@/constants"
 import { Language } from "@/utils/language"
 const Progress = ({ value, total }: { value: number; total: number | undefined }) => {
   let rate = total ? (value / total) * 100 : 0
@@ -19,7 +20,11 @@ const Progress = ({ value, total }: { value: number; total: number | undefined }
           </div>
         </div>
       </div>
-      <div className="ml-0 w-full text-xs text-primary">{lang.createRiver.note}</div>
+      <div className="ml-0 w-full text-xs text-primary">
+        {lang.createRiver.note
+          .replace("%%NUMBER%%", APPROVAL_RATIO_NUMBER.toString())
+          .replace("%%TOTAL%%", APPROVAL_RATIO_TOTAL.toString())}
+      </div>
     </div>
   )
 }

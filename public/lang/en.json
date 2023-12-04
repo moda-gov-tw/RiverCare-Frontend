@@ -38,7 +38,7 @@
     "upload": "Upload a json file.",
     "create": "Create!",
     "success": "River successfully created!",
-    "note": "(Need agreement from more than 1/3)"
+    "note": "(Need agreement from more than %%NUMBER%%/%%TOTAL%%)"
   },
 
   "createEvent": {
@@ -55,6 +55,7 @@
       "placeholder": "enter the participants count(token edition), if left blank, it represents an unlimited edition."
     },
     "approved": "Approve this event",
+    "success": "Successfully created event",
     "join": "Join event!"
   },
 
@@ -100,9 +101,12 @@
     { "route": "hosted-events", "option": "Hosted events" }
   ],
 
+  "myPageTitle": "My page",
+  "unavailableInGenZero": "This feature is unavailable in gen 0",
+
   "riverNav": [
     { "route": "", "option": "Details" },
-    { "route": "events", "option": "Events list" },
+    { "route": "event-list", "option": "Events list" },
     { "route": "create-event", "option": "Create event" },
     { "route": "multisig", "option": "River wallet" }
   ],
@@ -164,11 +168,13 @@
   "joinRiver": {
     "activated": "Activated",
     "agree": "I agree for above",
+    "successJoin": "Successfully got stewardship token",
+    "successActivated": "Successfully activated",
     "join": "Join!"
   },
 
   "joinEvent": {
-    "success": "Successfully get event token",
+    "success": "Successfully got event token",
     "view": "View"
   }
 }

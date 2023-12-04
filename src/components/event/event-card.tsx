@@ -23,7 +23,7 @@ const EventCard = ({
   return (
     <div className="relative mx-auto my-2 border p-4">
       <div className="absolute left-3 top-2 text-2xl text-[#BCBCBC]">#{eventId}</div>
-      <div className="mt-4 text-2xl font-bold">{event.name}</div>
+      <div className="mb-2 mt-6 text-2xl font-bold">{event.name && event.name.split("]")[1]}</div>
       <EventInfo event={event} stewardsCount={stewardsCount} />
       {showApprove && (
         <Button style={ButtonStyle.primary} onClick={onClick}>

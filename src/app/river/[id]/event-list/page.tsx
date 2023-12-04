@@ -60,7 +60,8 @@ export default function Events({ params }: { params: { id: number } }) {
 
   return (
     <>
-      <Dropdown type="riverNav" onChange={navigate} currRoute={"events"} />
+      <div className="mb-6 mt-4 font-monda text-5xl font-bold text-title">{river?.name}</div>
+      <Dropdown type="riverNav" onChange={navigate} currRoute={"event-list"} />
       <main className="">
         {river ? (
           <div>

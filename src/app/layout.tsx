@@ -32,7 +32,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${monda.variable}`}>
         <ContextProvider>
           <Header />
-          <div className="flex flex-col items-center justify-between p-4">{children}</div>
+          <div className="mx-auto flex max-w-[1200px] flex-col items-center justify-between p-4">
+            {children}
+          </div>
           <div className="fixed left-0 top-0 -z-10 h-screen w-screen bg-mainBg bg-cover bg-no-repeat"></div>
         </ContextProvider>
       </body>
