@@ -53,7 +53,7 @@ const EventToken = ({ event, isHost }: { event: any; isHost?: boolean }) => {
       <Link href={``}>
         <Image className="mx-auto" src={EventTokenSrc} alt="" width={200} height={200} />
       </Link>
-      <div className="my-2 font-bold">{event.name && event.name.split("]")[1]}</div>
+      <div className="my-2 font-bold">{event.name}</div>
       <div className="">
         {lang.eventInfo.total} {event.editions}
       </div>

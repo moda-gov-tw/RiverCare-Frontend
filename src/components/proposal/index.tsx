@@ -39,7 +39,7 @@ const Proposal = ({
 
   let approvedRatio = river ? proposal.approvalsCount / river.stewardsCount : 0
 
-  const [showDetail, setShowDetail] = useState(false)
+  const [showDetail, setShowDetail] = useState(true)
 
   const isApproved = () => {
     return (

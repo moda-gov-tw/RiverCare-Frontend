@@ -40,7 +40,7 @@ export default function EventTokens({ params }: { params: { wallet: string } }) 
       <main className="m-4 w-auto border bg-white text-left font-monda">
         {events &&
           events.length > 0 &&
-          events.map((event: Event, i) => <EventToken key={i} event={event} />)}
+          events.map((event: Event, i) => <EventToken key={i} event={event} />).reverse()}
       </main>
     </>
   )
