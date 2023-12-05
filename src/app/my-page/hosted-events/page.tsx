@@ -41,7 +41,9 @@ export default function HostedEvents({ params }: { params: { wallet: string } })
       <main className="m-4 w-auto border bg-white text-left font-monda">
         {events &&
           events.length > 0 &&
-          events.map((event: Event, i) => <EventToken key={i} event={event} isHost={true} />)}
+          events
+            .map((event: Event, i) => <EventToken key={i} event={event} isHost={true} />)
+            .reverse()}
       </main>
     </>
   )

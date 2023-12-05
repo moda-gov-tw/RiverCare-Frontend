@@ -39,7 +39,8 @@ export default function Mypage({ params }: { params: { wallet: string } }) {
           stewardships.length > 0 &&
           stewardships
             .filter((river) => river.generation !== 0)
-            .map((river: River, i) => <StewardshipToken key={i} river={river} />)}
+            .map((river: River, i) => <StewardshipToken key={i} river={river} />)
+            .reverse()}
       </main>
     </>
   )

@@ -13,10 +13,10 @@ const Progress = ({ value, total }: { value: number; total: number | undefined }
         >
           <div
             className={`absolute font-bold ${
-              rate <= 80 ? "-right-4 text-primary" : "right-4 text-white"
+              rate <= 80 ? "-right-12 text-primary" : "right-12 text-white"
             }`}
           >
-            {value}
+            {`${value}/${total}`}
           </div>
         </div>
       </div>

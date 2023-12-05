@@ -69,7 +69,7 @@ export default function Multisig({ params }: { params: { id: number } }) {
                 {/* Member List */}
                 <div>
                   <div className="my-4 text-lg font-bold">
-                    {lang.multisig.memberList}(threshold: 1/3)
+                    {lang.multisig.memberList}: {river.stewardsCount}
                   </div>
                   <div className="max-h-[120px] overflow-scroll border px-4 py-2">
                     {river.stewards &&
@@ -168,7 +168,7 @@ export default function Multisig({ params }: { params: { id: number } }) {
                 </div>
               </>
             ) : (
-              <div>River not found</div>
+              <Loading />
             )}
 
             {/* Overlay */}
