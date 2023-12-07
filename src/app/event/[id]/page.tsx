@@ -112,17 +112,23 @@ export default function Event({ params }: { params: { id: string } }) {
       })
   }
 
+  let isSteward =
+    address !== undefined &&
+    river !== null &&
+    Array.isArray(river.stewards) &&
+    river.stewards.indexOf(address) >= 0
+
   return (
     <>
       <div className=" mb-6 mt-4 font-monda text-5xl font-bold text-title">
-        {event?.name && event.name.split("]")[1]}
+        {event?.name && event.name}
       </div>
       <main className="border bg-white p-4">
         {event !== null && river !== null ? (
           !isSuccess ? (
             <>
               <EventInfo event={event} stewardsCount={river.stewardsCount} />
-              {address && river.stewards?.indexOf(address) < 0 && !approved && (
+              {isSteward && address && event.approvals.indexOf(address) < 0 && !approved && (
                 <div className="border-b-2 pb-8">
                   <Button style={ButtonStyle.primary} onClick={approve}>
                     {lang.createEvent.approved}
