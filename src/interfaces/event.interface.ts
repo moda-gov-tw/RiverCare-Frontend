@@ -5,6 +5,7 @@ export declare interface Event {
   tokenContract: string
   description: string
   editions: number
+  gen: number
   amount: number
   host: string
   createdTime: string

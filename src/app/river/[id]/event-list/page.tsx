@@ -58,6 +58,8 @@ export default function Events({ params }: { params: { id: number } }) {
       })
   }
 
+  console.log(river)
+
   return (
     <>
       <div className="mb-6 mt-4 font-monda text-5xl font-bold text-title">{river?.name}</div>
@@ -66,7 +68,8 @@ export default function Events({ params }: { params: { id: number } }) {
         {river ? (
           <div>
             {river.events
-              ?.map((event, i) => (
+              ?.filter((event) => event.gen === river?.gen)
+              .map((event, i) => (
                 <EventCard
                   key={i}
                   event={event}

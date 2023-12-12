@@ -18,6 +18,7 @@ export declare interface Proposal {
   targetAddr: string // only transfer
   transferMutez: number // only transfer
   proposerAddr: string
+  gen: number
   status: ProposalStatus
   createdTime: string
   expiredTime: string
