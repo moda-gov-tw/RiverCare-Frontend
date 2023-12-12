@@ -1,6 +1,7 @@
 import { RiverStatus } from "@/interfaces/river.interface"
 import React from "react"
 import { Language } from "@/utils/language"
+import { GEN_DURATION } from "@/constants"
 
 const Dot = ({ text, disabled }: { text?: string; disabled?: boolean }) => {
   return (
@@ -84,7 +85,11 @@ const Schedule = ({ gen, needActivate }: { gen: number; needActivate: boolean })
     `Gen ${gen + 1} ${lang.schedule.deadline}`
   ]
   let dotDisabled = [false, true, true, true]
-  let lineBottomText = [`${lang.schedule.months}`, "", `${lang.schedule.months}`]
+  let lineBottomText = [
+    `${GEN_DURATION}${lang.schedule.days}`,
+    "",
+    `${GEN_DURATION}${lang.schedule.days}`
+  ]
   let lineTopText = [
     `${lang.schedule.gen} ${gen}`,
     `${lang.schedule.until}`,
