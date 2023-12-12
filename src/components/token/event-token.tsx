@@ -55,7 +55,7 @@ const EventToken = ({ event, isHost }: { event: any; isHost?: boolean }) => {
       </Link>
       <div className="my-2 font-bold">{event.name}</div>
       <div className="">
-        {lang.eventInfo.total} {event.editions}
+        {lang.eventInfo.total} {event.editions === 0 ? lang.eventInfo.openEdition : event.editions}
       </div>
       <div className="mb-4">
         {lang.eventInfo.participants} {event.participantsCount}

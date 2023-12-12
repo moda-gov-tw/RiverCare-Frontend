@@ -85,6 +85,7 @@ export default function Multisig({ params }: { params: { id: number } }) {
                   <div className="my-4 text-lg font-bold">{lang.multisig.proposal}</div>
                   <div className="">
                     {river?.proposals
+                      ?.filter((proposal) => proposal.gen === river?.gen)
                       ?.map((proposal, i) => (
                         <Proposal
                           key={i}

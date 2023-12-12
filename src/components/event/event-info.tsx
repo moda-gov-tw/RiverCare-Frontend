@@ -31,7 +31,7 @@ const EventInfo = ({
         </div>
         <div className="my-2 font-semibold">
           {lang.eventInfo.edition}
-          {event.editions}
+          {event.editions === 0 ? lang.eventInfo.openEdition : event.editions}
         </div>
       </div>
       <div className="p-4 pt-0 text-left">

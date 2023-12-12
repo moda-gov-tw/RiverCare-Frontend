@@ -67,6 +67,7 @@
     "approveRate": "通過率:",
     "total": "總數量:",
     "copy": "複製連結",
+    "openEdition": "不限",
     "qrcodeDownload": "下載QR code"
   },
 
@@ -161,7 +162,7 @@
     "deadline": "截止日",
     "until": "等待啟動",
     "activate": "啟動",
-    "months": "3個月",
+    "days": "天",
     "gen": "世代"
   },
 

@@ -66,6 +66,7 @@
     "participants": "Participants:",
     "approveRate": "Approve rate:",
     "total": "Total editions:",
+    "openEdition": "Open-editions",
     "copy": "Copy link",
     "qrcodeDownload": "Download QR code"
   },
@@ -161,7 +162,7 @@
     "deadline": "End",
     "until": "Until activated",
     "activate": "Activate",
-    "months": "3M",
+    "days": "days",
     "gen": "Gen"
   },
 

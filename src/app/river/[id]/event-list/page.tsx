@@ -66,7 +66,8 @@ export default function Events({ params }: { params: { id: number } }) {
         {river ? (
           <div>
             {river.events
-              ?.map((event, i) => (
+              ?.filter((event) => event.gen === river?.gen)
+              .map((event, i) => (
                 <EventCard
                   key={i}
                   event={event}
