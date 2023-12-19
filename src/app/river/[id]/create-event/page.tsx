@@ -8,7 +8,7 @@ import { useState, useContext } from "react"
 import { Context } from "@/context"
 import Loading from "../loading"
 import { Language } from "@/utils/language"
-import { River } from "@/interfaces/river.interface"
+import { River, RiverStatus } from "@/interfaces/river.interface"
 import Success from "@/components/success"
 import useSWR from "swr"
 import { BASE_URL } from "@/constants"
@@ -71,8 +71,8 @@ export default function CreateEvent({ params }: { params: { id: number } }) {
       <div className="mb-6 mt-4 font-monda text-5xl font-bold text-title">{river?.name}</div>
       <Dropdown type="riverNav" onChange={navigate} currRoute={"create-event"} />
       <main className="border p-6 text-left font-monda">
-        {river?.gen === 0 ? (
-          <div className="text-center">{lang.unavailableInGenZero}</div>
+        {river?.status === RiverStatus.dead || river?.gen === 0 ? (
+          <div className="text-center">{lang.unavailable}</div>
         ) : !isSuccess ? (
           <>
             <div className="mb-4">

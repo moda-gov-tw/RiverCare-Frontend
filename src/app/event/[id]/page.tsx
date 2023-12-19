@@ -123,9 +123,9 @@ export default function Event({ params }: { params: { id: string } }) {
       <div className=" mb-6 mt-4 font-monda text-5xl font-bold text-title">
         {event?.name && event.name}
       </div>
-      <main className="border bg-white p-4">
-        {event !== null && river !== null ? (
-          !isSuccess ? (
+      {event && river ? (
+        <main className="border bg-white p-4">
+          {!isSuccess ? (
             <>
               <EventInfo event={event} stewardsCount={river.stewardsCount} />
               {isSteward && address && event.approvals.indexOf(address) < 0 && !approved && (
@@ -165,17 +165,19 @@ export default function Event({ params }: { params: { id: string } }) {
                 buttonText={lang.joinEvent.view}
               />
             </div>
-          )
-        ) : (
-          <div>- Event not found -</div>
-        )}
-        {/* Overlay */}
-        {showOverlay && (
-          <div className="fixed left-0 top-0 z-50 h-screen w-screen bg-black opacity-50">
-            <Loading />
-          </div>
-        )}
-      </main>
+          )}
+          {/* Overlay */}
+          {showOverlay && (
+            <div className="fixed left-0 top-0 z-50 h-screen w-screen bg-black opacity-50">
+              <Loading />
+            </div>
+          )}
+        </main>
+      ) : (
+        <div>
+          <Loading />
+        </div>
+      )}
     </>
   )
 }

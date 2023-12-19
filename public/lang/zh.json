@@ -103,7 +103,7 @@
   ],
 
   "myPageTitle": "個人頁面",
-  "unavailableInGenZero": "此功能無法在 Gen 0 中使用",
+  "unavailable": "河流須為 gen 1 以上，且狀態為 \"alive\" 才能使用此功能",
 
   "riverNav": [
     { "route": "", "option": "資訊" },

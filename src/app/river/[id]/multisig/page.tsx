@@ -7,7 +7,7 @@ import { ProposalType } from "@/interfaces/proposal.interface"
 import { Language } from "@/utils/language"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { River } from "@/interfaces/river.interface"
+import { River, RiverStatus } from "@/interfaces/river.interface"
 import Modal from "react-modal"
 import UpdateAgreement from "../../../../components/proposal/update-agreement/page"
 import UpdateDataset from "../../../../components/proposal/update-dataset/page"
@@ -54,8 +54,8 @@ export default function Multisig({ params }: { params: { id: number } }) {
       <div className="mb-6 mt-4 font-monda text-5xl font-bold text-title">{river?.name}</div>
       <Dropdown type="riverNav" onChange={navigate} currRoute={"multisig"} />
       <main className="border p-6 text-left">
-        {river?.gen === 0 ? (
-          <div className="text-center">{lang.unavailableInGenZero}</div>
+        {river?.status === RiverStatus.dead || river?.gen === 0 ? (
+          <div className="text-center">{lang.unavailable}</div>
         ) : (
           <>
             {river ? (
