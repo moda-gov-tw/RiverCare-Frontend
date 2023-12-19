@@ -103,7 +103,7 @@
   ],
 
   "myPageTitle": "My page",
-  "unavailableInGenZero": "This feature is unavailable in gen 0",
+  "unavailable": "This feature is only available when river is \"alive\" and after gen 0.",
 
   "riverNav": [
     { "route": "", "option": "Details" },
